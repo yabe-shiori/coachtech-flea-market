@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <form method="POST" action="{{ route('register') }}">
+    <form method="POST" action="{{ route('user.register') }}">
         @csrf
 
         <h2 class="text-2xl text-center font-bold mt-8 mb-10">{{ __('会員登録') }}</h2>
@@ -42,7 +42,7 @@
         </div> --}}
 
         <div class="flex items-center justify-end mt-14">
-            {{-- <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
+            {{-- <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('user.login') }}">
                 {{ __('Already registered?') }}
             </a> --}}
 
@@ -52,7 +52,7 @@
         </div>
 
         <div class="text-center mt-4">
-                <a class="text-blue-500 hover:underline text-base hover:text-blue-700" href="{{ route('login') }}">
+                <a class="text-blue-500 hover:underline text-base hover:text-blue-700" href="{{ route('user.login') }}">
                     ログインはこちら
                 </a>
             </div>
