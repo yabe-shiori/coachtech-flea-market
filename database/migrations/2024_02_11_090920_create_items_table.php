@@ -18,7 +18,14 @@ return new class extends Migration
             $table->foreignId('category_id')->constrained()->onDelete('cascade');
             $table->foreignId('brand_id')->constrained()->onDelete('cascade');
             $table->decimal('price', 10, 2);
-            $table->string('condition');
+            $table->enum('condition', [
+                '新品、未使用',
+                '未使用に近い',
+                '目立った傷や汚れなし',
+                'やや傷や汚れあり',
+                '傷や汚れあり',
+                '全体的に状態が悪い'
+            ]);
             $table->text('description')->nullable();
             $table->timestamps();
         });
