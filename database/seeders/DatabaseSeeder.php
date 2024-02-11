@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Item;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -17,6 +19,7 @@ class DatabaseSeeder extends Seeder
             CategoriesTableSeeder::class,
             BrandsTableSeeder::class,
             ItemsTableSeeder::class,
+            ItemImagesTableSeeder::class,
         ]);
         // \App\Models\User::factory(10)->create();
 
