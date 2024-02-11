@@ -9,11 +9,11 @@
         </p>
     </header>
 
-    <form id="send-verification" method="post" action="{{ route('verification.send') }}">
+    <form id="send-verification" method="post" action="{{ route('user.verification.send') }}">
         @csrf
     </form>
 
-    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
+    <form method="post" action="{{ route('user.profile.update') }}" class="mt-6 space-y-6" enctype="multipart/form-data">
         @csrf
         @method('patch')
 
@@ -21,6 +21,12 @@
             <x-input-label for="name" :value="__('Name')" />
             <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
+        </div>
+
+        <div>
+            <x-input-label for="postal_code" :value="__('郵便番号')" />
+            <x-text-input id="postal_code" name="postal_code" type="text" class="mt-1 block w-full" :value="old('postal_code', $user->postal_code)" required autofocus autocomplete="postal_code" />
+            <x-input-error class="mt-2" :messages="$errors->get('postal_code')" />
         </div>
 
         <div>
@@ -45,6 +51,26 @@
                     @endif
                 </div>
             @endif
+        </div>
+
+
+        <div>
+            <x-input-label for="avatar" :value="__('画像')" />
+            <input id="avatar" name="avatar" type="file" class="mt-1 block w-full" accept="image/*">
+            <x-input-error class="mt-2" :messages="$errors->get('avatar')" />
+        </div>
+
+
+        <div>
+            <x-input-label for="address" :value="__('住所')" />
+            <x-text-input id="address" name="address" type="text" class="mt-1 block w-full" :value="old('address', $user->address)" required autofocus autocomplete="address" />
+            <x-input-error class="mt-2" :messages="$errors->get('address')" />
+        </div>
+
+        <div>
+            <x-input-label for="building_name" :value="__('建物名')" />
+            <x-text-input id="building_name" name="building_name" type="text" class="mt-1 block w-full" :value="old('building_name', $user->building_name)" required autofocus autocomplete="building_name" />
+            <x-input-error class="mt-2" :messages="$errors->get('building_name')" />
         </div>
 
         <div class="flex items-center gap-4">
