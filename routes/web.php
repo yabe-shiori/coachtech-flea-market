@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ItemController;
 
 
 
@@ -19,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('user.welcome');
 });
+Route::get('/user', [ItemController::class, 'index'])->name('user.index');
 
 Route::get('/dashboard', function () {
     return view('user.dashboard');

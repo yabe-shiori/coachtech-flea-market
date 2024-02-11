@@ -34,7 +34,7 @@ class Item extends Model
         return $this->belongsTo(Brand::class);
     }
 
-    public function itemImages()
+    public function images()
     {
         return $this->hasMany(ItemImage::class);
     }

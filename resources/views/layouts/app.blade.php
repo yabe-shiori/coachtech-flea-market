@@ -17,7 +17,7 @@
 </head>
 
 <body class="font-sans antialiased">
-    <div class="min-h-screen bg-white">
+    {{-- <div class="min-h-screen bg-white"> --}}
         @if (auth('admin')->user())
             @include('layouts.admin-navigation')
         @else
@@ -37,7 +37,7 @@
         <main>
             {{ $slot }}
         </main>
-    </div>
+    {{-- </div> --}}
 </body>
 
 </html>
