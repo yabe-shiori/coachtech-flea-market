@@ -21,6 +21,10 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'avatar',
+        'postal_code',
+        'address',
+        'building_name',
     ];
 
     /**
@@ -42,4 +46,35 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+
+    public function favorites()
+    {
+        return $this->belongsToMany(Item::class, 'favorites', 'user_id', 'item_id')->withTimestamps();
+    }
+
+    public function messageSent()
+    {
+        return $this->hasMany(Message::class, 'sender_id');
+    }
+
+    public function messageReceived()
+    {
+        return $this->hasMany(Message::class, 'receiver_id');
+    }
+
+    public function items()
+    {
+        return $this->hasMany(Item::class);
+    }
+
+    public function followers()
+    {
+        return $this->belongsToMany(User::class, 'follows', 'followed_id', 'follower_id')->withTimestamps();
+    }
+
+    public function following()
+    {
+        return $this->belongsToMany(User::class, 'follows', 'follower_id', 'followed_id')->withTimestamps();
+    }
 }
