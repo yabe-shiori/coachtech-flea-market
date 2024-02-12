@@ -45,10 +45,24 @@ class CategoriesTableSeeder extends Seeder
         Category::create(['name' => '食器', 'parent_id' => $kitchen->id]);
         Category::create(['name' => 'キッチンストレージ', 'parent_id' => $kitchen->id]);
 
+        $parentCategoryName = 'ホーム & ガーデン';
+        $parentCategory = Category::where('name', $parentCategoryName)->first();
+        if ($parentCategory) {
+            $kitchen->parent_id = $parentCategory->id;
+            $kitchen->save();
+        }
+
         $furniture = Category::create(['name' => '家具', 'parent_id' => $homeGarden->id]);
         Category::create(['name' => 'ソファ', 'parent_id' => $furniture->id]);
         Category::create(['name' => 'ベッド', 'parent_id' => $furniture->id]);
         Category::create(['name' => '収納家具', 'parent_id' => $furniture->id]);
+
+        $parentCategoryName = 'ホーム & ガーデン';
+        $parentCategory = Category::where('name', $parentCategoryName)->first();
+        if ($parentCategory) {
+            $furniture->parent_id = $parentCategory->id;
+            $furniture->save();
+        }
 
         // エンターテイメントカテゴリ
         $entertainment = Category::create(['name' => 'エンターテイメント']);
@@ -62,6 +76,15 @@ class CategoriesTableSeeder extends Seeder
         Category::create(['name' => 'DVD', 'parent_id' => $musicMovies->id]);
         Category::create(['name' => 'レコード', 'parent_id' => $musicMovies->id]);
 
+        $parentCategoryName = 'エンターテイメント';
+        $parentCategory = Category::where('name', $parentCategoryName)->first();
+        if ($parentCategory) {
+            $books->parent_id = $parentCategory->id;
+            $books->save();
+            $musicMovies->parent_id = $parentCategory->id;
+            $musicMovies->save();
+        }
+
         // ホビー & おもちゃカテゴリ
         $hobbiesToys = Category::create(['name' => 'ホビー & おもちゃ']);
         $hobbies = Category::create(['name' => 'ホビー', 'parent_id' => $hobbiesToys->id]);
@@ -72,11 +95,27 @@ class CategoriesTableSeeder extends Seeder
         Category::create(['name' => 'ボードゲーム', 'parent_id' => $gamesPuzzles->id]);
         Category::create(['name' => 'ビデオゲーム', 'parent_id' => $gamesPuzzles->id]);
 
+        $parentCategoryName = 'ホビー & おもちゃ';
+        $parentCategory = Category::where('name', $parentCategoryName)->first();
+        if ($parentCategory) {
+            $hobbies->parent_id = $parentCategory->id;
+            $hobbies->save();
+            $gamesPuzzles->parent_id = $parentCategory->id;
+            $gamesPuzzles->save();
+        }
+
         // スポーツ & アウトドアカテゴリ
         $sportsOutdoors = Category::create(['name' => 'スポーツ & アウトドア']);
         Category::create(['name' => 'フィットネス機器', 'parent_id' => $sportsOutdoors->id]);
         Category::create(['name' => 'アウトドア用品', 'parent_id' => $sportsOutdoors->id]);
         Category::create(['name' => 'スポーツウェア', 'parent_id' => $sportsOutdoors->id]);
+
+        $parentCategoryName = 'スポーツ & アウトドア';
+        $parentCategory = Category::where('name', $parentCategoryName)->first();
+        if ($parentCategory) {
+            $sportsOutdoors->parent_id = $parentCategory->id;
+            $sportsOutdoors->save();
+        }
 
         // ビューティー & ヘルスカテゴリ
         $beautyHealth = Category::create(['name' => 'ビューティー & ヘルス']);
@@ -84,11 +123,25 @@ class CategoriesTableSeeder extends Seeder
         Category::create(['name' => 'スキンケア', 'parent_id' => $beautyHealth->id]);
         Category::create(['name' => 'サプリメント', 'parent_id' => $beautyHealth->id]);
 
+        $parentCategoryName = 'ビューティー & ヘルス';
+        $parentCategory = Category::where('name', $parentCategoryName)->first();
+        if ($parentCategory) {
+            $beautyHealth->parent_id = $parentCategory->id;
+            $beautyHealth->save();
+        }
+
         // キッズ & ベイビーカテゴリ
         $kidsBaby = Category::create(['name' => 'キッズ & ベイビー']);
         Category::create(['name' => '子供服', 'parent_id' => $kidsBaby->id]);
         Category::create(['name' => 'おもちゃ', 'parent_id' => $kidsBaby->id]);
         Category::create(['name' => '子供用家具', 'parent_id' => $kidsBaby->id]);
+
+        $parentCategoryName = 'キッズ & ベイビー';
+        $parentCategory = Category::where('name', $parentCategoryName)->first();
+        if ($parentCategory) {
+            $kidsBaby->parent_id = $parentCategory->id;
+            $kidsBaby->save();
+        }
 
         // 自動車 & バイクカテゴリ
         $automotive = Category::create(['name' => '自動車 & バイク']);
@@ -96,11 +149,24 @@ class CategoriesTableSeeder extends Seeder
         Category::create(['name' => 'カーアクセサリー', 'parent_id' => $automotive->id]);
         Category::create(['name' => 'バイク用品', 'parent_id' => $automotive->id]);
 
+        $parentCategoryName = '自動車 & バイク';
+        $parentCategory = Category::where('name', $parentCategoryName)->first();
+        if ($parentCategory) {
+            $automotive->parent_id = $parentCategory->id;
+            $automotive->save();
+        }
+
         // アート & 手作りカテゴリ
         $artHandmade = Category::create(['name' => 'アート & 手作り']);
         Category::create(['name' => '絵画', 'parent_id' => $artHandmade->id]);
         Category::create(['name' => '彫刻', 'parent_id' => $artHandmade->id]);
         Category::create(['name' => 'ハンドクラフト', 'parent_id' => $artHandmade->id]);
 
+        $parentCategoryName = 'アート & 手作り';
+        $parentCategory = Category::where('name', $parentCategoryName)->first();
+        if ($parentCategory) {
+            $artHandmade->parent_id = $parentCategory->id;
+            $artHandmade->save();
+        }
     }
 }
