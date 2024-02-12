@@ -21,6 +21,8 @@ use App\Http\Controllers\ItemController;
 Route::get('/', [ItemController::class, 'index'])->name('index');
 //商品詳細ページ
 Route::get('/item/{item}', [ItemController::class, 'show'])->name('item.show');
+Route::get('/sell', [ItemController::class, 'create'])->name('item.create');
+
 
 // Route::get('/dashboard', function () {
 //     return view('user.dashboard');
