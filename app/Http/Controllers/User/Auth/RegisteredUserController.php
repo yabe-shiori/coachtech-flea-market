@@ -32,19 +32,32 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             // 'name' => ['required', 'string', 'max:255'],
+            'avatar' => ['image', 'max:1024'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', Rules\Password::defaults()],
         ]);
 
-        $user = User::create([
-            // 'name' => $request->name,
+        // userテーブルのデータ
+        $attr = [
+            'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-        ]);
+        ];
+
+        //avatarの保存
+        if (request()->hasFile('avatar')) {
+            $name = request()->file('avatar')->getClientOriginalName();
+            $avatar = date('Ymd_His') . '_' . $name;
+            request()->file('avatar')->storeAs('public/avatar', $avatar);
+            //avatarファイル名をデータに追加
+            $attr['avatar'] = $avatar;
+        }
+
+        $user = User::create($attr);
 
         event(new Registered($user));
 
-        Auth::guard('users')->login($user);
+        Auth::login($user);
 
         return redirect(RouteServiceProvider::HOME);
     }

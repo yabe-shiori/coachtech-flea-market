@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <form method="POST" action="{{ route('user.register') }}">
+    <form method="POST" action="{{ route('user.register') }}" enctype="multipart/form-data">
         @csrf
 
         <h2 class="text-2xl text-center font-bold mt-8 mb-10">{{ __('会員登録') }}</h2>
@@ -17,7 +17,12 @@
             <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
+<!-- Avatar -->
+            <div class="mt-4">
+                <x-input-label for="avatar" :value="__('プロフィール画像（任意・1MBまで）')" />
 
+                <x-text-input id="avatar" class="block mt-1 w-full rounded-none" type="file" name="avatar" :value="old('avatar')" />
+            </div>
         <!-- Password -->
         <div class="mt-4">
             <x-input-label for="password" :value="__('Password')" />
