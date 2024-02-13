@@ -4,7 +4,7 @@
         <div class="flex">
             <!-- Logo -->
             <div class="bg-black shrink-0 flex items-center">
-                <a href="{{ route('user.index') }}">
+                <a href="{{ route('user.item.index') }}">
                     <x-application-logo class="block h-9 w-auto fill-current text-white" />
                 </a>
             </div>
@@ -20,7 +20,7 @@
                     ログアウト
                 </x-nav-link>
 
-                <x-nav-link :href="route('user.index')" :active="request()->routeIs('user.index')" class="text-white">
+                <x-nav-link :href="route('user.item.index')" :active="request()->routeIs('user.index')" class="text-white">
                     マイページ
                 </x-nav-link>
                 <x-nav-link :href="route('user.item.create')" :active="request()->routeIs('user.item.create')"
@@ -90,7 +90,7 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('user.index')" :active="request()->routeIs('user.index')">
+            <x-responsive-nav-link :href="route('user.item.index')" :active="request()->routeIs('user.index')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
         </div>

@@ -14,7 +14,7 @@ class ItemController extends Controller
     public function index()
     {
         $itemImages = Item::with('images')->get();
-        return view('user.index', compact('itemImages'));
+        return view('item.index', compact('itemImages'));
     }
 
     //商品詳細ページ
@@ -31,7 +31,7 @@ class ItemController extends Controller
             $brands = Brand::all();
             return view('item.create', compact('categories', 'brands'));
         } else {
-            return redirect()->route('user.index')->with('message', '出品するにはログインしてください。');
+            return redirect()->route('user.item.index')->with('message', '出品するにはログインしてください。');
         }
     }
 
@@ -61,6 +61,6 @@ class ItemController extends Controller
             ]);
         }
 
-        return redirect()->route('user.index')->with('message', '商品を出品しました。');
+        return redirect()->route('user.item.index')->with('message', '商品を出品しました。');
     }
 }

@@ -18,7 +18,7 @@ use App\Http\Controllers\ItemController;
 */
 
 
-Route::get('/', [ItemController::class, 'index'])->name('index');
+Route::get('/', [ItemController::class, 'index'])->name('item.index');
 //商品詳細ページ
 Route::get('/item/{item}', [ItemController::class, 'show'])->name('item.show');
 //出品ページ
