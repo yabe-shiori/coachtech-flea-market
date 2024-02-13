@@ -24,7 +24,7 @@ class ItemStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'image_path' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            // 'image_path' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'name' => 'required|string|max:255',
             'category_id' => 'required|exists:categories,id',
             'brand_id' => 'exists:brands,id',
@@ -38,8 +38,8 @@ class ItemStoreRequest extends FormRequest
                 '全体的に状態が悪い',
             ])],
             'description' => 'nullable|string|max:1000',
-            'images' => 'required|array',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            // 'images' => 'required|array',
+            // 'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
 
     }

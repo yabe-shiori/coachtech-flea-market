@@ -26,36 +26,42 @@ class ItemController extends Controller
     //出品ページ
     public function create()
     {
-        $categories = Category::all();
-        $brands = Brand::all();
-
-        return view('item.create', compact('categories', 'brands'));
+        if (Auth::check()) {
+            $categories = Category::all();
+            $brands = Brand::all();
+            return view('item.create', compact('categories', 'brands'));
+        } else {
+            return redirect()->route('user.index')->with('message', '出品するにはログインしてください。');
+        }
     }
 
-
-    //出品
+    // 出品
     public function store(ItemStoreRequest $request)
     {
+
         $data = $request->validated();
 
         $user = Auth::user();
         $item = new Item();
         $item->user_id = $user->id;
         $item->name = $data['name'];
-        $item->category_id = $data['category_id'];
-        $item->brand_id = $data['brand_id'];
+
+        // 選択されたカテゴリの親カテゴリを取得
+        $category = Category::findOrFail($data['category_id']);
+        $item->category_id = $category->id;
+
+        // $item->brand_id = $data['brand_id'];
         $item->price = $data['price'];
         $item->condition = $data['condition'];
         $item->description = $data['description'];
         $item->save();
 
-        foreach ($data['images'] as $image) {
+        foreach ($request->file('image') as $image) {
             $item->images()->create([
                 'image_path' => $image->store('item_images', 'public')
             ]);
         }
 
-        return redirect()->route('items.index')->with('message', '商品を出品しました。');
+        return redirect()->route('user.index')->with('message', '商品を出品しました。');
     }
-    }
-
+}
