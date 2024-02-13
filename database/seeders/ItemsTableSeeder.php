@@ -15,7 +15,7 @@ class ItemsTableSeeder extends Seeder
      */
     public function run(): void
     {
-        Db::table('items')->insert([
+        $items = [
             [
                 'user_id' => 1,
                 'name' => 'テスト商品1',
@@ -135,7 +135,32 @@ class ItemsTableSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],
+        ];
 
-        ]);
+        foreach ($items as $item) {
+            $itemId = DB::table('items')->insertGetId([
+                'user_id' => $item['user_id'],
+                'name' => $item['name'],
+                'brand_id' => $item['brand_id'],
+                'category_id' => $item['category_id'],
+                'price' => $item['price'],
+                'condition' => $item['condition'],
+                'description' => $item['description'],
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ]);
+
+            $categories = [1, 2, 3];
+            foreach ($categories as $categoryId) {
+                DB::table('item_categories')->insert([
+                    'item_id' => $itemId,
+                    'category_id' => $categoryId,
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now(),
+                ]);
+            }
+        }
+
     }
+
 }

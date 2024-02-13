@@ -24,7 +24,8 @@ class ItemStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            // 'image_path' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'required|array',
+            'image.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'name' => 'required|string|max:255',
             'category_id' => 'required|exists:categories,id',
             'brand_id' => 'exists:brands,id',
@@ -38,19 +39,17 @@ class ItemStoreRequest extends FormRequest
                 '全体的に状態が悪い',
             ])],
             'description' => 'nullable|string|max:1000',
-            // 'images' => 'required|array',
-            // 'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
-
     }
 
     public function messages()
     {
         return [
-            'image_path.required' => '商品画像を選択してください。',
-            'image_path.image' => '画像ファイルを選択してください。',
-            'image_path.mimes' => '画像ファイルの形式はjpeg、png、jpg、gif、svgのいずれかを選択してください。',
-            'image_path.max' => '画像ファイルのサイズは2MB以下にしてください。',
+            'image.required' => '商品画像を選択してください。',
+            'image.*.required' => '画像ファイルを選択してください。',
+            'image.*.image' => '画像ファイルを選択してください。',
+            'image.*.mimes' => '画像ファイルの形式はjpeg、png、jpg、gif、svgのいずれかを選択してください。',
+            'image.*.max' => '画像ファイルのサイズは2MB以下にしてください。',
             'name.required' => '商品名を入力してください。',
             'name.string' => '商品名は文字列で入力してください。',
             'name.max' => '商品名は255文字以内で入力してください。',

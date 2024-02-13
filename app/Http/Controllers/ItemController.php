@@ -46,7 +46,6 @@ class ItemController extends Controller
         $item->user_id = $user->id;
         $item->name = $data['name'];
 
-        // 選択されたカテゴリの親カテゴリを取得
         $category = Category::findOrFail($data['category_id']);
         $item->category_id = $category->id;
 
