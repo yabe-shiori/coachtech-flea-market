@@ -16,22 +16,36 @@
 
         <!-- Navigation Links -->
         <div class="hidden sm:flex items-center space-x-8">
-            <form id="logoutForm" method="POST" action="{{ route('user.logout') }}">
-                @csrf
-            </form>
-            <x-nav-link href="#" onclick="event.preventDefault(); document.getElementById('logoutForm').submit();"
-                class="text-white text-lg">
-                ログアウト
-            </x-nav-link>
+            @auth
+                <form id="logoutForm" method="POST" action="{{ route('user.logout') }}">
+                    @csrf
+                </form>
+                <x-nav-link href="#" onclick="event.preventDefault(); document.getElementById('logoutForm').submit();"
+                    class="text-white text-lg">
+                    ログアウト
+                </x-nav-link>
 
-            <x-nav-link :href="route('user.mypage.index')" :active="request()->routeIs('user.mypage.index')" class="text-white text-lg">
-                マイページ
-            </x-nav-link>
-            <x-nav-link :href="route('user.item.create')" :active="request()->routeIs('user.item.create')"
-                class="inline-flex items-center justify-center bg-white text-black px-4 py-1.5 rounded-md text-lg"
-                style="line-height: 1.25rem;">
-                出品
-            </x-nav-link>
+                <x-nav-link :href="route('user.mypage.index')" :active="request()->routeIs('user.mypage.index')" class="text-white text-lg">
+                    マイページ
+                </x-nav-link>
+                <x-nav-link :href="route('user.item.create')" :active="request()->routeIs('user.item.create')"
+                    class="inline-flex items-center justify-center bg-white text-black px-4 py-1.5 rounded-md text-lg"
+                    style="line-height: 1.25rem;">
+                    出品
+                </x-nav-link>
+            @else
+                <x-nav-link :href="route('user.login')" class="text-white text-lg">
+                    ログイン
+                </x-nav-link>
+                <x-nav-link :href="route('user.register')" class="text-white text-lg">
+                    会員登録
+                </x-nav-link>
+                <x-nav-link :href="route('user.item.create')" :active="request()->routeIs('user.item.create')"
+                    class="inline-flex items-center justify-center bg-white text-black px-4 py-1.5 rounded-md text-lg"
+                    style="line-height: 1.25rem;">
+                    出品
+                </x-nav-link>
+            @endauth
         </div>
         <!-- Hamburger -->
         <div class="flex items-center md:hidden">
@@ -50,21 +64,32 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{ 'block': open, 'hidden': !open }" class="hidden md:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <form method="POST" action="{{ route('user.logout') }}">
-                @csrf
-
-                <x-responsive-nav-link :href="route('user.logout')"
-                    onclick="event.preventDefault();
-                                        this.closest('form').submit();">
-                    {{ __('Log Out') }}
+            @auth
+                <form method="POST" action="{{ route('user.logout') }}">
+                    @csrf
+                    <x-responsive-nav-link :href="route('user.logout')"
+                        onclick="event.preventDefault();
+                                            this.closest('form').submit();">
+                        {{ __('Log Out') }}
+                    </x-responsive-nav-link>
+                </form>
+                <x-responsive-nav-link :href="route('user.mypage.index')" :active="request()->routeIs('user.mypage.index')">
+                    マイページ
                 </x-responsive-nav-link>
-            </form>
-            <x-responsive-nav-link :href="route('user.mypage.index')" :active="request()->routeIs('user.mypage.index')">
-                マイページ
-            </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('user.item.create')" :active="request()->routeIs('user.item.create')">
-                出品
-            </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('user.item.create')" :active="request()->routeIs('user.item.create')">
+                    出品
+                </x-responsive-nav-link>
+            @else
+                <x-responsive-nav-link :href="route('user.login')">
+                    ログイン
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('user.register')">
+                    会員登録
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('user.item.create')" :active="request()->routeIs('user.item.create')">
+                    出品
+                </x-responsive-nav-link>
+            @endauth
         </div>
     </div>
 </nav>
