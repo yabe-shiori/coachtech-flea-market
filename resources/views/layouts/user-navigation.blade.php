@@ -1,7 +1,5 @@
 <nav x-data="{ open: false }" class="bg-black border-b border-gray-100">
-    <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
-        <!-- Logo and Text -->
         <div class="flex items-center">
             <a href="{{ route('user.item.index') }}" class="hidden md:flex">
                 <x-application-logo class="block h-9 w-auto fill-current text-white" />
@@ -21,27 +19,28 @@
                     @csrf
                 </form>
                 <x-nav-link href="#" onclick="event.preventDefault(); document.getElementById('logoutForm').submit();"
-                    class="text-white text-lg">
+                    class="text-white">
                     ログアウト
                 </x-nav-link>
 
-                <x-nav-link :href="route('user.mypage.index')" :active="request()->routeIs('user.mypage.index')" class="text-white text-lg">
+                <x-nav-link :href="route('user.mypage.index')" :active="request()->routeIs('user.mypage.index')" class="text-white">
                     マイページ
                 </x-nav-link>
                 <x-nav-link :href="route('user.item.create')" :active="request()->routeIs('user.item.create')"
-                    class="inline-flex items-center justify-center bg-white text-black px-4 py-1.5 rounded-md text-lg"
+                    class="inline-flex items-center justify-center bg-white text-black px-4 py-1.5 rounded-md"
                     style="line-height: 1.25rem;">
+                    <i class="fas fa-camera mr-2"></i>
                     出品
                 </x-nav-link>
             @else
-                <x-nav-link :href="route('user.login')" class="text-white text-lg">
+                <x-nav-link :href="route('user.login')" class="text-white">
                     ログイン
                 </x-nav-link>
-                <x-nav-link :href="route('user.register')" class="text-white text-lg">
+                <x-nav-link :href="route('user.register')" class="text-white">
                     会員登録
                 </x-nav-link>
                 <x-nav-link :href="route('user.item.create')" :active="request()->routeIs('user.item.create')"
-                    class="inline-flex items-center justify-center bg-white text-black px-4 py-1.5 rounded-md text-lg"
+                    class="inline-flex items-center justify-center bg-white text-black px-4 py-1.5 rounded-md"
                     style="line-height: 1.25rem;">
                     出品
                 </x-nav-link>

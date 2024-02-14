@@ -15,7 +15,7 @@
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-    <script src="{{ asset('vendor/livewire/livewire.js') }}" defer></script>
+    <script src="https://kit.fontawesome.com/2a628c72fd.js" crossorigin="anonymous"></script>
 </head>
 
 <body class="font-sans antialiased">
