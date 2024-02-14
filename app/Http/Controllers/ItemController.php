@@ -65,5 +65,20 @@ class ItemController extends Controller
 
         return redirect()->route('user.item.index')->with('message', '商品を出品しました。');
     }
+
+    //商品検索
+    public function search(Request $request)
+    {
+        $searchQuery = $request->input('query');
+
+        $items = Item::searchByName($searchQuery)
+        ->orWhere(function ($query) use ($searchQuery) {
+            $query->searchByCategory($searchQuery)
+            ->searchByBrand($searchQuery);
+        })
+            ->get();
+
+        return view('item.search', compact('items'));
+    }
 }
 

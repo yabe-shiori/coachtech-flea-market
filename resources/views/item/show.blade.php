@@ -8,7 +8,16 @@
                 <div>
                     <h2 class="text-2xl font-bold text-black mb-4">{{ $item->name }}</h2>
                     <p class="text-lg font-semibold text-gray-800 mb-4"> ¥{{ number_format($item->price) }}（値段）</p>
-
+                    <form action="{{ route('user.favorite.store', ['item_id' => $item->id]) }}" method="POST">
+                        @csrf
+                        <button type="submit">
+                            @if (auth()->user() && auth()->user()->isFavorite($item->id))
+                                <i class="fas fa-star text-yellow-500"></i>
+                            @else
+                                <i class="far fa-star text-yellow-500"></i>
+                            @endif
+                        </button>
+                    </form>
                     <a href="{{ route('user.payment.create', ['item' => $item]) }}" class="inline-block bg-red-500 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-red-600">購入する</a>
 
                     <h3 class="text-lg text-gray-700 font-bold mb-2">商品説明</h3>

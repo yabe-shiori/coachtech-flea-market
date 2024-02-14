@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ShipmentController;
-
+use App\Http\Controllers\FavoriteController;
 
 
 /*
@@ -27,6 +27,12 @@ Route::get('/item/{item}', [ItemController::class, 'show'])->name('item.show');
 Route::get('/sell', [ItemController::class, 'create'])->name('item.create');
 //出品
 Route::post('/sell', [ItemController::class, 'store'])->name('item.store');
+
+//商品検索
+Route::get('/search', [ItemController::class, 'search'])->name('item.search');
+
+//お気に入り登録
+Route::post('/favorite', [FavoriteController::class, 'store'])->name('favorite.store');
 
 
 

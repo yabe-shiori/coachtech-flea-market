@@ -48,4 +48,26 @@ class Item extends Model
     {
         return $this->hasMany(Message::class);
     }
+
+    // 商品名で検索
+    public function scopeSearchByName($query, $name)
+    {
+        return $query->where('name', 'like', '%' . $name . '%');
+    }
+
+    // カテゴ検索
+    public function scopeSearchByCategory($query, $categoryName)
+    {
+        return $query->whereHas('category', function ($query) use ($categoryName) {
+            $query->where('name', 'like', '%' . $categoryName . '%');
+        });
+    }
+
+    // ブランド検索
+    public function scopeSearchByBrand($query, $brandName)
+    {
+        return $query->whereHas('brand', function ($query) use ($brandName) {
+            $query->where('name', 'like', '%' . $brandName . '%');
+        });
+    }
 }
