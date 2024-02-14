@@ -14,6 +14,8 @@
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <script src="{{ asset('vendor/livewire/livewire.js') }}" defer></script>
 </head>
 
 <body class="font-sans antialiased">
@@ -27,7 +29,7 @@
         <!-- Page Heading -->
         @if (isset($subheader))
             <header class="bg-white shadow border-b-2 border-gray-400">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                <div class="max-w-7xl mx-auto pt-4 px-4 sm:px-6 lg:px-8">
                     {{ $subheader }}
                 </div>
             </header>

@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\PaymentController;
 
 
 
@@ -44,4 +45,8 @@ Route::middleware('auth:users')->group(function () {
     // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+//支払いページ
+Route::get('/purchase/{item}', [PaymentController::class, 'create'])->name('payment.create');
+
+Route::get('/mypage/products', [ProfileController::class, 'myProducts'])->name('mypage.products');
 require __DIR__ . '/auth.php';

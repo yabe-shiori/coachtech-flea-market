@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use App\Models\Item;
 
 class ProfileController extends Controller
 {
@@ -18,6 +19,13 @@ class ProfileController extends Controller
         return view('mypage.index', [
             'user' => $request->user(),
         ]);
+    }
+
+    public function myProducts()
+    {
+        $products = Item::where('user_id', auth()->id())->get();
+        
+        return view('mypage.my-products', compact('products'));
     }
 
 

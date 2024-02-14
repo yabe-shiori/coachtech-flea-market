@@ -66,3 +66,4 @@ class ItemController extends Controller
         return redirect()->route('user.item.index')->with('message', '商品を出品しました。');
     }
 }
+

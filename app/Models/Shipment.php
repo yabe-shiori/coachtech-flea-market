@@ -10,16 +10,12 @@ class Shipment extends Model
     use HasFactory;
 
     protected $fillable = [
-        'transaction_id',
+        'user_id',
         'recipient_name',
         'postal_code',
         'address',
         'building_name',
     ];
 
-    public function transaction()
-    {
-        return $this->belongsTo(Transaction::class);
-    }
 
 }
