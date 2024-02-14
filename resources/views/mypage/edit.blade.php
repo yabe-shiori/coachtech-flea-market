@@ -6,7 +6,7 @@
                 プロフィール設定
             </h2>
 
-            <form method="post" action="{{ route('user.profile.update') }}" class="mt-6 space-y-6 max-w-lg mx-auto"
+            <form method="post" action="{{ route('user.mypage.update') }}" class="mt-6 space-y-6 max-w-lg mx-auto"
                 enctype="multipart/form-data">
                 @csrf
                 @method('patch')

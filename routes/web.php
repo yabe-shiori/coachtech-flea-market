@@ -28,14 +28,19 @@ Route::post('/sell', [ItemController::class, 'store'])->name('item.store');
 
 
 
+
+
 // Route::get('/dashboard', function () {
 //     return view('user.dashboard');
 // })->middleware(['auth:users'])->name('dashboard');
 
 
 Route::middleware('auth:users')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+    //マイページ
+    Route::get('/mypage', [ProfileController::class, 'index'])->name('mypage.index');
+    //プロフィール編集
+    Route::get('/mypage/profile', [ProfileController::class, 'edit'])->name('mypage.edit');
+    Route::patch('/mypage/profile', [ProfileController::class, 'update'])->name('mypage.update');
     // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 

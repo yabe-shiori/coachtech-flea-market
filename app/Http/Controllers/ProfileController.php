@@ -11,12 +11,19 @@ use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
-    /**
-     * Display the user's profile form.
-     */
+
+    //マイぺージ表示
+    public function index(Request $request): View
+    {
+        return view('mypage.index', [
+            'user' => $request->user(),
+        ]);
+    }
+
+
     public function edit(Request $request): View
     {
-        return view('profile.edit', [
+        return view('mypage.edit', [
             'user' => $request->user(),
         ]);
     }
@@ -42,7 +49,7 @@ class ProfileController extends Controller
 
         $user->update($attr);
 
-        return redirect()->route('user.profile.edit')->with('status', 'profile-updated');
+        return redirect()->route('user.mypage.index')->with('message', 'プロフィールを更新しました。');
     }
 
     // public function destroy(Request $request): RedirectResponse
