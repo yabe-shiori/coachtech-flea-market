@@ -7,7 +7,8 @@
                     <!-- 商品画像と商品情報 -->
                     <div class="flex items-center mb-8">
                         <div class="w-1/4 max-w-xs mr-4">
-                            <img src="{{ asset('storage/' . $item->images->first()->image_path) }}" alt="{{ $item->name }}" class="max-w-full">
+                            <img src="{{ asset('storage/' . $item->images->first()->image_path) }}"
+                                alt="{{ $item->name }}" class="max-w-full">
                         </div>
                         <div class="w-3/4">
                             <h2 class="text-2xl font-bold">{{ $item->name }}</h2>
@@ -29,7 +30,8 @@
                             <h3 class="text-xl font-bold">配送先</h3>
                         </div>
                         <div class="w-1/2 text-right">
-                            <a href="#" class="text-blue-500">変更する</a>
+                            <a href="{{ route('user.shipment.create', ['item' => $item->id]) }}"
+                                class="text-blue-500">変更する</a>
                         </div>
                     </div>
                 </div>

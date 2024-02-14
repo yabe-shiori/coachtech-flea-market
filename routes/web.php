@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\ShipmentController;
 
 
 
@@ -47,6 +48,9 @@ Route::middleware('auth:users')->group(function () {
 
 //支払いページ
 Route::get('/purchase/{item}', [PaymentController::class, 'create'])->name('payment.create');
+
+//配送先変更ページ
+Route::get('/address/{item}', [ShipmentController::class, 'create'])->name('shipment.create');
 
 Route::get('/mypage/products', [ProfileController::class, 'myProducts'])->name('mypage.products');
 require __DIR__ . '/auth.php';
