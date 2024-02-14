@@ -1,19 +1,21 @@
 <nav x-data="{ open: false }" class="bg-black border-b border-gray-100">
+    <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
+        <!-- Logo and Text -->
         <div class="flex items-center">
-            <a href="{{ route('user.item.index') }}" class="hidden md:flex">
+            <a href="{{ route('user.item.index') }}" class="hidden lg:flex">
                 <x-application-logo class="block h-9 w-auto fill-current text-white" />
-                <h1 class="text-white text-3xl font-bold ml-2">COACHTECH</h1>
+                {{-- <h1 class="text-white text-3xl font-bold ml-4 mr-6">COACHTECH</h1> --}}
             </a>
         </div>
 
         <!-- Search Box -->
-        <div class="flex flex-grow justify-center items-center">
-            <input type="text" class="form-input w-96 rounded-lg" placeholder="何をお探しですか？">
+        <div class="flex-grow justify-center items-center space-x-4 ml-8">
+            <input type="text" class="form-input w-4/5 rounded-lg" placeholder="何をお探しですか？">
         </div>
 
         <!-- Navigation Links -->
-        <div class="hidden sm:flex items-center space-x-8">
+        <div class="hidden md:flex items-center space-x-4 sm:space-x-8 flex-wrap">
             @auth
                 <form id="logoutForm" method="POST" action="{{ route('user.logout') }}">
                     @csrf

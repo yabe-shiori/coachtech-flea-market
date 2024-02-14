@@ -9,8 +9,7 @@
                     <h2 class="text-2xl font-bold text-black mb-4">{{ $item->name }}</h2>
                     <p class="text-lg font-semibold text-gray-800 mb-4"> ¥{{ number_format($item->price) }}（値段）</p>
 
-                    <!-- 購入ボタンをリンクに変更 -->
-                    <a href="{{ route('user.payment.create', ['item' => $item]) }}" class="inline-block bg-blue-500 text-white px-4 py-2 rounded-lg text-sm font-semibold">購入する</a>
+                    <a href="{{ route('user.payment.create', ['item' => $item]) }}" class="inline-block bg-red-500 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-red-600">購入する</a>
 
                     <h3 class="text-lg text-gray-700 font-bold mb-2">商品説明</h3>
                     <p>{{ $item->description }}</p>
