@@ -9,26 +9,32 @@
                 <div>
                     <h2 class="text-2xl font-bold text-black mb-4">{{ $item->name }}</h2>
                     <p class="text-lg font-semibold text-gray-800 mb-4"> ¥{{ number_format($item->price) }}（値段）</p>
-                    <div class="flex items-start mb-2">
+                    <div class="flex items-center mb-2">
                         <form action="{{ route('user.favorite.store', ['item_id' => $item->id]) }}" method="POST"
-                            class="relative">
+                            class="flex items-center mr-6">
                             @csrf
-                            <button type="submit" class="flex flex-col items-center">
+                            <button type="submit" class="flex flex-col items-center justify-center text-center">
                                 @if (Auth::user()->isFavorite($item->id))
-                                    <i class="fas fa-star text-yellow-500"></i>
+                                    <i class="fas fa-star fa-lg text-yellow-500"></i>
                                 @else
-                                    <i class="far fa-star text-gray-500"></i>
+                                    <i class="far fa-star fa-lg text-gray-500"></i>
                                 @endif
                                 <!-- お気に入りされている数 -->
-                                <span class="text-xs text-gray-500">{{ $item->favorites()->count() }}</span>
+                                <span class="text-xs text-gray-500 mt-3">{{ $item->favorites()->count() }}</span>
                             </button>
                         </form>
-                        <a href="{{ route('user.message.show', ['item' => $item->id]) }}" class="ml-2"><i
-                                class="far fa-comment"></i></a>
+
+                        <div class="flex items-center mr-2">
+                            <a href="{{ route('user.message.show', ['item' => $item->id]) }}"
+                                class="flex flex-col items-center justify-center text-center">
+                                <i class="far fa-comment fa-lg"></i>
+                                <!-- コメント数 -->
+                                <span class="text-xs text-gray-500 mt-3">200</span>
+                            </a>
+                        </div>
                     </div>
                     <a href="{{ route('user.payment.create', ['item' => $item]) }}"
                         class="inline-block bg-red-500 text-white text-base text-center w-1/2 px-4 py-2 rounded-lg font-semibold mb-4 hover:bg-red-600">購入する</a>
-
                     <h3 class="text-xl text-gray-700 font-bold mb-2">商品説明</h3>
                     <p>{{ $item->description }}</p>
                     <h3 class="text-xl text-gray-700 font-bold my-4">商品の情報</h3>
