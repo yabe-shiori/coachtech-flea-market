@@ -36,7 +36,10 @@ Route::get('/search', [ItemController::class, 'search'])->name('item.search');
 Route::post('/favorite', [FavoriteController::class, 'store'])->name('favorite.store');
 
 //商品に対するお問い合わせ画面
-Route::get('/item/{item}/contact', [CommentController::class, 'show'])->name('message.show');
+Route::get('/item/{item}/contact', [CommentController::class, 'show'])->name('comment.show');
+
+//商品に対するお問い合わせ
+Route::post('/item/{item}/contact', [CommentController::class, 'store'])->name('comment.store');
 
 //配送先変更ページ
 Route::get('/address/{item}', [ProfileController::class, 'showShippingAddressForm'])->name('profile.showShippingAddressForm');

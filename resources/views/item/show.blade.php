@@ -14,11 +14,11 @@
                             class="flex items-center mr-6">
                             @csrf
                             <button type="submit" class="flex flex-col items-center justify-center text-center">
-                                @if (Auth::user()->isFavorite($item->id))
-                                    <i class="fas fa-star fa-lg text-yellow-500"></i>
-                                @else
-                                    <i class="far fa-star fa-lg text-gray-500"></i>
-                                @endif
+                                @if (Auth::check() && Auth::user()->isFavorite($item->id))
+    <i class="fas fa-star fa-lg text-yellow-500"></i>
+@else
+    <i class="far fa-star fa-lg text-gray-500"></i>
+@endif
                                 <!-- お気に入りされている数 -->
                                 <span class="text-xs text-gray-500 mt-3">{{ $item->favorites()->count() }}</span>
                             </button>

@@ -14,7 +14,7 @@
                 <div>
                     <div class="mt-1 flex items-center">
                         <img id="avatar-preview"
-                            src="{{ asset('storage/avatar/' . optional($user->profile)->avatar ?? 'user-default.jpg') }}"
+                            src="{{ asset('storage/avatar/' . $user->avatar ?? 'user-default.jpg') }}"
                             class="w-20 h-20 rounded-full mr-4" alt="アバター画像">
 
                         <input id="avatar" name="avatar" type="file" class="hidden" accept="image/*"

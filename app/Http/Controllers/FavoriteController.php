@@ -13,12 +13,12 @@ class FavoriteController extends Controller
         $user = auth()->user();
 
         if (!$user) {
-            return redirect()->route('login');
+            return redirect()->route('user.login');
         }
 
         //既にお気に入りに追加されているか確認
         if (!$user->isFavorite($request->item_id)) {
-            
+
             $favorite = new Favorite();
             $favorite->user_id = $user->id;
             $favorite->item_id = $request->item_id;
