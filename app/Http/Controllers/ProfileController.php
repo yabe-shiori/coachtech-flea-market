@@ -42,9 +42,16 @@ class ProfileController extends Controller
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
         $user = auth()->user();
-
-        // User nameの更新
+        
         $user->name = $request->name;
+
+        if ($request->hasFile('avatar')) {
+            $name = $request->file('avatar')->getClientOriginalName();
+            $avatar = date('Ymd_His') . '_' . $name;
+            $request->file('avatar')->storeAs('public/avatar', $avatar);
+            $user->avatar = $avatar;
+        }
+
         $user->save();
 
         $profileData = [
@@ -54,23 +61,14 @@ class ProfileController extends Controller
             'building_name' => $request->building_name,
         ];
 
-        if ($request->hasFile('avatar')) {
-            $name = $request->file('avatar')->getClientOriginalName();
-            $avatar = date('Ymd_His') . '_' . $name;
-            $request->file('avatar')->storeAs('public/avatar', $avatar);
-            $profileData['avatar'] = $avatar;
-        }
-
         $user->profile()->updateOrCreate(['user_id' => $user->id], $profileData);
 
         return redirect()->route('user.mypage.index')->with('message', 'プロフィールを更新しました。');
     }
-
     // 配送先変更ページ表示
     public function showShippingAddressForm()
     {
         $user = Auth::user();
-        
         $profile = $user->profile;
 
         return view('payment.shipping', compact('user', 'profile'));
