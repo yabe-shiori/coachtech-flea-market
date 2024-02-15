@@ -16,16 +16,18 @@ class FavoriteController extends Controller
             return redirect()->route('login');
         }
 
-        $favorite = new Favorite();
-        $favorite->user_id = $user->id;
-        $favorite->item_id = $request->item_id;
-        $favorite->save();
+        //既にお気に入りに追加されているか確認
+        if (!$user->isFavorite($request->item_id)) {
+            
+            $favorite = new Favorite();
+            $favorite->user_id = $user->id;
+            $favorite->item_id = $request->item_id;
+            $favorite->save();
+        }
 
         return redirect()->back();
     }
     public function removeFavorite(Request $request)
     {
-
     }
 }
-
