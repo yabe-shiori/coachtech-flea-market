@@ -38,7 +38,11 @@ Route::post('/favorite', [FavoriteController::class, 'store'])->name('favorite.s
 //商品に対するお問い合わせ画面
 Route::get('/item/{item}/contact', [MessageController::class, 'show'])->name('message.show');
 
+//配送先変更ページ
+Route::get('/address/{item}', [ProfileController::class, 'showShippingAddressForm'])->name('profile.showShippingAddressForm');
 
+//配送先住所の変更
+Route::patch('/profile/shipping-address', [ProfileController::class, 'updateShippingAddress'])->name('profile.updateShippingAddress');
 
 
 
@@ -59,8 +63,7 @@ Route::middleware('auth:users')->group(function () {
 //支払いページ
 Route::get('/purchase/{item}', [PaymentController::class, 'create'])->name('payment.create');
 
-//配送先変更ページ
-Route::get('/address/{item}', [ShipmentController::class, 'create'])->name('shipment.create');
+
 
 Route::get('/mypage/products', [ProfileController::class, 'myProducts'])->name('mypage.products');
 require __DIR__ . '/auth.php';

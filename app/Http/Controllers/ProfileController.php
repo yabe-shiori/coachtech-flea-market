@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Http\Requests\ShippingAddressUpdateRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -24,7 +25,7 @@ class ProfileController extends Controller
     public function myProducts()
     {
         $products = Item::where('user_id', auth()->id())->get();
-        
+
         return view('mypage.my-products', compact('products'));
     }
 
@@ -37,12 +38,17 @@ class ProfileController extends Controller
     }
 
 
+    // プロフィールの更新
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $user = $request->user();
+        $user = auth()->user();
 
-        $attr = [
-            'name' => $request->name,
+        // User nameの更新
+        $user->name = $request->name;
+        $user->save();
+
+        $profileData = [
+            'introduction' => $request->introduction,
             'postal_code' => $request->postal_code,
             'address' => $request->address,
             'building_name' => $request->building_name,
@@ -52,12 +58,34 @@ class ProfileController extends Controller
             $name = $request->file('avatar')->getClientOriginalName();
             $avatar = date('Ymd_His') . '_' . $name;
             $request->file('avatar')->storeAs('public/avatar', $avatar);
-            $attr['avatar'] = $avatar;
+            $profileData['avatar'] = $avatar;
         }
 
-        $user->update($attr);
+        $user->profile()->updateOrCreate(['user_id' => $user->id], $profileData);
 
         return redirect()->route('user.mypage.index')->with('message', 'プロフィールを更新しました。');
+    }
+
+    // 配送先変更ページ表示
+    public function showShippingAddressForm()
+    {
+        $user = Auth::user();
+        
+        $profile = $user->profile;
+
+        return view('payment.shipping', compact('user', 'profile'));
+    }
+
+    // 配送先住所の更新
+    public function updateShippingAddress(ShippingAddressUpdateRequest $request): RedirectResponse
+    {
+        $user = Auth::user();
+
+        $validatedData = $request->validated();
+
+        $user->profile()->update($validatedData);
+
+        return redirect()->route('user.mypage.index')->with('message', '住所を変更しました');
     }
 
     // public function destroy(Request $request): RedirectResponse

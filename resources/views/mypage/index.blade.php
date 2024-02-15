@@ -2,7 +2,7 @@
     <x-slot name="subheader">
         <div class="flex flex-col md:flex-row md:justify-around items-center">
             <div class="md:flex md:items-center mb-4">
-                <img src="{{ asset('storage/avatar/' . Auth::user()->avatar) }}" alt="User Avatar"
+                <img src="{{ asset('storage/avatar/' . Auth::user()->profile->avatar) }}" alt="User Avatar"
                     class="w-32 h-32 rounded-full mr-4">
                 <div>
                     <h2 class="text-2xl font-bold">{{ Auth::user()->name ? Auth::user()->name : '未設定' }}</h2>

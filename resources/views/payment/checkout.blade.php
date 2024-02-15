@@ -30,7 +30,7 @@
                             <h3 class="text-xl font-bold">配送先</h3>
                         </div>
                         <div class="w-1/2 text-right">
-                            <a href="{{ route('user.shipment.create', ['item' => $item->id]) }}"
+                            <a href="{{ route('user.profile.showShippingAddressForm', ['item' => $item->id]) }}"
                                 class="text-blue-500">変更する</a>
                         </div>
                     </div>

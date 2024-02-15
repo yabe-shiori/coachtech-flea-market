@@ -2,7 +2,8 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <h2 class="text-2xl text-center font-bold mb-8">住所の変更</h2>
-            <form action="" method="POST" class="max-w-lg mx-auto">
+            <form action="{{ route('user.profile.updateShippingAddress') }}" method="POST" class="max-w-lg mx-auto">
+                @method('PATCH')
                 @csrf
                 <!-- 郵便番号 -->
                 <div class="mb-6">

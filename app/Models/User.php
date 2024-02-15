@@ -21,10 +21,6 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'avatar',
-        'postal_code',
-        'address',
-        'building_name',
     ];
 
     /**
@@ -47,6 +43,10 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    public function profile()
+    {
+        return $this->hasOne(Profile::class);
+    }
 
     public function favorites()
     {

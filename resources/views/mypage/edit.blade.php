@@ -13,8 +13,9 @@
 
                 <div>
                     <div class="mt-1 flex items-center">
-                        <img id="avatar-preview" src="{{ asset('storage/avatar/' . $user->avatar) }}"
-                            class="w-20 h-20 rounded-full mr-4" alt="保存された画像">
+                        <img id="avatar-preview"
+                            src="{{ asset('storage/avatar/' . optional($user->profile)->avatar ?? 'user-default.jpg') }}"
+                            class="w-20 h-20 rounded-full mr-4" alt="アバター画像">
 
                         <input id="avatar" name="avatar" type="file" class="hidden" accept="image/*"
                             onchange="previewImage(this)">
@@ -26,32 +27,31 @@
                     <x-input-error class="mt-2" :messages="$errors->get('avatar')" />
                 </div>
 
-                <div>
-                    <x-input-label for="name" :value="__('ユーザー名')" />
-                    <x-text-input id="name" name="name" type="text" class="mt-1 block w-full"
-                        :value="old('name', $user->name)" required autofocus autocomplete="name" />
-                    <x-input-error class="mt-2" :messages="$errors->get('name')" />
+                <div class="mb-4">
+                    <label for="name" class="block text-sm font-medium text-gray-700">ユーザー名</label>
+                    <input type="text" id="name" name="name" value="{{ old('name', $user->name) }}"
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                 </div>
 
-                <div>
-                    <x-input-label for="postal_code" :value="__('郵便番号')" />
-                    <x-text-input id="postal_code" name="postal_code" type="text" class="mt-1 block w-full"
-                        :value="old('postal_code', $user->postal_code)" required autofocus autocomplete="postal_code" />
-                    <x-input-error class="mt-2" :messages="$errors->get('postal_code')" />
+                <div class="mb-4">
+                    <label for="postal_code" class="block text-sm font-medium text-gray-700">郵便番号</label>
+                    <input type="text" id="postal_code" name="postal_code"
+                        value="{{ old('postal_code', optional($user->profile)->postal_code) }}"
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                 </div>
 
-                <div>
-                    <x-input-label for="address" :value="__('住所')" />
-                    <x-text-input id="address" name="address" type="text" class="mt-1 block w-full"
-                        :value="old('address', $user->address)" required autofocus autocomplete="address" />
-                    <x-input-error class="mt-2" :messages="$errors->get('address')" />
+                <div class="mb-4">
+                    <label for="address" class="block text-sm font-medium text-gray-700">住所</label>
+                    <input type="text" id="address" name="address"
+                        value="{{ old('address', optional($user->profile)->address) }}"
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                 </div>
 
-                <div>
-                    <x-input-label for="building_name" :value="__('建物名')" />
-                    <x-text-input id="building_name" name="building_name" type="text" class="mt-1 block w-full"
-                        :value="old('building_name', $user->building_name)" required autofocus autocomplete="building_name" />
-                    <x-input-error class="mt-2" :messages="$errors->get('building_name')" />
+                <div class="mb-4">
+                    <label for="building_name" class="block text-sm font-medium text-gray-700">建物名</label>
+                    <input type="text" id="building_name" name="building_name"
+                        value="{{ old('building_name', optional($user->profile)->building_name) }}"
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                 </div>
 
                 <div class="flex items-center justify-center gap-4">
