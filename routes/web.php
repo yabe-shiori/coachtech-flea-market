@@ -6,7 +6,7 @@ use App\Http\Controllers\ItemController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ShipmentController;
 use App\Http\Controllers\FavoriteController;
-use App\Http\Controllers\MessageController;
+use App\Http\Controllers\CommentController;
 
 
 /*
@@ -36,7 +36,7 @@ Route::get('/search', [ItemController::class, 'search'])->name('item.search');
 Route::post('/favorite', [FavoriteController::class, 'store'])->name('favorite.store');
 
 //商品に対するお問い合わせ画面
-Route::get('/item/{item}/contact', [MessageController::class, 'show'])->name('message.show');
+Route::get('/item/{item}/contact', [CommentController::class, 'show'])->name('message.show');
 
 //配送先変更ページ
 Route::get('/address/{item}', [ProfileController::class, 'showShippingAddressForm'])->name('profile.showShippingAddressForm');

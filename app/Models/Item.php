@@ -44,9 +44,9 @@ class Item extends Model
         return $this->belongsToMany(User::class, 'favorites', 'item_id', 'user_id')->withTimestamps();
     }
 
-    public function messages()
+    public function comments()
     {
-        return $this->hasMany(Message::class);
+        return $this->hasMany(Comment::class);
     }
 
     // 商品名で検索
