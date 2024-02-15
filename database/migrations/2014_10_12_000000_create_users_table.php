@@ -18,7 +18,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('avatar')->default('user-default.jpg');
-            $table->string('postal_code')->nullable();
+            $table->char('postal_code', 8)->nullable();
             $table->string('address')->nullable();
             $table->string('building_name')->nullable();
             $table->rememberToken();
