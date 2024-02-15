@@ -6,6 +6,7 @@ use App\Http\Controllers\ItemController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ShipmentController;
 use App\Http\Controllers\FavoriteController;
+use App\Http\Controllers\MessageController;
 
 
 /*
@@ -33,6 +34,9 @@ Route::get('/search', [ItemController::class, 'search'])->name('item.search');
 
 //お気に入り登録
 Route::post('/favorite', [FavoriteController::class, 'store'])->name('favorite.store');
+
+//商品に対するお問い合わせ画面
+Route::get('/item/{item}/contact', [MessageController::class, 'show'])->name('message.show');
 
 
 
