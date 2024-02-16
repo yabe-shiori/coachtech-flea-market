@@ -85,6 +85,41 @@ class ItemImagesTableSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],
+
+            [
+                'item_id' => 11,
+                'image_path' => 'item_images/dummy11.png',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+
+            [
+                'item_id' => 12,
+                'image_path' => 'item_images/dummy12.png',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+
+            [
+                'item_id' => 13,
+                'image_path' => 'item_images/dummy13.png',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+
+            [
+                'item_id' => 14,
+                'image_path' => 'item_images/dummy14.png',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+
+            [
+                'item_id' => 15,
+                'image_path' => 'item_images/dummy15.png',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
         ];
 
         foreach ($itemImages as $itemImage) {
