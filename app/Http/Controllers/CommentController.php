@@ -12,11 +12,10 @@ class CommentController extends Controller
 {
     public function show($itemId)
     {
-        $item = Item::with(['comments' => function ($query) {
-            $query->orderByDesc('created_at');
-        }])->findOrFail($itemId);
+        $item = Item::findOrFail($itemId);
+        $comments = $item->comments()->orderByDesc('created_at')->paginate(5);
 
-        return view('item.comment', compact('item'));
+        return view('item.comment', compact('item', 'comments'));
     }
 
     //コメント投稿
