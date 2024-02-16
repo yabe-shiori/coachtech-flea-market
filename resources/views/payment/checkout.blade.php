@@ -52,10 +52,44 @@
                     </div>
 
                     <div class="flex justify-center mt-auto">
-                        <x-primary-button>購入する</x-primary-button>
+                        <form id="checkout-form" action="{{ route('user.checkout', $item->id) }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="item_id" value="{{ $item->id }}">
+                            <button type="submit" id="checkout-button">購入する</button>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <script>
+        var stripe = Stripe('{{ env('STRIPE_PUBLIC') }}');
+        var checkoutButton = document.getElementById('checkout-button');
+
+        checkoutButton.addEventListener('click', function() {
+            fetch('{{ route('user.checkout', ['itemId' => $item->id]) }}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    }
+                })
+                .then(function(response) {
+                    return response.json();
+                })
+                .then(function(session) {
+                    return stripe.redirectToCheckout({
+                        sessionId: session.id
+                    });
+                })
+                .then(function(result) {
+                    if (result.error) {
+                        console.error(result.error.message);
+                    }
+                })
+                .catch(function(error) {
+                    console.error('Error:', error);
+                });
+        });
+    </script>
 </x-app-layout>

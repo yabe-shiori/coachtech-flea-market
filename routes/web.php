@@ -7,6 +7,7 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ShipmentController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\StripeController;
 
 
 /*
@@ -47,11 +48,12 @@ Route::get('/address/{item}', [ProfileController::class, 'showShippingAddressFor
 //配送先住所の変更
 Route::patch('/profile/shipping-address', [ProfileController::class, 'updateShippingAddress'])->name('profile.updateShippingAddress');
 
+// Stripe
+Route::post('/checkout/{itemId}', [StripeController::class, 'createSession'])->name('checkout');
 
+Route::get('/success', [StripeController::class, 'success'])->name('success');
+Route::get('/cancel', [StripeController::class, 'cancel'])->name('cancel');
 
-// Route::get('/dashboard', function () {
-//     return view('user.dashboard');
-// })->middleware(['auth:users'])->name('dashboard');
 
 
 Route::middleware('auth:users')->group(function () {
