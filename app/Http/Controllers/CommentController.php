@@ -12,7 +12,9 @@ class CommentController extends Controller
 {
     public function show($itemId)
     {
-        $item = Item::findOrFail($itemId);
+        $item = Item::with(['comments' => function ($query) {
+            $query->orderByDesc('created_at');
+        }])->findOrFail($itemId);
 
         return view('item.comment', compact('item'));
     }
@@ -20,24 +22,25 @@ class CommentController extends Controller
     //コメント投稿
     public function store(CommentStoreRequest $request, $itemId)
     {
-        // ログインしているユーザーのIDを取得
+        // ログインチェック
+        if (!Auth::check()) {
+            return back()->withErrors('ログインしてください');
+        }
+
         $senderId = Auth::id();
 
-        // バリデーション済みデータを取得
         $validatedData = $request->validated();
 
-        // 商品を取得
         $item = Item::findOrFail($itemId);
 
-        // コメントを作成して保存
         $comment = new Comment();
         $comment->body = $validatedData['body'];
-        $comment->item_id = $itemId; // 商品IDを設定
-        $comment->sender_id = $senderId; // sender_idを設定
-        $comment->receiver_id = $item->user_id; // receiver_idを設定
+        $comment->item_id = $itemId;
+        $comment->sender_id = $senderId;
+        $comment->receiver_id = $item->user_id;
         $comment->save();
 
-        // リダイレクト
         return back()->with('message', 'コメントを投稿しました');
     }
 }
+

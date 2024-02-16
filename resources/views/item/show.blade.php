@@ -15,21 +15,21 @@
                             @csrf
                             <button type="submit" class="flex flex-col items-center justify-center text-center">
                                 @if (Auth::check() && Auth::user()->isFavorite($item->id))
-    <i class="fas fa-star fa-lg text-yellow-500"></i>
-@else
-    <i class="far fa-star fa-lg text-gray-500"></i>
-@endif
+                                    <i class="fas fa-star fa-lg text-yellow-500"></i>
+                                @else
+                                    <i class="far fa-star fa-lg text-gray-500"></i>
+                                @endif
                                 <!-- お気に入りされている数 -->
                                 <span class="text-xs text-gray-500 mt-3">{{ $item->favorites()->count() }}</span>
                             </button>
                         </form>
 
                         <div class="flex items-center mr-2">
-                            <a href="{{ route('user.message.show', ['item' => $item->id]) }}"
+                            <a href="{{ route('user.comment.show', ['item' => $item->id]) }}"
                                 class="flex flex-col items-center justify-center text-center">
                                 <i class="far fa-comment fa-lg"></i>
                                 <!-- コメント数 -->
-                                <span class="text-xs text-gray-500 mt-3">200</span>
+                                <span class="text-xs text-gray-500 mt-3">{{ $item->comments->count() }}</span>
                             </a>
                         </div>
                     </div>
