@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Brand;
 use App\Http\Requests\ItemStoreRequest;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Favorite;
 
 
 
@@ -71,14 +72,17 @@ class ItemController extends Controller
     {
         $searchQuery = $request->input('query');
 
-        $items = Item::searchByName($searchQuery)
-        ->orWhere(function ($query) use ($searchQuery) {
-            $query->searchByCategory($searchQuery)
-            ->searchByBrand($searchQuery);
+        $items = Item::where(function ($query) use ($searchQuery) {
+            $query->searchByName($searchQuery)
+                ->orWhere(function ($query) use ($searchQuery) {
+                    $query->searchByCategory($searchQuery);
+                })
+                ->orWhere(function ($query) use ($searchQuery) {
+                    $query->searchByBrand($searchQuery);
+                });
         })
             ->get();
 
         return view('item.search', compact('items'));
     }
 }
-

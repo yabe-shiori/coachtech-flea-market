@@ -4,9 +4,20 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Favorite;
+use App\Models\Item;
+
 
 class FavoriteController extends Controller
 {
+
+    //マイリスト表示
+    public function index()
+    {
+        $itemImages = Item::with('images')->get();
+        return view('mylist', compact('itemImages'));
+    }
+
+
     // お気に入り登録
     public function store(Request $request)
     {

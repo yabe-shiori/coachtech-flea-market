@@ -54,6 +54,10 @@ Route::post('/checkout/{itemId}', [StripeController::class, 'createSession'])->n
 Route::get('/success', [StripeController::class, 'success'])->name('success');
 Route::get('/cancel', [StripeController::class, 'cancel'])->name('cancel');
 
+Route::get('/mylist', [FavoriteController::class, 'index'])->name('mylist');
+
+
+
 
 
 Route::middleware('auth:users')->group(function () {
