@@ -56,7 +56,7 @@ class ItemsTableSeeder extends Seeder
             [
                 'user_id' => 1,
                 'name' => '折りたたみ式キャンプチェア',
-                'category_ids' => [36, 46],
+                'category_ids' => [24, 46],
                 'brand_id' => 4,
                 'price' => 6500,
                 'condition' => '新品、未使用',
