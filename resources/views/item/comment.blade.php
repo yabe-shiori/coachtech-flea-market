@@ -69,10 +69,10 @@
                                     @if (Auth::check() && ($comment->sender_id == Auth::id() || $item->user_id == Auth::id()))
                                         <form
                                             action="{{ route('user.comment.destroy', ['item' => $item->id, 'comment' => $comment->id]) }}"
-                                            method="POST" class="inline">
+                                            method="POST" class="inline" id="delete-comment-form-{{ $comment->id }}">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit"
+                                            <button type="button" onclick="confirmDelete({{ $comment->id }})"
                                                 class="text-gray-400 hover:text-gray-600 p-1 rounded-full focus:outline-none focus:shadow-outline"
                                                 title="コメントを削除">
                                                 <i class="fas fa-trash-alt"></i>
@@ -101,4 +101,11 @@
             </div>
         </div>
     </div>
+    <script>
+        function confirmDelete(commentId) {
+            if (confirm("本当に削除しますか？")) {
+                document.getElementById('delete-comment-form-' + commentId).submit();
+            }
+        }
+    </script>
 </x-app-layout>
