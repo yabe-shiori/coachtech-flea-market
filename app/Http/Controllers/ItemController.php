@@ -41,22 +41,22 @@ class ItemController extends Controller
     // 出品
     public function store(ItemStoreRequest $request)
     {
-
         $data = $request->validated();
 
         $user = Auth::user();
         $item = new Item();
         $item->user_id = $user->id;
         $item->name = $data['name'];
-
-        $category = Category::findOrFail($data['category_id']);
-        $item->category_id = $category->id;
-
-        // $item->brand_id = $data['brand_id'];
         $item->price = $data['price'];
         $item->condition = $data['condition'];
         $item->description = $data['description'];
         $item->save();
+
+        $selectedCategories = (array) $request->input('category_id');
+        $parentCategories = Category::whereIn('id', $selectedCategories)->pluck('parent_id')->toArray();
+        $allCategories = array_merge($selectedCategories, $parentCategories);
+
+        $item->category()->sync($allCategories);
 
         foreach ($request->file('image') as $image) {
             $item->images()->create([
