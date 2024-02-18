@@ -12,7 +12,6 @@ class StripeController extends Controller
     public function createSession(Request $request, $itemId)
     {
         $item = Item::findOrFail($itemId);
-        // dd($item->price); // 価格を確認
 
         Stripe::setApiKey(env('STRIPE_SECRET'));
 
@@ -24,7 +23,7 @@ class StripeController extends Controller
                     'product_data' => [
                         'name' => $item->name,
                     ],
-                    'unit_amount' => $item->price * 100,
+                    'unit_amount' => intval($item->price),
                 ],
                 'quantity' => 1,
             ]],
@@ -32,7 +31,6 @@ class StripeController extends Controller
             'success_url' => route('user.success'),
             'cancel_url' => route('user.cancel'),
         ]);
-        // dd($checkout_session);
 
         return response()->json(['id' => $checkout_session->id]);
     }
