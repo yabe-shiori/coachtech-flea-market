@@ -10,19 +10,26 @@
                     <h2 class="text-2xl font-bold text-black mb-4">{{ $item->name }}</h2>
                     <p class="text-lg font-semibold text-gray-800 mb-4"> ¥{{ number_format($item->price) }}（値段）</p>
                     <div class="flex items-center mb-2">
-                        <form action="{{ route('user.favorite.store', ['item_id' => $item->id]) }}" method="POST"
-                            class="flex items-center mr-6">
-                            @csrf
-                            <button type="submit" class="flex flex-col items-center justify-center text-center">
-                                @if (Auth::check() && Auth::user()->isFavorite($item->id))
-                                    <i class="fas fa-star fa-lg text-yellow-500"></i>
-                                @else
-                                    <i class="far fa-star fa-lg text-gray-500"></i>
-                                @endif
-                                <!-- お気に入りされている数 -->
-                                <span class="text-xs text-gray-500 mt-3">{{ $item->favorites()->count() }}</span>
-                            </button>
-                        </form>
+                       @if (Auth::check() && Auth::user()->isFavorite($item->id))
+    <!-- お気に入り削除フォーム -->
+    <form action="{{ route('user.removeFavorite', ['item_id' => $item->id]) }}" method="POST" class="flex items-center mr-6">
+        @csrf
+        @method('DELETE')
+        <button type="submit" class="flex flex-col items-center justify-center text-center">
+            <i class="fas fa-star fa-lg text-yellow-500"></i>
+            <span class="text-xs text-gray-500 mt-3">{{ $item->favorites()->count() }}</span>
+        </button>
+    </form>
+@else
+    <!-- お気に入り追加フォーム -->
+    <form action="{{ route('user.favorite', ['item_id' => $item->id]) }}" method="POST" class="flex items-center mr-6">
+        @csrf
+        <button type="submit" class="flex flex-col items-center justify-center text-center">
+            <i class="far fa-star fa-lg text-gray-500"></i>
+            <span class="text-xs text-gray-500 mt-3">{{ $item->favorites()->count() }}</span>
+        </button>
+    </form>
+@endif
 
                         <div class="flex items-center mr-2">
                             <a href="{{ route('user.comment.show', ['item' => $item->id]) }}"

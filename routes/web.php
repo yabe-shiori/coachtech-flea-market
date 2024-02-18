@@ -25,16 +25,24 @@ use App\Http\Controllers\StripeController;
 Route::get('/', [ItemController::class, 'index'])->name('item.index');
 //商品詳細ページ
 Route::get('/item/{item}', [ItemController::class, 'show'])->name('item.show');
+
+//マイリスト表示
+Route::get('/mylist', [FavoriteController::class, 'index'])->name('mylist');
+
+//商品検索
+Route::get('/search', [ItemController::class, 'search'])->name('item.search');
+
+
 //出品ページ
 Route::get('/sell', [ItemController::class, 'create'])->name('item.create');
 //出品
 Route::post('/sell', [ItemController::class, 'store'])->name('item.store');
 
-//商品検索
-Route::get('/search', [ItemController::class, 'search'])->name('item.search');
-
 //お気に入り登録
-Route::post('/favorite', [FavoriteController::class, 'store'])->name('favorite.store');
+Route::post('/favorite', [FavoriteController::class, 'store'])->name('favorite');
+
+//お気に入り削除
+Route::delete('/favorite', [FavoriteController::class, 'removeFavorite'])->name('removeFavorite');
 
 //商品に対するお問い合わせ画面
 Route::get('/item/{item}/contact', [CommentController::class, 'show'])->name('comment.show');
@@ -54,7 +62,7 @@ Route::post('/checkout/{itemId}', [StripeController::class, 'createSession'])->n
 Route::get('/success', [StripeController::class, 'success'])->name('success');
 Route::get('/cancel', [StripeController::class, 'cancel'])->name('cancel');
 
-Route::get('/mylist', [FavoriteController::class, 'index'])->name('mylist');
+
 
 
 

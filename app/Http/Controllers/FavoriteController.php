@@ -5,11 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Favorite;
 use App\Models\Item;
+use Illuminate\Support\Facades\Auth;
 
 
 class FavoriteController extends Controller
 {
-
     //マイリスト表示
     public function index()
     {
@@ -26,24 +26,38 @@ class FavoriteController extends Controller
     // お気に入り登録
     public function store(Request $request)
     {
-        $user = auth()->user();
+        $user_id = Auth::id();
 
-        if (!$user) {
+        if (!$user_id) {
             return redirect()->route('user.login');
         }
 
-        //既にお気に入りに追加されているか確認
-        if (!$user->isFavorite($request->item_id)) {
+        $item_id = $request->item_id;
 
+        $favoriteExists = Favorite::where('user_id', $user_id)->where('item_id', $item_id)->exists();
+
+        if (!$favoriteExists) {
             $favorite = new Favorite();
-            $favorite->user_id = $user->id;
-            $favorite->item_id = $request->item_id;
+            $favorite->user_id = $user_id;
+            $favorite->item_id = $item_id;
             $favorite->save();
         }
 
         return redirect()->back();
     }
+
+    // お気に入り削除
     public function removeFavorite(Request $request)
     {
+        $user_id = Auth::id();
+        $item_id = $request->input('item_id');
+
+        $favorite = Favorite::where('user_id', $user_id)->where('item_id', $item_id)->first();
+
+        if ($favorite) {
+            $favorite->delete();
+        }
+
+        return back();
     }
 }
