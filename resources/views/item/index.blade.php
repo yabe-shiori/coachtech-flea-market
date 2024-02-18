@@ -1,7 +1,6 @@
 <x-app-layout>
     <x-slot name="subheader">
         <h2 class="font-semibold text-xl text-gray-500 leading-tight">
-            <!-- より柔らかい赤色に変更 -->
             <a href="{{ route('user.item.index') }}" id="recommendedLink" class="mr-4" style="color:#e57373;">おすすめ</a>
             <a href="javascript:void(0)" id="myListLink" onclick="loadMyList()">マイリスト</a>
         </h2>
@@ -31,8 +30,7 @@
                 .then(response => response.text())
                 .then(data => {
                     document.getElementById('item-list').innerHTML = data;
-                    // マイリストをロードした後に色を変更
-                    document.getElementById('myListLink').style.color = '#e57373'; // こちらも同じ色に
+                    document.getElementById('myListLink').style.color = '#e57373';
                     document.getElementById('recommendedLink').style.color = 'black';
                 })
                 .catch(error => console.error('Error:', error));

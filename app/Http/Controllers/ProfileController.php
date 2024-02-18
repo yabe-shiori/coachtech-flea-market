@@ -17,18 +17,16 @@ class ProfileController extends Controller
     //マイぺージ表示
     public function index(Request $request): View
     {
+        $user = $request->user();
+
+        // ユーザーが出品した商品と画像を取得
+        $userItems = Item::with('images')->where('user_id', $user->id)->get();
+
         return view('mypage.index', [
-            'user' => $request->user(),
+            'user' => $user,
+            'userItems' => $userItems,
         ]);
     }
-
-    public function myProducts()
-    {
-        $products = Item::where('user_id', auth()->id())->get();
-
-        return view('mypage.my-products', compact('products'));
-    }
-
 
     public function edit(Request $request): View
     {
@@ -42,7 +40,7 @@ class ProfileController extends Controller
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
         $user = auth()->user();
-        
+
         $user->name = $request->name;
 
         if ($request->hasFile('avatar')) {
