@@ -13,10 +13,11 @@ class FavoriteController extends Controller
     //マイリスト表示
     public function index()
     {
-        $itemImages = Item::with('images')->get();
-        return view('mylist', compact('itemImages'));
-    }
+        $userId = auth()->user()->id;
+        $favoriteItems = Favorite::where('user_id', $userId)->with('item.images')->get();
 
+        return view('mylist', compact('favoriteItems'));
+    }
 
     // お気に入り登録
     public function store(Request $request)
