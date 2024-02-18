@@ -2,9 +2,7 @@
     <div class="py-12">
         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
             <div class="grid grid-cols-2 gap-4">
-                <!-- 左側カラム -->
                 <div class="p-6 sm:px-20 bg-white border-b border-gray-200">
-                    <!-- 商品画像と商品情報 -->
                     <div class="flex items-center mb-8">
                         <div class="w-1/4 max-w-xs mr-4">
                             <img src="{{ asset('storage/' . $item->images->first()->image_path) }}"
@@ -35,7 +33,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- 右側カラム -->
                 <div class="p-6 sm:px-20 bg-white border-b border-gray-200">
                     <div class="mb-8">
                         <h2 class="text-xl font-bold mb-4 text-center">ご注文内容の確認</h2>
@@ -55,7 +52,7 @@
                         <form id="checkout-form" action="{{ route('user.checkout', $item->id) }}" method="POST">
                             @csrf
                             <input type="hidden" name="item_id" value="{{ $item->id }}">
-                            <button type="submit" id="checkout-button">購入する</button>
+                            <x-primary-button type="submit" id="checkout-button">購入する</x-primary-button>
                         </form>
                     </div>
                 </div>
