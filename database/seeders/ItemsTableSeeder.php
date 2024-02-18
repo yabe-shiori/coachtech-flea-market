@@ -7,6 +7,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use App\Models\Item;
 use Carbon\Carbon;
+use App\Models\Category;
 
 class ItemsTableSeeder extends Seeder
 {
@@ -19,7 +20,7 @@ class ItemsTableSeeder extends Seeder
             [
                 'user_id' => 1,
                 'name' => 'ヴィンテージデニムジャケット',
-                'category_id' => 10,
+                'category_ids' => [6, 10],
                 'brand_id' => 1,
                 'price' => 8500,
                 'condition' => '目立った傷や汚れなし',
@@ -31,9 +32,9 @@ class ItemsTableSeeder extends Seeder
             [
                 'user_id' => 1,
                 'name' => 'レトロスタイルカメラ',
-                'category_id' => 38,
+                'category_ids' => [37, 38],
                 'brand_id' => 2,
-                'price' =>  12000,
+                'price' => 12000,
                 'condition' => '傷や汚れあり',
                 'description' => 'レトロなデザインのフィルムカメラです。クラシックな写真を楽しみたい方におすすめです。',
                 'created_at' => Carbon::now(),
@@ -43,9 +44,9 @@ class ItemsTableSeeder extends Seeder
             [
                 'user_id' => 1,
                 'name' => ' ミニチュアフィギュアコレクション',
-                'category_id' => 38,
+                'category_ids' => [37, 38],
                 'brand_id' => 3,
-                'price' =>  2000,
+                'price' => 2000,
                 'condition' => '目立った傷や汚れなし',
                 'description' => '人気キャラクターのミニチュアフィギュアのコレクションセットです。ディスプレイやプレゼントに最適です。',
                 'created_at' => Carbon::now(),
@@ -55,7 +56,7 @@ class ItemsTableSeeder extends Seeder
             [
                 'user_id' => 1,
                 'name' => '折りたたみ式キャンプチェア',
-                'category_id' => 46,
+                'category_ids' => [36, 46],
                 'brand_id' => 4,
                 'price' => 6500,
                 'condition' => '新品、未使用',
@@ -67,7 +68,7 @@ class ItemsTableSeeder extends Seeder
             [
                 'user_id' => 1,
                 'name' => 'プラントスタンド',
-                'category_id' => 27,
+                'category_ids' => [19, 27],
                 'brand_id' => 5,
                 'price' => 2800,
                 'condition' => '目立った傷や汚れなし',
@@ -79,7 +80,7 @@ class ItemsTableSeeder extends Seeder
             [
                 'user_id' => 1,
                 'name' => 'ドライヤー＆ストレートアイロンセット',
-                'category_id' => 48,
+                'category_ids' => [48],
                 'brand_id' => 6,
                 'price' => 9200,
                 'condition' => '全体的に状態が悪い',
@@ -91,7 +92,7 @@ class ItemsTableSeeder extends Seeder
             [
                 'user_id' => 1,
                 'name' => 'ワイヤレスイヤホン',
-                'category_id' => 11,
+                'category_ids' => [11, 18],
                 'brand_id' => 7,
                 'price' => 4500,
                 'condition' => '新品、未使用',
@@ -103,7 +104,7 @@ class ItemsTableSeeder extends Seeder
             [
                 'user_id' => 1,
                 'name' => ' カラフルなキッチンツールセット',
-                'category_id' => 20,
+                'category_ids' => [19, 20],
                 'brand_id' => 8,
                 'price' => 3800,
                 'condition' => '未使用に近い',
@@ -115,7 +116,7 @@ class ItemsTableSeeder extends Seeder
             [
                 'user_id' => 1,
                 'name' => 'サーフボード',
-                'category_id' => 46,
+                'category_ids' => [44, 46],
                 'brand_id' => 9,
                 'price' => 25000,
                 'condition' => '目立った傷や汚れなし',
@@ -127,9 +128,9 @@ class ItemsTableSeeder extends Seeder
             [
                 'user_id' => 1,
                 'name' => 'ベビーカー',
-                'category_id' => 52,
+                'category_ids' => [52, 26],
                 'brand_id' => 10,
-                'price' => 128000,
+                'price' => 12800,
                 'condition' => 'やや傷や汚れあり',
                 'description' => '赤ちゃんを快適に乗せることができるベビーカーです。安全性と快適性を追求したデザインです。',
                 'created_at' => Carbon::now(),
@@ -139,7 +140,7 @@ class ItemsTableSeeder extends Seeder
             [
                 'user_id' => 1,
                 'name' => 'ダウンジャケット',
-                'category_id' => 10,
+                'category_ids' => [6, 10],
                 'brand_id' => 10,
                 'price' => 7500,
                 'condition' => '目立った傷や汚れなし',
@@ -151,7 +152,7 @@ class ItemsTableSeeder extends Seeder
             [
                 'user_id' => 1,
                 'name' => 'スマートウォッチ',
-                'category_id' => 18,
+                'category_ids' => [11, 18],
                 'brand_id' => 10,
                 'price' => 14000,
                 'condition' => '新品、未使用',
@@ -163,7 +164,7 @@ class ItemsTableSeeder extends Seeder
             [
                 'user_id' => 1,
                 'name' => 'マジカルスターライトプロジェクター',
-                'category_id' => 23,
+                'category_ids' => [19, 24],
                 'brand_id' => 10,
                 'price' => 4800,
                 'condition' => '新品、未使用',
@@ -175,7 +176,7 @@ class ItemsTableSeeder extends Seeder
             [
                 'user_id' => 1,
                 'name' => 'フローラルドレス',
-                'category_id' => 4,
+                'category_ids' => [1, 4],
                 'brand_id' => 10,
                 'price' => 3200,
                 'condition' => '目立った傷や汚れなし',
@@ -187,7 +188,7 @@ class ItemsTableSeeder extends Seeder
             [
                 'user_id' => 1,
                 'name' => ' キッズシューズ',
-                'category_id' => 53,
+                'category_ids' => [52, 53],
                 'brand_id' => 10,
                 'price' => 2500,
                 'condition' => '新品、未使用',
@@ -198,11 +199,11 @@ class ItemsTableSeeder extends Seeder
         ];
 
         foreach ($items as $item) {
+            // 商品をitemsテーブルに挿入
             $itemId = DB::table('items')->insertGetId([
                 'user_id' => $item['user_id'],
                 'name' => $item['name'],
                 'brand_id' => $item['brand_id'],
-                'category_id' => $item['category_id'],
                 'price' => $item['price'],
                 'condition' => $item['condition'],
                 'description' => $item['description'],
@@ -210,8 +211,8 @@ class ItemsTableSeeder extends Seeder
                 'updated_at' => Carbon::now(),
             ]);
 
-            $categories = [1, 2, 3];
-            foreach ($categories as $categoryId) {
+            // 商品に関連するカテゴリーをitem_categoriesテーブルに挿入
+            foreach ($item['category_ids'] as $categoryId) {
                 DB::table('item_categories')->insert([
                     'item_id' => $itemId,
                     'category_id' => $categoryId,
@@ -220,7 +221,6 @@ class ItemsTableSeeder extends Seeder
                 ]);
             }
         }
-
     }
-
 }
+

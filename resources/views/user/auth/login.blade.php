@@ -6,7 +6,7 @@
     <form method="POST" action="{{ route('user.login') }}">
         @csrf
 
-        <h2 class="text-2xl text-center font-bold mt-8 mb-10">{{ __('ログイン') }}</h2>
+        <h2 class="text-2xl text-center font-bold mt-8 mb-10">ログイン</h2>
 
         <!-- Email Address -->
         <div>
