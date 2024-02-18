@@ -50,6 +50,9 @@ Route::get('/item/{item}/contact', [CommentController::class, 'show'])->name('co
 //商品に対するお問い合わせ
 Route::post('/item/{item}/contact', [CommentController::class, 'store'])->name('comment.store');
 
+//商品に対するお問い合わせ削除
+Route::delete('/item/{item}/contact/{comment}', [CommentController::class, 'destroy'])->name('comment.destroy');
+
 //配送先変更ページ
 Route::get('/address/{item}', [ProfileController::class, 'showShippingAddressForm'])->name('profile.showShippingAddressForm');
 

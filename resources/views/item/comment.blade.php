@@ -65,6 +65,20 @@
                                     <p class="text-xs text-gray-600">
                                         {{ $comment->created_at->diffForHumans() }}
                                     </p>
+                                    <!-- コメント削除ボタン -->
+                                    @if (Auth::check() && ($comment->sender_id == Auth::id() || $item->user_id == Auth::id()))
+                                        <form
+                                            action="{{ route('user.comment.destroy', ['item' => $item->id, 'comment' => $comment->id]) }}"
+                                            method="POST" class="inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit"
+                                                class="text-gray-400 hover:text-gray-600 p-1 rounded-full focus:outline-none focus:shadow-outline"
+                                                title="コメントを削除">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </button>
+                                        </form>
+                                    @endif
                                 </div>
                             </div>
                         @endforeach

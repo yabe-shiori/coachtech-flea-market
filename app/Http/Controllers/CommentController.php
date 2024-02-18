@@ -21,9 +21,8 @@ class CommentController extends Controller
     //コメント投稿
     public function store(CommentStoreRequest $request, $itemId)
     {
-        // ログインチェック
         if (!Auth::check()) {
-            return back()->withErrors('ログインしてください');
+            return back()->with('message', 'コメントを投稿するにはログインしてください');
         }
 
         $senderId = Auth::id();
@@ -41,5 +40,19 @@ class CommentController extends Controller
 
         return back()->with('message', 'コメントを投稿しました');
     }
-}
 
+    // コメント削除
+    public function destroy($itemId, $commentId)
+    {
+        $comment = Comment::findOrFail($commentId);
+        $item = $comment->item;
+
+        if ($item->user_id !== Auth::id() && $comment->sender_id !== Auth::id()) {
+            return back();
+        }
+
+        $comment->delete();
+
+        return back()->with('message', 'コメントを削除しました');
+    }
+}
