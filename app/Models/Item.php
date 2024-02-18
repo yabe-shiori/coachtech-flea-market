@@ -16,6 +16,7 @@ class Item extends Model
         'price',
         'condition',
         'description',
+        'is_sold',
     ];
 
     public function user()
@@ -68,5 +69,11 @@ class Item extends Model
         return $query->whereHas('brand', function ($query) use ($brandName) {
             $query->where('name', 'like', '%' . $brandName . '%');
         });
+    }
+
+    //売れたかどうか
+    public function isSold()
+    {
+        return $this->is_sold;
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Stripe\Stripe;
 use App\Models\Item;
+use App\Models\SoldItem;
 use Stripe\Checkout\Session as StripeCheckoutSession;
 
 class StripeController extends Controller
@@ -29,7 +30,7 @@ class StripeController extends Controller
             ]],
             'mode' => 'payment',
             'success_url' => route('user.success'),
-            'cancel_url' => route('user.cancel'),
+            'cancel_url' => route('user.cancel', ['itemId' => $itemId]),
         ]);
 
         return response()->json(['id' => $checkout_session->id]);
@@ -37,12 +38,15 @@ class StripeController extends Controller
 
     public function success()
     {
-        return view('item.show');
+        return view('payment.success');
     }
 
-    public function cancel()
+    
+    public function cancel($itemId)
     {
-        return view('payment.checkout');
+        $item = Item::findOrFail($itemId);
+
+        return view('payment.checkout', compact('item'));
     }
 
 

@@ -63,7 +63,7 @@ Route::patch('/profile/shipping-address', [ProfileController::class, 'updateShip
 Route::post('/checkout/{itemId}', [StripeController::class, 'createSession'])->name('checkout');
 
 Route::get('/success', [StripeController::class, 'success'])->name('success');
-Route::get('/cancel', [StripeController::class, 'cancel'])->name('cancel');
+Route::get('/cancel/{itemId}', [StripeController::class, 'cancel'])->name('cancel');
 
 
 
