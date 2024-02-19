@@ -4,11 +4,9 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\PaymentController;
-use App\Http\Controllers\ShipmentController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\StripeController;
-use App\Http\Controllers\WebhookController;
 
 
 /*
@@ -22,8 +20,9 @@ use App\Http\Controllers\WebhookController;
 |
 */
 
-
+//商品一覧ページ
 Route::get('/', [ItemController::class, 'index'])->name('item.index');
+
 //商品詳細ページ
 Route::get('/item/{item}', [ItemController::class, 'show'])->name('item.show');
 
@@ -33,66 +32,59 @@ Route::get('/mylist', [FavoriteController::class, 'index'])->name('mylist');
 //商品検索
 Route::get('/search', [ItemController::class, 'search'])->name('item.search');
 
-
-//出品ページ
-Route::get('/sell', [ItemController::class, 'create'])->name('item.create');
-//出品
-Route::post('/sell', [ItemController::class, 'store'])->name('item.store');
-
-//お気に入り登録
-Route::post('/favorite', [FavoriteController::class, 'store'])->name('favorite');
-
-//お気に入り削除
-Route::delete('/favorite', [FavoriteController::class, 'removeFavorite'])->name('removeFavorite');
-
 //商品に対するお問い合わせ画面
 Route::get('/item/{item}/contact', [CommentController::class, 'show'])->name('comment.show');
 
 //商品に対するお問い合わせ
 Route::post('/item/{item}/contact', [CommentController::class, 'store'])->name('comment.store');
 
-//商品に対するお問い合わせ削除
-Route::delete('/item/{item}/contact/{comment}', [CommentController::class, 'destroy'])->name('comment.destroy');
-
-//配送先変更ページ
-Route::get('/address/{item}', [ProfileController::class, 'showShippingAddressForm'])->name('profile.showShippingAddressForm');
-
-//配送先住所の変更
-Route::patch('/profile/shipping-address', [ProfileController::class, 'updateShippingAddress'])->name('profile.updateShippingAddress');
-
-//支払いページ
+//支払いページ表示
 Route::get('/purchase/{item}', [PaymentController::class, 'create'])->name('payment.create');
-// Stripe
-Route::post('/checkout/{itemId}', [StripeController::class, 'createSession'])->name('checkout');
-
-Route::get('/success', [StripeController::class, 'success'])->name('success');
-Route::get('/cancel/{itemId}', [StripeController::class, 'cancel'])->name('cancel');
-
-
-
-
-
-
-
-
 
 
 Route::middleware('auth:users')->group(function () {
     //マイページ
     Route::get('/mypage', [ProfileController::class, 'index'])->name('mypage.index');
-    //プロフィール編集
-    Route::get('/mypage/profile', [ProfileController::class, 'edit'])->name('mypage.edit');
-    Route::patch('/mypage/profile', [ProfileController::class, 'update'])->name('mypage.update');
-    // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     //購入した商品一覧
-    Route::get('/mypage/purchased-items', [ProfileController::class, 'purchasedItems'])->name('mypage.purchasedItems');
+    Route::get('/mypage/purchased', [ProfileController::class, 'purchasedItems'])->name('mypage.purchasedItems');
+
+    //プロフィール編集
+    Route::get('/mypage/profile', [ProfileController::class, 'edit'])->name('mypage.edit');
+
+    //プロフィール更新
+    Route::patch('/mypage/profile', [ProfileController::class, 'update'])->name('mypage.update');
+
+    //配送先変更ページ
+    Route::get('/address/{item}', [ProfileController::class, 'showShippingAddressForm'])->name('profile.showShippingAddressForm');
+
+    //配送先住所の変更
+    Route::patch('/profile/shipping-address', [ProfileController::class, 'updateShippingAddress'])->name('profile.updateShippingAddress');
+
+    //出品ページ表示
+    Route::get('/sell', [ItemController::class, 'create'])->name('item.create');
+
+    //出品
+    Route::post('/sell', [ItemController::class, 'store'])->name('item.store');
+
+    //お気に入り登録
+    Route::post('/favorite', [FavoriteController::class, 'store'])->name('favorite');
+
+    //お気に入り削除
+    Route::delete('/favorite', [FavoriteController::class, 'removeFavorite'])->name('removeFavorite');
+
+    //商品に対するお問い合わせ削除
+    Route::delete('/item/{item}/contact/{comment}', [CommentController::class, 'destroy'])->name('comment.destroy');
+
+    // Stripeでの支払い処理
+    Route::post('/checkout/{itemId}', [StripeController::class, 'createSession'])->name('checkout');
+
+    //決済成功時の処理
+    Route::get('/success', [StripeController::class, 'success'])->name('success');
+
+    //決済キャンセル時の処理
+    Route::get('/cancel/{itemId}', [StripeController::class, 'cancel'])->name('cancel');
 
 });
 
-
-
-
-
-Route::get('/mypage/products', [ProfileController::class, 'myProducts'])->name('mypage.products');
 require __DIR__ . '/auth.php';
