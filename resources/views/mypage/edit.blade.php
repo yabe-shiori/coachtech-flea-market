@@ -24,13 +24,16 @@
                             画像を選択する
                         </label>
                     </div>
-                    <x-input-error class="mt-2" :messages="$errors->get('avatar')" />
                 </div>
 
                 <div class="mb-4">
                     <label for="name" class="block text-sm font-medium text-gray-700">ユーザー名</label>
                     <input type="text" id="name" name="name" value="{{ old('name', $user->name) }}"
                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+
+                    @error('name')
+                        <p class="text-sm text-red-500">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <div class="mb-4">
@@ -38,6 +41,10 @@
                     <input type="text" id="postal_code" name="postal_code"
                         value="{{ old('postal_code', optional($user->profile)->postal_code) }}"
                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+
+                    @error('postal_code')
+                        <p class="text-sm text-red-500">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <div class="mb-4">
@@ -45,6 +52,10 @@
                     <input type="text" id="address" name="address"
                         value="{{ old('address', optional($user->profile)->address) }}"
                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+
+                    @error('address')
+                        <p class="text-sm text-red-500">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <div class="mb-4">
@@ -52,6 +63,10 @@
                     <input type="text" id="building_name" name="building_name"
                         value="{{ old('building_name', optional($user->profile)->building_name) }}"
                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+
+                    @error('building_name')
+                        <p class="text-sm text-red-500">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <div class="flex items-center justify-center gap-4">

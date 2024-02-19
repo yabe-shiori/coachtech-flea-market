@@ -2,9 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class ProfileUpdateRequest extends FormRequest
 {
@@ -21,7 +19,7 @@ class ProfileUpdateRequest extends FormRequest
             'introduction' => ['string', 'max:1000'],
             'postal_code' => ['required', 'string', 'max:8'],
             'address' => ['required', 'string', 'max:255'],
-            'building_name' => ['string', 'max:255'],
+            'building_name' => ['nullable', 'string', 'max:255'],
         ];
     }
 
