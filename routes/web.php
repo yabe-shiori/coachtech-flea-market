@@ -84,6 +84,10 @@ Route::middleware('auth:users')->group(function () {
     Route::get('/mypage/profile', [ProfileController::class, 'edit'])->name('mypage.edit');
     Route::patch('/mypage/profile', [ProfileController::class, 'update'])->name('mypage.update');
     // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    //購入した商品一覧
+    Route::get('/mypage/purchased-items', [ProfileController::class, 'purchasedItems'])->name('mypage.purchasedItems');
+
 });
 
 

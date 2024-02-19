@@ -15,7 +15,7 @@
         </div>
         <div class="md:flex md:items-center mb-4">
             <a href="{{ route('user.mypage.index') }}" class="inline-block mr-10 text-gray-500 text-xl font-bold">出品した商品</a>
-            <a href="" class="inline-block text-gray-500 text-xl font-bold">購入した商品</a>
+            <a href="javascript:void(0)" class="inline-block text-gray-500 text-xl font-bold" onclick="loadPurchasedItems()">購入した商品</a>
         </div>
     </x-slot>
 
@@ -38,3 +38,14 @@
         </div>
     </div>
 </x-app-layout>
+
+<script>
+    function loadPurchasedItems() {
+        fetch('{{ route('user.mypage.purchasedItems') }}')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('item-list').innerHTML = data;
+            })
+            .catch(error => console.error('Error:', error));
+    }
+</script>

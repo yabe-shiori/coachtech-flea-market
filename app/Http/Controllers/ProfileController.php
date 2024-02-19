@@ -7,7 +7,6 @@ use App\Http\Requests\ShippingAddressUpdateRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use App\Models\Item;
 
@@ -19,7 +18,6 @@ class ProfileController extends Controller
     {
         $user = $request->user();
 
-        // ユーザーが出品した商品と画像を取得
         $userItems = Item::with('images')->where('user_id', $user->id)->get();
 
         return view('mypage.index', [
@@ -28,6 +26,20 @@ class ProfileController extends Controller
         ]);
     }
 
+    // 購入商品一覧表示
+    public function purchasedItems(Request $request): View
+    {
+        $user = $request->user();
+
+        $purchasedItems = $user->purchasedItems()->with('item.images')->get();
+
+        return view('mypage.purchased_items', [
+            'user' => $user,
+            'purchasedItems' => $purchasedItems,
+        ]);
+    }
+
+    // プロフィール編集ページ表示
     public function edit(Request $request): View
     {
         return view('mypage.edit', [
@@ -63,6 +75,7 @@ class ProfileController extends Controller
 
         return redirect()->route('user.mypage.index')->with('message', 'プロフィールを更新しました。');
     }
+
     // 配送先変更ページ表示
     public function showShippingAddressForm()
     {
@@ -83,22 +96,4 @@ class ProfileController extends Controller
 
         return redirect()->route('user.mypage.index')->with('message', '住所を変更しました');
     }
-
-    // public function destroy(Request $request): RedirectResponse
-    // {
-    //     $request->validateWithBag('userDeletion', [
-    //         'password' => ['required', 'current_password'],
-    //     ]);
-
-    //     $user = $request->user();
-
-    //     Auth::logout();
-
-    //     $user->delete();
-
-    //     $request->session()->invalidate();
-    //     $request->session()->regenerateToken();
-
-    //     return Redirect::to('/');
-    // }
 }

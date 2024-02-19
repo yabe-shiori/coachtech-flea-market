@@ -25,6 +25,11 @@ class SoldItem extends Model
         return $this->belongsTo(Item::class);
     }
 
+    public function images()
+    {
+        return $this->item->images();
+    }
+
     public function buyer()
     {
         return $this->belongsTo(User::class, 'buyer_id');

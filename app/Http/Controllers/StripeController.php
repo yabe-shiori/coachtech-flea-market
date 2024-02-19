@@ -13,10 +13,12 @@ class StripeController extends Controller
     public function createSession(Request $request, $itemId)
     {
         $item = Item::findOrFail($itemId);
+        $buyerId = auth()->id();
+        $sellerId = $item->user_id;
 
         Stripe::setApiKey(env('STRIPE_SECRET'));
 
-        $checkout_session = StripeCheckoutSession::create([
+        $checkoutSession = StripeCheckoutSession::create([
             'payment_method_types' => ['card'],
             'line_items' => [[
                 'price_data' => [
@@ -33,18 +35,23 @@ class StripeController extends Controller
             'cancel_url' => route('user.cancel', ['itemId' => $itemId]),
         ]);
 
-        $buyer_id = auth()->id();
-        $seller_id = $item->user_id;
-        SoldItem::create([
-            'item_id' => $item->id,
-            'buyer_id' => $buyer_id,
-            'seller_id' => $seller_id,
-            'sold_at' => now(),
-        ]);
+        $existingSoldItem = SoldItem::where('item_id', $item->id)
+            ->where('buyer_id', $buyerId)
+            ->where('seller_id', $sellerId)
+            ->first();
+
+        if (!$existingSoldItem) {
+            SoldItem::create([
+                'item_id' => $item->id,
+                'buyer_id' => $buyerId,
+                'seller_id' => $sellerId,
+                'sold_at' => now(),
+            ]);
+        }
 
         $item->update(['is_sold' => true]);
 
-        return response()->json(['id' => $checkout_session->id]);
+        return response()->json(['id' => $checkoutSession->id]);
     }
 
     public function success()
@@ -52,11 +59,9 @@ class StripeController extends Controller
         return view('payment.success');
     }
 
-
     public function cancel($itemId)
     {
         $item = Item::findOrFail($itemId);
-
         return view('payment.checkout', compact('item'));
     }
 }

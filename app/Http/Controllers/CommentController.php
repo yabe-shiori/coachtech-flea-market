@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Item;
 use App\Models\Comment;
 use App\Http\Requests\CommentStoreRequest;
@@ -10,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
+    //コメント表示
     public function show($itemId)
     {
         $item = Item::findOrFail($itemId);

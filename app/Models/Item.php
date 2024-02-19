@@ -55,7 +55,7 @@ class Item extends Model
         return $query->where('name', 'like', '%' . $name . '%');
     }
 
-    // カテゴ検索
+    // カテゴリ検索
     public function scopeSearchByCategory($query, $categoryName)
     {
         return $query->whereHas('category', function ($query) use ($categoryName) {
@@ -71,7 +71,7 @@ class Item extends Model
         });
     }
 
-    //売れたかどうか
+    //商品が売れたかどうかを判定
     public function isSold()
     {
         return $this->is_sold;

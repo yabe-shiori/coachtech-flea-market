@@ -8,12 +8,11 @@ use App\Models\Category;
 use App\Models\Brand;
 use App\Http\Requests\ItemStoreRequest;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Favorite;
-
 
 
 class ItemController extends Controller
 {
+    //商品一覧ページ
     public function index()
     {
         $itemImages = Item::with('images')->get();
