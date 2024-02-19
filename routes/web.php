@@ -8,6 +8,7 @@ use App\Http\Controllers\ShipmentController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\StripeController;
+use App\Http\Controllers\WebhookController;
 
 
 /*
@@ -59,11 +60,16 @@ Route::get('/address/{item}', [ProfileController::class, 'showShippingAddressFor
 //配送先住所の変更
 Route::patch('/profile/shipping-address', [ProfileController::class, 'updateShippingAddress'])->name('profile.updateShippingAddress');
 
+//支払いページ
+Route::get('/purchase/{item}', [PaymentController::class, 'create'])->name('payment.create');
 // Stripe
 Route::post('/checkout/{itemId}', [StripeController::class, 'createSession'])->name('checkout');
 
 Route::get('/success', [StripeController::class, 'success'])->name('success');
 Route::get('/cancel/{itemId}', [StripeController::class, 'cancel'])->name('cancel');
+
+
+
 
 
 
@@ -80,8 +86,7 @@ Route::middleware('auth:users')->group(function () {
     // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-//支払いページ
-Route::get('/purchase/{item}', [PaymentController::class, 'create'])->name('payment.create');
+
 
 
 

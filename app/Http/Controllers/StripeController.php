@@ -33,6 +33,17 @@ class StripeController extends Controller
             'cancel_url' => route('user.cancel', ['itemId' => $itemId]),
         ]);
 
+        $buyer_id = auth()->id();
+        $seller_id = $item->user_id;
+        SoldItem::create([
+            'item_id' => $item->id,
+            'buyer_id' => $buyer_id,
+            'seller_id' => $seller_id,
+            'sold_at' => now(),
+        ]);
+
+        $item->update(['is_sold' => true]);
+
         return response()->json(['id' => $checkout_session->id]);
     }
 
@@ -41,13 +52,11 @@ class StripeController extends Controller
         return view('payment.success');
     }
 
-    
+
     public function cancel($itemId)
     {
         $item = Item::findOrFail($itemId);
 
         return view('payment.checkout', compact('item'));
     }
-
-
 }
