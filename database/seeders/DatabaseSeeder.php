@@ -21,6 +21,8 @@ class DatabaseSeeder extends Seeder
             ItemsTableSeeder::class,
             ItemImagesTableSeeder::class,
             SoldItemsTableSeeder::class,
+            FavoritesTableSeeder::class,
+            CommentsTableSeeder::class,
         ]);
         // \App\Models\User::factory(10)->create();
 
