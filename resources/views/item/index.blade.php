@@ -15,7 +15,7 @@
                             <a href="{{ route('user.item.show', $item) }}">
                                 <img src="{{ asset('storage/' . $image->image_path) }}" alt="{{ $item->name }}">
                                 @if ($item->isSold())
-                                    <div class="absolute top-0 left-0 bg-red-500 text-white px-4 py-1">SOLD</div>
+                                    <div class="absolute top-0 left-0 bg-red-500 text-base text-white font-bold px-5 py-1">SOLD</div>
                                 @endif
                                 <span
                                     class="absolute bottom-0 left-0 px-2 py-1 bg-black bg-opacity-40 text-white rounded-tr-xl rounded-br-xl">¥{{ number_format($item->price) }}</span>
