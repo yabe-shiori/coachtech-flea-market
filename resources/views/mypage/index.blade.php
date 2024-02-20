@@ -1,5 +1,8 @@
 <x-app-layout>
     <x-message :message="session('message')" />
+    
+    <x-error-message />
+
     <div class="bg-white shadow border-b-2 border-gray-400">
         <div class="max-w-7xl mx-auto pt-4 px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row md:justify-around items-center">

@@ -7,6 +7,7 @@ use App\Http\Requests\ShippingAddressUpdateRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 use App\Models\Item;
 
@@ -51,29 +52,39 @@ class ProfileController extends Controller
     // プロフィールの更新
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $user = auth()->user();
+        DB::beginTransaction();
 
-        $user->name = $request->name;
+        try {
+            $user = auth()->user();
 
-        if ($request->hasFile('avatar')) {
-            $name = $request->file('avatar')->getClientOriginalName();
-            $avatar = date('Ymd_His') . '_' . $name;
-            $request->file('avatar')->storeAs('public/avatar', $avatar);
-            $user->avatar = $avatar;
+            $user->name = $request->name;
+
+            if ($request->hasFile('avatar')) {
+                $name = $request->file('avatar')->getClientOriginalName();
+                $avatar = date('Ymd_His') . '_' . $name;
+                $request->file('avatar')->storeAs('public/avatar', $avatar);
+                $user->avatar = $avatar;
+            }
+
+            $user->save();
+
+            $profileData = [
+                'introduction' => $request->introduction,
+                'postal_code' => $request->postal_code,
+                'address' => $request->address,
+                'building_name' => $request->building_name,
+            ];
+
+            $user->profile()->updateOrCreate(['user_id' => $user->id], $profileData);
+
+            DB::commit();
+
+            return redirect()->route('user.mypage.index')->with('message', 'プロフィールを更新しました。');
+        } catch (\Exception $e) {
+
+            DB::rollback();
+            return back()->withErrors(['error' => 'プロフィールの更新中にエラーが発生しました。']);
         }
-
-        $user->save();
-
-        $profileData = [
-            'introduction' => $request->introduction,
-            'postal_code' => $request->postal_code,
-            'address' => $request->address,
-            'building_name' => $request->building_name,
-        ];
-
-        $user->profile()->updateOrCreate(['user_id' => $user->id], $profileData);
-
-        return redirect()->route('user.mypage.index')->with('message', 'プロフィールを更新しました。');
     }
 
     // 配送先変更ページ表示
