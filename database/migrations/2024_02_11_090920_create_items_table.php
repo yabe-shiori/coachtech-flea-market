@@ -26,6 +26,7 @@ return new class extends Migration
                 '全体的に状態が悪い'
             ]);
             $table->text('description')->nullable();
+            $table->boolean('is_sold')->default(false);
             $table->timestamps();
         });
     }

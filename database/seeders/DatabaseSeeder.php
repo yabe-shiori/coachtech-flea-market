@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             BrandsTableSeeder::class,
             ItemsTableSeeder::class,
             ItemImagesTableSeeder::class,
+            SoldItemsTableSeeder::class,
         ]);
         // \App\Models\User::factory(10)->create();
 

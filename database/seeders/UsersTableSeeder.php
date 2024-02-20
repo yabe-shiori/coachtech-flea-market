@@ -19,10 +19,20 @@ class UsersTableSeeder extends Seeder
             'name' => 'テスト太郎',
             'email' => 'test@example.com',
             'password' => Hash::make('password'),
-            // 'avatar' => '/images/user-default.jpg',
-            // 'postal_code' => '1234567',
-            // 'address' => '東京都渋谷区',
-            // 'building_name' => '渋谷ビル',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('users')->insert([
+            'name' => 'テスト次郎',
+            'email' => 'testjiro@example.com',
+            'password' => Hash::make('password'),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('users')->insert([
+            'name' => 'テスト三郎',
+            'email' => 'testsaburo@example.com',
+            'password' => Hash::make('password'),
             'created_at' => now(),
             'updated_at' => now(),
         ]);
