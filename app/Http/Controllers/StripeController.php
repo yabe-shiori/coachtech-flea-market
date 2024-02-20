@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Stripe\Stripe;
 use App\Models\Item;
 use App\Models\SoldItem;
@@ -11,36 +12,50 @@ use Stripe\Checkout\Session as StripeCheckoutSession;
 class StripeController extends Controller
 {
 
-    //Stripeのセッションを作成
+    // Stripeのセッションを作成
     public function createSession(Request $request, $itemId)
     {
         $item = Item::findOrFail($itemId);
 
+        if ($item->is_sold) {
+            return redirect()->route('user.item.show', ['item' => $itemId])->with('message', '売り切れです');
+        }
+
         Stripe::setApiKey(env('STRIPE_SECRET'));
 
-        $checkoutSession = StripeCheckoutSession::create([
-            'payment_method_types' => ['card'],
-            'line_items' => [[
-                'price_data' => [
-                    'currency' => 'jpy',
-                    'product_data' => [
-                        'name' => $item->name,
+        DB::beginTransaction();
+
+        try {
+            $checkoutSession = StripeCheckoutSession::create([
+                'payment_method_types' => ['card'],
+                'line_items' => [[
+                    'price_data' => [
+                        'currency' => 'jpy',
+                        'product_data' => [
+                            'name' => $item->name,
+                        ],
+                        'unit_amount' => intval($item->price),
                     ],
-                    'unit_amount' => intval($item->price),
-                ],
-                'quantity' => 1,
-            ]],
-            'mode' => 'payment',
-            'success_url' => route('user.success', ['item_id' => $itemId]),
-            'cancel_url' => route('user.cancel', ['itemId' => $itemId]),
-        ]);
+                    'quantity' => 1,
+                ]],
+                'mode' => 'payment',
+                'success_url' => route('user.success', ['item_id' => $itemId]),
+                'cancel_url' => route('user.cancel', ['itemId' => $itemId]),
+            ]);
 
-        $request->session()->put('stripe_checkout_session_id', $checkoutSession->id);
+            $request->session()->put('stripe_checkout_session_id', $checkoutSession->id);
 
-        return response()->json(['id' => $checkoutSession->id]);
+            DB::commit();
+
+            return response()->json(['id' => $checkoutSession->id]);
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            return redirect()->route('user.item.show', ['item' => $itemId])->with('error', '決済セッションの作成中にエラーが発生しました。');
+        }
     }
 
-    //決済成功時の処理
+    // 決済成功時の処理
     public function success(Request $request)
     {
         $checkoutSessionId = $request->session()->pull('stripe_checkout_session_id');
@@ -48,19 +63,31 @@ class StripeController extends Controller
         $item = Item::findOrFail($itemId);
         $user = auth()->user();
 
-        $this->updateItemAndCreateSoldItem($item, $user);
+        DB::beginTransaction();
 
-        return view('payment.success', compact('user', 'item'));
+        try {
+            $this->updateItemAndCreateSoldItem($item, $user);
+
+            DB::commit();
+
+            return view('payment.success', compact('user', 'item'));
+        } catch (\Exception $e) {
+
+            DB::rollBack();
+
+            return redirect()->route('user.item.show', ['item' => $itemId])->with('error', '決済処理中にエラーが発生しました。');
+        }
     }
 
-    //決済キャンセル時の処理
+    // 決済キャンセル時の処理
     public function cancel($itemId)
     {
         $item = Item::findOrFail($itemId);
         return view('payment.checkout', compact('item'));
     }
 
-    //商品のis_soldをtrueに更新し、SoldItemを作成
+
+    // 商品情報を更新し、SoldItemを作成
     private function updateItemAndCreateSoldItem($item, $user)
     {
         $item->update(['is_sold' => true]);

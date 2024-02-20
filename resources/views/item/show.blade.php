@@ -1,4 +1,17 @@
 <x-app-layout>
+    <x-message :message="session('message')" />
+
+    <!-- エラーメッセージ -->
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 flex items-center justify-center">
             <div class="grid grid-cols-2 gap-8">
