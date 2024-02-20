@@ -1,4 +1,5 @@
 <x-app-layout>
+    <x-message :message="session('message')" />
     <x-slot name="subheader">
         <h2 class="font-semibold text-xl leading-tight">
             <a href="{{ route('user.item.index') }}" id="recommendedLink" class="mr-4" style="color:#e57373;">おすすめ</a>

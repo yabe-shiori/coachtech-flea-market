@@ -2,6 +2,7 @@
     ユーザー側ログイン画面
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
+    <x-message :message="session('message')" />
 
     <form method="POST" action="{{ route('user.login') }}">
         @csrf

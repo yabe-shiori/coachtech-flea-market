@@ -1,5 +1,16 @@
 <x-app-layout>
     <x-message :message="session('message')" />
+    <!-- エラーメッセージ -->
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+    
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <h2 class="text-2xl font-bold text-black mb-4 text-center">商品の出品</h2>

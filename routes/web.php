@@ -20,11 +20,16 @@ use App\Http\Controllers\StripeController;
 |
 */
 
+
+
 //商品一覧ページ
 Route::get('/', [ItemController::class, 'index'])->name('item.index');
 
 //商品詳細ページ
 Route::get('/item/{item}', [ItemController::class, 'show'])->name('item.show');
+
+//出品ページ表示
+Route::get('/sell', [ItemController::class, 'create'])->name('item.create');
 
 //マイリスト表示
 Route::get('/mylist', [FavoriteController::class, 'index'])->name('mylist');
@@ -60,9 +65,6 @@ Route::middleware('auth:users')->group(function () {
 
     //配送先住所の変更
     Route::patch('/profile/shipping-address', [ProfileController::class, 'updateShippingAddress'])->name('profile.updateShippingAddress');
-
-    //出品ページ表示
-    Route::get('/sell', [ItemController::class, 'create'])->name('item.create');
 
     //出品
     Route::post('/sell', [ItemController::class, 'store'])->name('item.store');
