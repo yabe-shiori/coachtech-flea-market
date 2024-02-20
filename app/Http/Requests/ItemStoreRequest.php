@@ -23,12 +23,12 @@ class ItemStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'image' => 'required|array',
-            'image.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'name' => 'required|string|max:255',
-            'category_id' => 'required|exists:categories,id',
-            'brand_id' => 'exists:brands,id',
-            'price' => 'required|numeric|min:0',
+            'image' => ['required', 'array'],
+            'image.*' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
+            'name' => ['required', 'string', 'max:255'],
+            'category_id' => ['required', 'exists:categories,id'],
+            'brand_id' => ['exists:brands,id'],
+            'price' => ['required', 'numeric', 'min:0', 'max:9999999.99'],
             'condition' => ['required', Rule::in([
                 '新品、未使用',
                 '未使用に近い',
@@ -37,7 +37,7 @@ class ItemStoreRequest extends FormRequest
                 '傷や汚れあり',
                 '全体的に状態が悪い',
             ])],
-            'description' => 'nullable|string|max:1000',
+            'description' => ['nullable', 'string', 'max:1000'],
         ];
     }
 
@@ -57,7 +57,8 @@ class ItemStoreRequest extends FormRequest
             'brand_id.exists' => '選択されたブランドは無効です。',
             'price.required' => '価格を入力してください。',
             'price.numeric' => '価格は数値で入力してください。',
-            'price.min' => '価格は0以上で入力してください。',
+            'price.min' => '価格は0円以上で入力してください。',
+            'price.max' => '価格は9999999.99円以下で入力してください。',
             'condition.required' => '商品の状態を選択してください。',
             'condition.in' => '選択された商品の状態は無効です。',
             'description.string' => '商品説明は文字列で入力してください。',
