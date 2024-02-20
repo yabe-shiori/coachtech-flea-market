@@ -21,7 +21,6 @@ use App\Http\Controllers\StripeController;
 */
 
 
-
 //商品一覧ページ
 Route::get('/', [ItemController::class, 'index'])->name('item.index');
 

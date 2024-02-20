@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\Auth\PasswordController;
 use App\Http\Controllers\Admin\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Admin\Auth\RegisteredUserController;
 use App\Http\Controllers\Admin\Auth\VerifyEmailController;
+use App\Http\Controllers\AdminController;
 
 
 
@@ -28,6 +29,7 @@ use App\Http\Controllers\Admin\Auth\VerifyEmailController;
 // Route::get('/', function () {
 //     return view('admin.welcome');
 // });
+
 
 
 Route::get('/dashboard', function () {
@@ -70,6 +72,16 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth:admin')->group(function () {
+
+    //管理画面の商品一覧ページ
+    Route::get('/admin/items', [AdminController::class, 'index'])->name('item.index');
+
+    //管理者作成ページ表示
+    Route::get('/admin/create', [AdminController::class, 'create'])->name('create');
+
+    //管理者作成
+    Route::post('/admin/create', [AdminController::class, 'store'])->name('store');
+
     Route::get('verify-email', EmailVerificationPromptController::class)
         ->name('verification.notice');
 
