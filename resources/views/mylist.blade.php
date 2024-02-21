@@ -8,7 +8,7 @@
         </div>
     @endif
     @if (isset($favoriteItems) && $favoriteItems->isEmpty())
-        <p class="text-xl">お気に入りに登録されている商品はまだありません。</p>
+        <p class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 mb-4">お気に入りに登録されている商品はまだありません。</p>
     @elseif (isset($favoriteItems))
         <div class="grid grid-cols-5 gap-4">
             @foreach ($favoriteItems as $favorite)
