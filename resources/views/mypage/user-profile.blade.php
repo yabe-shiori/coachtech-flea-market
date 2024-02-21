@@ -16,8 +16,8 @@
                     <!-- フォローボタン -->
                     <div class="ml-auto">
                         <button class="bg-white border border-red-500 text-red-500 font-bold py-2 px-4 rounded flex items-center">
-                            <i class="fa fa-plus-circle mr-2" aria-hidden="true"></i>
-                            <span>フォローする</span>
+                            <i class="fa fa-plus-circle mr-2 px-2" aria-hidden="true"></i>
+                            <span>フォロー</span>
                         </button>
                     </div>
                 </div>
