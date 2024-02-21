@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-message :message="session('message')" />
-    
-    <x-error-message />
+
+    <x-error-message :message="session('error')" />
 
     <div class="bg-white shadow border-b-2 border-gray-400">
         <div class="max-w-7xl mx-auto pt-4 px-4 sm:px-6 lg:px-8">

@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-message :message="session('message')" />
-    <x-error-message />
+    <x-error-message :message="session('error')" />
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 flex items-center justify-center">
             <div class="grid grid-cols-2 gap-8">

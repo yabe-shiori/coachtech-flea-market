@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-message :message="session('message')" />
 
-    <x-error-message />
+    <x-error-message :message="session('error')" />
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -75,18 +75,15 @@
                             <input type="text" name="name" id="name"
                                 class="border-2 border-gray-300 rounded-md p-2 w-full" value="{{ old('name') }}"
                                 required>
-                            @error('name')
-                                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                            @enderror
+                            <x-validation-errors field="name" />
                         </div>
+
                         <div class="mb-4">
                             <label for="description" class="block text-base font-bold mb-2">商品の説明</label>
                             <textarea name="description" id="description" rows="5" class="border-2 border-gray-300 rounded-md p-2 w-full"
                                 required>{{ old('description') }}</textarea>
                         </div>
-                        @error('description')
-                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                        @enderror
+                        <x-validation-errors field="description" />
 
                         <h3 class="text-xl font-bold text-gray-500 border-b-2 border-gray-600 mb-4">販売価格</h3>
                         <div class="mb-4">
@@ -95,9 +92,7 @@
                                 <input type="number" name="price" id="price" class="flex-1 p-2 rounded-r-md"
                                     placeholder="￥" value="{{ old('price') }}" required>
                             </div>
-                            @error('price')
-                                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                            @enderror
+                            <x-validation-errors field="price" />
                         </div>
 
                         <div class="mb-4">
