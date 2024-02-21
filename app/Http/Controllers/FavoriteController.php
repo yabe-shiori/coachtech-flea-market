@@ -15,7 +15,7 @@ class FavoriteController extends Controller
         if (auth()->check()) {
             $userId = auth()->user()->id;
             $favoriteItems = Favorite::where('user_id', $userId)->with('item.images')->get();
-            return view('mylist', compact('favoriteItems'));
+            return view('item.mylist', compact('favoriteItems'));
         } else {
             $message = "ログインしてください。";
             return view('mylist', compact('message'));

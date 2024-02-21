@@ -20,6 +20,10 @@ use App\Http\Controllers\StripeController;
 |
 */
 
+//出品者のプロフィール画面
+Route::get('/profile/{user}', [ProfileController::class, 'show'])->name('profile.show');
+
+
 
 //商品一覧ページ
 Route::get('/', [ItemController::class, 'index'])->name('item.index');

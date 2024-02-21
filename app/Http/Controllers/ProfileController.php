@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 use App\Models\Item;
+use App\Models\User;
 
 class ProfileController extends Controller
 {
@@ -109,5 +110,16 @@ class ProfileController extends Controller
         $itemId = $user->items()->first()->id;
 
         return redirect()->route('user.payment.create', $itemId)->with('message', '住所を変更しました');
+    }
+
+    // 出品者のプロフィール表示
+    public function show(User $user): View
+    {
+        $userItems = Item::with('images')->where('user_id', $user->id)->get();
+
+        return view('mypage.user-profile', [
+            'user' => $user,
+            'userItems' => $userItems,
+        ]);
     }
 }

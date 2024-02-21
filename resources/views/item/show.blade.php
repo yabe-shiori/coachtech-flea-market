@@ -62,7 +62,8 @@
                     <div class="flex items-center mb-4">
                         <p class="mr-4 font-bold">カテゴリー</p>
                         @foreach ($item->category as $category)
-                            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
+                            <span
+                                class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
                                 {{ $category->name }}
                             </span>
                         @endforeach
@@ -70,15 +71,19 @@
 
                     <div class="flex items-center mb-10">
                         <p class="mr-4 font-bold">商品の状態</p>
-                        <span class="inline-block px-3 py-1 text-sm font-semibold text-gray-700 mr-2">{{ $item->condition }}</span>
+                        <span
+                            class="inline-block px-3 py-1 text-sm font-semibold text-gray-700 mr-2">{{ $item->condition }}</span>
                     </div>
 
                     <div class="mb-4">
                         <p class="text-xl text-gray-700 font-bold mb-2 border-b-2 p-2">出品者</p>
                         <div class="flex items-center mt-2">
-                            <img src="{{ asset('storage/avatar/' . $item->user->avatar) }}" alt="User Avatar"
-                                class="w-10 h-10 rounded-full mr-2">
-                            <p class="text-sm font-semibold">{{ $item->user->name }}</p>
+                            <a href="{{ route('user.profile.show', ['user' => $item->user]) }}"
+                                class="flex items-center">
+                                <img src="{{ asset('storage/avatar/' . $item->user->avatar) }}" alt="User Avatar"
+                                    class="w-10 h-10 rounded-full mr-2">
+                                <p class="text-sm font-semibold">{{ $item->user->name }}</p>
+                            </a>
                         </div>
                     </div>
                 </div>

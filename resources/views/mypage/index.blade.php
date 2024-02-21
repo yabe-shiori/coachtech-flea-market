@@ -51,9 +51,7 @@
             </div>
         </div>
     </div>
-</x-app-layout>
-
-<script>
+    <script>
     function loadPurchasedItems() {
         fetch('{{ route('user.mypage.purchasedItems') }}')
             .then(response => response.text())
@@ -65,3 +63,6 @@
             .catch(error => console.error('Error:', error));
     }
 </script>
+</x-app-layout>
+
+
