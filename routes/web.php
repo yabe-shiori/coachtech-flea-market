@@ -7,6 +7,7 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\StripeController;
+use App\Http\Controllers\FollowController;
 
 
 /*
@@ -23,6 +24,10 @@ use App\Http\Controllers\StripeController;
 //出品者のプロフィール画面
 Route::get('/profile/{user}', [ProfileController::class, 'show'])->name('profile.show');
 
+//フォロー
+Route::post('/follow/{user}', [FollowController::class, 'follow'])->name('follow');
+//フォロー解除
+Route::delete('/follow/{userId}', [FollowController::class, 'unfollow'])->name('unfollow');
 
 
 //商品一覧ページ
@@ -89,6 +94,8 @@ Route::middleware('auth:users')->group(function () {
 
     //決済キャンセル時の処理
     Route::get('/cancel/{itemId}', [StripeController::class, 'cancel'])->name('cancel');
+
+
 
 });
 

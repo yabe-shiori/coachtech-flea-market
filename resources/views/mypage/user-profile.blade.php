@@ -1,4 +1,8 @@
 <x-app-layout>
+    <x-message :message="session('message')" />
+
+    <x-error-message :message="session('error')" />
+
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -15,20 +19,38 @@
 
                     <!-- フォローボタン -->
                     <div class="ml-auto">
-                        <button class="bg-white border border-red-500 text-red-500 font-bold py-2 px-4 rounded flex items-center">
-                            <i class="fa fa-plus-circle mr-2 px-2" aria-hidden="true"></i>
-                            <span>フォロー</span>
-                        </button>
+                        @if (Auth::check() && Auth::user()->isFollowing($user))
+                            <form action="{{ route('user.unfollow', ['userId' => $user->id]) }}" method="POST">
+                                @method('DELETE')
+                                @csrf
+                                <button type="submit"
+                                    class="bg-white border border-red-500 text-red-500 font-bold py-2 px-4 rounded flex items-center">
+                                    <i class="fa fa-minus-circle mr-2 px-2" aria-hidden="true"></i>
+                                    <span>フォロー解除</span>
+                                </button>
+                            </form>
+                        @else
+                            <form action="{{ route('user.follow', ['user' => $user->id]) }}" method="POST">
+                                @csrf
+                                <button type="submit"
+                                    class="bg-white border border-red-500 text-red-500 font-bold py-2 px-4 rounded flex items-center">
+                                    <i class="fa fa-plus-circle mr-2 px-2" aria-hidden="true"></i>
+                                    <span>フォロー</span>
+                                </button>
+                            </form>
+                        @endif
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    </div>
     <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
         <div id="item-list" class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 @if ($userItems->isEmpty())
-                    <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 mb-4">まだ出品した商品はありません</div>
+                    <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 mb-4">まだ出品した商品はありません
+                    </div>
                 @else
                     <div class="grid grid-cols-5 gap-4">
                         @foreach ($userItems as $item)
