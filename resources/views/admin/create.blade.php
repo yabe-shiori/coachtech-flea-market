@@ -9,29 +9,42 @@
                         <!-- Name -->
                         <div>
                             <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
-                            <input id="name" class="mt-1 p-2 block w-full border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2" type="text" name="name" :value="old('name')" required autofocus />
+                            <input id="name"
+                                class="mt-1 p-2 block w-full border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2"
+                                type="text" name="name" value="{{ old('name') }}" required autofocus />
+                            <x-validation-errors field="name" />
                         </div>
 
                         <!-- Email Address -->
                         <div>
                             <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-                            <input id="email" class="mt-1 p-2 block w-full border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2" type="email" name="email" :value="old('email')" required />
+                            <input id="email"
+                                class="mt-1 p-2 block w-full border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2"
+                                type="email" name="email" value="{{ old('email') }}" required />
+                            <x-validation-errors field="email" />
                         </div>
 
                         <!-- Password -->
                         <div>
                             <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
-                            <input id="password" class="mt-1 p-2 block w-full border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2" type="password" name="password" required autocomplete="new-password" />
+                            <input id="password"
+                                class="mt-1 p-2 block w-full border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2"
+                                type="password" name="password" required autocomplete="new-password" />
+                            <x-validation-errors field="password" />
                         </div>
 
                         <!-- Confirm Password -->
                         <div>
-                            <label for="password_confirmation" class="block text-sm font-medium text-gray-700">Confirm Password</label>
-                            <input id="password_confirmation" class="mt-1 p-2 block w-full border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2" type="password" name="password_confirmation" required />
+                            <label for="password_confirmation" class="block text-sm font-medium text-gray-700">Confirm
+                                Password</label>
+                            <input id="password_confirmation"
+                                class="mt-1 p-2 block w-full border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2"
+                                type="password" name="password_confirmation" required />
                         </div>
 
                         <div class="flex justify-end">
-                            <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                            <button type="submit"
+                                class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                                 Create Admin
                             </button>
                         </div>
