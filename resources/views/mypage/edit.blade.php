@@ -35,6 +35,22 @@
                 </div>
 
                 <div class="mb-4">
+                    <label for="display_name" class="block text-sm font-medium text-gray-700">ニックネーム</label>
+                    <input type="text" id="display_name" name="display_name"
+                        value="{{ old('display_name', optional($user->profile)->display_name) }}"
+                        placeholder="coachtechフリマ内のユーザー名"
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                    <x-validation-errors field="display_name" />
+                </div>
+
+                <div class="mb-4">
+                    <label for="introduction" class="block text-sm font-medium text-gray-700">自己紹介</label>
+                    <textarea id="introduction" name="introduction" rows="5" placeholder="例) ご覧いただきありがとうございます。どうぞよろしくお願いします！"
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">{{ old('introduction', optional($user->profile)->introduction) }}</textarea>
+                    <x-validation-errors field="introduction" />
+                </div>
+
+                <div class="mb-4">
                     <label for="postal_code" class="block text-sm font-medium text-gray-700">郵便番号</label>
                     <input type="text" id="postal_code" name="postal_code"
                         value="{{ old('postal_code', optional($user->profile)->postal_code) }}"

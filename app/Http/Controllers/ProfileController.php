@@ -69,6 +69,7 @@ class ProfileController extends Controller
             $user->save();
 
             $profileData = [
+                'display_name' => $request->display_name,
                 'introduction' => $request->introduction,
                 'postal_code' => $request->postal_code,
                 'address' => $request->address,

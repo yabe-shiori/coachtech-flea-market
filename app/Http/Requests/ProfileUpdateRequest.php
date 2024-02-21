@@ -16,7 +16,8 @@ class ProfileUpdateRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:255'],
             'avatar' => ['image', 'max:2048'],
-            'introduction' => ['string', 'max:1000'],
+            'display_name' => ['nullable', 'string', 'max:255'],
+            'introduction' => ['nullable', 'string', 'max:1000'],
             'postal_code' => ['required', 'string', 'max:8'],
             'address' => ['required', 'string', 'max:255'],
             'building_name' => ['nullable', 'string', 'max:255'],
@@ -31,6 +32,8 @@ class ProfileUpdateRequest extends FormRequest
             'name.max' => '名前は255文字以内で入力して下さい',
             'avatar.image' => '画像ファイルを選択して下さい',
             'avatar.max' => '画像ファイルは2MB以内で選択して下さい',
+            'display_name.string' => 'ニックネームは文字列で入力してください',
+            'display_name.max' => 'ニックネームは255文字以内で入力して下さい',
             'introduction.string' => '自己紹介は文字列で入力してください',
             'introduction.max' => '自己紹介は1000文字以内で入力して下さい',
             'postal_code.required' => '郵便番号を入力して下さい',
