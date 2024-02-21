@@ -18,6 +18,9 @@
                             <a href="{{ route('admin.create') }}" class="ml-4 px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 flex items-center">
                                 <i class="fas fa-user-plus mr-2"></i> Create Admin
                             </a>
+                            <a href="{{ route('admin.seller_payments') }}" class="ml-4 text-blue-500 hover:underline flex items-center">
+                                <i class="fas fa-money-bill mr-2"></i> Seller Payments
+                            </a>
                         </div>
                     </div>
                 </div>

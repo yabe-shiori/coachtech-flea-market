@@ -26,11 +26,6 @@ use App\Http\Controllers\AdminController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('admin.welcome');
-// });
-
-
 
 Route::get('/dashboard', function () {
     return view('admin.dashboard');
@@ -81,6 +76,9 @@ Route::middleware('auth:admin')->group(function () {
 
     //管理者作成
     Route::post('/admin/create', [AdminController::class, 'store'])->name('store');
+
+    // 出品者への送金額確認画面を表示
+    Route::get('/seller-payments', [AdminController::class, 'showSellerPayments'])->name('seller_payments');
 
     Route::get('verify-email', EmailVerificationPromptController::class)
         ->name('verification.notice');
