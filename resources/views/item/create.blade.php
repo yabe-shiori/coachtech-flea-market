@@ -22,6 +22,7 @@
                         <div id="imagePreview" class="flex flex-wrap justify-start gap-4"></div>
 
                         <h3 class="text-xl font-bold text-gray-500 border-b-2 border-gray-600 mb-4">商品の詳細</h3>
+
                         <div class="mb-4">
                             <label for="category" class="block text-gray-700 text-base font-bold mb-2">カテゴリー</label>
                             <select name="category_id" id="category"
@@ -48,6 +49,18 @@
                                 @endforeach
                             </select>
                         </div>
+
+                        <div class="mb-4">
+                            <label for="brand" class="block text-gray-700 text-base font-bold mb-2">ブランド（任意）</label>
+                            <select name="brand_id" id="brand"
+                                class="border-2 border-gray-300 rounded-md p-2 w-full">
+                                <option value="">選択してください</option>
+                                @foreach ($brands as $brand)
+                                    <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
                         <div class="mb-4">
                             <label for="condition" class="block text-black text-base font-bold mb-2">商品の状態</label>
                             <select name="condition" id="condition"
