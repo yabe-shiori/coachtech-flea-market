@@ -42,8 +42,7 @@ class AdminController extends Controller
     // 出品者への送金額確認画面を表示
     public function showSellerPayments()
     {
-        // sold_itemsテーブルから売れた商品の情報を取得
-        $soldItems = SoldItem::with('item')->get();
+        $soldItems = SoldItem::with('item')->paginate(10);
 
         return view('admin.seller-payments', compact('soldItems'));
     }
