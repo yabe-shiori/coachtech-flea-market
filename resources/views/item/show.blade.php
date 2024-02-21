@@ -46,9 +46,9 @@
                     </div>
                     <a href="{{ route('user.payment.create', ['item' => $item]) }}"
                         class="inline-block bg-red-500 text-white text-base text-center w-1/2 px-4 py-2 rounded-lg font-semibold mb-4 hover:bg-red-600">購入する</a>
-                    <h3 class="text-xl text-gray-700 font-bold mb-2">商品説明</h3>
+                    <h3 class="text-xl text-gray-700 font-bold mb-2 border-b-2 mb-4 p-2">商品説明</h3>
                     <p>{{ $item->description }}</p>
-                    <h3 class="text-xl text-gray-700 font-bold my-4">商品の情報</h3>
+                    <h3 class="text-xl text-gray-700 font-bold my-4 border-b-2 p-2">商品の情報</h3>
                     <div class="flex items-center mb-4">
                         <p class="mr-4 font-bold">カテゴリー</p>
                         @foreach ($item->category as $category)
@@ -58,12 +58,23 @@
                             </span>
                         @endforeach
                     </div>
-                    <div class="flex items-center mb-2">
+                    <div class="flex items-center mb-10">
                         <p class="mr-4 font-bold">商品の状態</p>
                         <span
                             class="inline-block px-3 py-1 text-sm font-semibold text-gray-700 mr-2">{{ $item->condition }}</span>
                     </div>
+
+                    <!-- 出品者情報 -->
+                    <div class="mb-4">
+                        <p class="text-xl text-gray-700 font-bold mb-2 border-b-2 p-2">出品者</p>
+                        <div class="flex items-center mt-2">
+                            <img src="{{ asset('storage/avatar/' . $item->user->avatar) }}" alt="User Avatar"
+                                class="w-10 h-10 rounded-full mr-2">
+                            <p class="text-sm font-semibold">{{ $item->user->name }}</p>
+                        </div>
+                    </div>
                 </div>
+
             </div>
         </div>
     </div>
