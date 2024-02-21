@@ -30,20 +30,24 @@
     <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
         <div id="item-list" class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="grid grid-cols-5 gap-4">
-                    @foreach ($userItems as $item)
-                        <div class="relative">
-                            @if ($item->images->isNotEmpty())
-                                <a href="{{ route('user.item.show', $item) }}">
-                                    <img src="{{ asset('storage/' . $item->images->first()->image_path) }}"
-                                        alt="{{ $item->name }}">
-                                    <span
-                                        class="absolute bottom-0 left-0 px-2 py-1 bg-black bg-opacity-40 text-white rounded-tr-xl rounded-br-xl">¥{{ number_format($item->price) }}</span>
-                                </a>
-                            @endif
-                        </div>
-                    @endforeach
-                </div>
+                @if ($userItems->isEmpty())
+                    <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 mb-4">まだ出品した商品はありません</div>
+                @else
+                    <div class="grid grid-cols-5 gap-4">
+                        @foreach ($userItems as $item)
+                            <div class="relative">
+                                @if ($item->images->isNotEmpty())
+                                    <a href="{{ route('user.item.show', $item) }}">
+                                        <img src="{{ asset('storage/' . $item->images->first()->image_path) }}"
+                                            alt="{{ $item->name }}">
+                                        <span
+                                            class="absolute bottom-0 left-0 px-2 py-1 bg-black bg-opacity-40 text-white rounded-tr-xl rounded-br-xl">¥{{ number_format($item->price) }}</span>
+                                    </a>
+                                @endif
+                            </div>
+                        @endforeach
+                    </div>
+                @endif
             </div>
         </div>
     </div>
