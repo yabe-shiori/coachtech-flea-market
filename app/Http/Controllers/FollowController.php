@@ -18,7 +18,6 @@ class FollowController extends Controller
 
         $followerId = Auth::id();
 
-        // 既にフォローしているか確認
         if (!$this->isFollowing($followerId, $followedUserId)) {
             Follow::create([
                 'follower_id' => $followerId,
@@ -38,8 +37,7 @@ class FollowController extends Controller
         }
 
         $followerId = Auth::id();
-
-        // フォロー関係を取得して削除
+        
         $follow = Follow::where('follower_id', $followerId)
             ->where('followed_id', $followedUserId)
             ->first();
@@ -57,5 +55,19 @@ class FollowController extends Controller
         return Follow::where('follower_id', $followerId)
             ->where('followed_id', $followedUserId)
             ->exists();
+    }
+
+    // フォロー一覧
+    public function following()
+    {
+        if(!Auth::check())
+        {
+            return redirect()->back()->with('error', 'ログインしてください。');
+        }
+
+        $user = Auth::user();
+        $following = $user->following;
+
+        return view('mypage.following', compact('following'));
     }
 }

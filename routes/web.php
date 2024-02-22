@@ -21,13 +21,7 @@ use App\Http\Controllers\FollowController;
 |
 */
 
-//出品者のプロフィール画面
-Route::get('/profile/{user}', [ProfileController::class, 'show'])->name('profile.show');
 
-//フォロー
-Route::post('/follow/{user}', [FollowController::class, 'follow'])->name('follow');
-//フォロー解除
-Route::delete('/follow/{userId}', [FollowController::class, 'unfollow'])->name('unfollow');
 
 
 //商品一覧ページ
@@ -38,6 +32,9 @@ Route::get('/item/{item}', [ItemController::class, 'show'])->name('item.show');
 
 //出品ページ表示
 Route::get('/sell', [ItemController::class, 'create'])->name('item.create');
+
+//出品者のプロフィール画面
+Route::get('/profile/{user}', [ProfileController::class, 'show'])->name('profile.show');
 
 //マイリスト表示
 Route::get('/mylist', [FavoriteController::class, 'index'])->name('mylist');
@@ -82,6 +79,18 @@ Route::middleware('auth:users')->group(function () {
 
     //お気に入り削除
     Route::delete('/favorite', [FavoriteController::class, 'removeFavorite'])->name('removeFavorite');
+
+    //フォロー
+    Route::post('/follow/{user}', [FollowController::class, 'follow'])->name('follow');
+
+    //フォロー解除
+    Route::delete('/follow/{userId}', [FollowController::class, 'unfollow'])->name('unfollow');
+
+    //フォロー一覧
+    Route::get('/mypage/following', [FollowController::class, 'following'])->name('following');
+
+    //フォローしているユーザーの商品一覧画面
+    Route::get('/following-items/{user}', [ProfileController::class, 'show'])->name('following.items');
 
     //商品に対するお問い合わせ削除
     Route::delete('/item/{item}/contact/{comment}', [CommentController::class, 'destroy'])->name('comment.destroy');
