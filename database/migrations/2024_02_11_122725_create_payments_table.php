@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('item_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('item_id')->constrained();
             $table->decimal('amount', 15, 2);
-            $table->enum('status', ['pending', 'approved', 'declined', 'refunded'])->default('pending');
-            $table->string('payment_method');
+            $table->enum('payment_method', ['credit_card', 'convenience_store']);
+            $table->timestamp('paid_at')->default(null);
             $table->timestamps();
         });
     }

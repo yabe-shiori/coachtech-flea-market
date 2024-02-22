@@ -21,8 +21,7 @@ use App\Http\Controllers\FollowController;
 |
 */
 
-
-
+Route::post('/user/payment/change/{item}', [PaymentController::class, 'changePaymentMethod'])->name('payment.change');
 
 //商品一覧ページ
 Route::get('/', [ItemController::class, 'index'])->name('item.index');
