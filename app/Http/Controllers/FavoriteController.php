@@ -18,7 +18,7 @@ class FavoriteController extends Controller
             return view('item.mylist', compact('favoriteItems'));
         } else {
             $message = "ログインしてください。";
-            return view('mylist', compact('message'));
+            return view('item.mylist', compact('message'));
         }
     }
 
