@@ -94,4 +94,9 @@ class User extends Authenticatable
     {
         return $this->following()->where('followed_id', $user->id)->exists();
     }
+
+    public function points()
+    {
+        return $this->hasOne(Point::class);
+    }
 }

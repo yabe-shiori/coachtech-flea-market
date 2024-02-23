@@ -1,5 +1,5 @@
 <x-app-layout>
-
+    <x-message :message="session('message')" />
     <div class="py-12">
         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
             <div class="grid grid-cols-2 gap-4">

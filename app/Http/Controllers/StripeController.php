@@ -79,6 +79,10 @@ class StripeController extends Controller
     {
         $item->update(['is_sold' => true]);
 
+        $pointsEarned = $item->price * 0.01;
+
+        $user->points()->create(['balance' => $pointsEarned]);
+
         SoldItem::create([
             'item_id' => $item->id,
             'buyer_id' => $user->id,
@@ -86,6 +90,7 @@ class StripeController extends Controller
             'sold_at' => now(),
         ]);
     }
+    
 
     // 支払い方法に応じて支払い方法タイプを取得
     private function getPaymentMethodTypes($paymentMethod)
