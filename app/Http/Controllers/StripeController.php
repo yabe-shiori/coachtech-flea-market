@@ -32,6 +32,8 @@ class StripeController extends Controller
             $selectedPoints = $request->input('points_to_use', 0);
             $pointValue = $selectedPoints * 1;
 
+            $user->points()->decrement('balance', $pointValue);
+
             $itemPrice = $item->price - $pointValue;
 
             $lineItems = $this->getLineItems($item, $itemPrice);
@@ -97,7 +99,8 @@ class StripeController extends Controller
         );
 
         // 既存のポイントバランスを更新
-        $points->increment('balance',
+        $points->increment(
+            'balance',
             $pointsEarned
         );
 
