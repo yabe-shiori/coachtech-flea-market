@@ -28,10 +28,18 @@ class StripeController extends Controller
             $paymentMethod = $request->input('payment_method');
             $paymentMethodTypes = $this->getPaymentMethodTypes($paymentMethod);
 
+            $user = auth()->user();
+            $selectedPoints = $request->input('points_to_use', 0);
+            $pointValue = $selectedPoints * 1;
+
+            $itemPrice = $item->price - $pointValue;
+
+            $lineItems = $this->getLineItems($item, $itemPrice);
+
             $checkoutSession = StripeCheckoutSession::create([
                 'payment_method_types' => $paymentMethodTypes,
                 'payment_method_options' => $this->getPaymentMethodOptions($paymentMethod),
-                'line_items' => $this->getLineItems($item),
+                'line_items' => $lineItems,
                 'mode' => 'payment',
                 'success_url' => route('user.success', ['item_id' => $itemId]),
                 'cancel_url' => route('user.cancel', ['itemId' => $itemId]),
@@ -76,21 +84,30 @@ class StripeController extends Controller
 
     // 商品情報を更新し、SoldItemを作成
     private function updateItemAndCreateSoldItem($item, $user)
-{
-    $item->update(['is_sold' => true]);
+    {
+        $item->update(['is_sold' => true]);
 
-    $pointsEarned = $item->price * 0.01;
+        // 購入金額の1%をポイントとして計算
+        $pointsEarned = $item->price * 0.01;
 
-    // ポイントを付与して保存
-    $user->points()->create(['balance' => $pointsEarned]);
+        // ユーザーの既存のポイントレコードを取得または新規作成
+        $points = $user->points()->firstOrCreate(
+            ['user_id' => $user->id],
+            ['balance' => 0]
+        );
 
-    SoldItem::create([
-        'item_id' => $item->id,
-        'buyer_id' => $user->id,
-        'seller_id' => $item->user_id,
-        'sold_at' => now(),
-    ]);
-}
+        // 既存のポイントバランスを更新
+        $points->increment('balance',
+            $pointsEarned
+        );
+
+        SoldItem::create([
+            'item_id' => $item->id,
+            'buyer_id' => $user->id,
+            'seller_id' => $item->user_id,
+            'sold_at' => now(),
+        ]);
+    }
 
     // 支払い方法に応じて支払い方法タイプを取得
     private function getPaymentMethodTypes($paymentMethod)
@@ -112,7 +129,7 @@ class StripeController extends Controller
     }
 
     // 商品情報からStripeのline_itemsを取得
-    private function getLineItems($item)
+    private function getLineItems($item, $itemPrice)
     {
         return [[
             'price_data' => [
@@ -120,7 +137,7 @@ class StripeController extends Controller
                 'product_data' => [
                     'name' => $item->name,
                 ],
-                'unit_amount' => intval($item->price),
+                'unit_amount' => intval($itemPrice),
             ],
             'quantity' => 1,
         ]];
