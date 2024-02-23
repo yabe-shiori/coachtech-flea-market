@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('sender_id')->constrained('users');
             $table->foreignId('receiver_id')->constrained('users');
-            $table->foreignId('item_id')->constrained();
+            $table->foreignId('item_id')->constrained('items');
             $table->text('body');
             $table->timestamp('read_at')->nullable();
             $table->timestamps();

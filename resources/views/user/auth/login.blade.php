@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <!-- Session Status -->
+
     <x-auth-session-status class="mb-4" :status="session('status')" />
     <x-message :message="session('message')" />
 
@@ -8,7 +8,6 @@
 
         <h2 class="text-2xl text-center font-bold mt-8 mb-10">ログイン</h2>
 
-        <!-- Email Address -->
         <div>
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required
@@ -16,7 +15,6 @@
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
-        <!-- Password -->
         <div class="mt-4">
             <x-input-label for="password" :value="__('Password')" />
 
@@ -30,6 +28,13 @@
             <x-primary-button class="w-full bg-red-400 font-bold flex items-center justify-center">
                 ログインする
             </x-primary-button>
+        </div>
+
+        <div class="flex items-center justify-end mt-4">
+            <a href="{{ route('user.login.google') }}" class="ml-3 inline-flex items-center">
+                <img src="https://developers.google.com/identity/images/btn_google_signin_dark_normal_web.png"
+                    style="margin-left: 3em;">
+            </a>
         </div>
 
         <div class="text-center mt-4">

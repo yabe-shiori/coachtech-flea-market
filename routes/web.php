@@ -8,6 +8,7 @@ use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\StripeController;
 use App\Http\Controllers\FollowController;
+use App\Http\Controllers\GoogleLoginController;
 
 
 /*
@@ -20,6 +21,15 @@ use App\Http\Controllers\FollowController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+//google認証
+Route::get('/auth/google', [GoogleLoginController::class, 'redirectToGoogle'])
+    ->name('login.google');
+
+Route::get('/auth/google/callback', [GoogleLoginController::class, 'handleGoogleCallback'])
+    ->name('login.google.callback');
+
+    
 
 Route::post('/user/payment/change/{item}', [PaymentController::class, 'changePaymentMethod'])->name('payment.change');
 
