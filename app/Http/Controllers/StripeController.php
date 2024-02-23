@@ -76,21 +76,21 @@ class StripeController extends Controller
 
     // 商品情報を更新し、SoldItemを作成
     private function updateItemAndCreateSoldItem($item, $user)
-    {
-        $item->update(['is_sold' => true]);
+{
+    $item->update(['is_sold' => true]);
 
-        $pointsEarned = $item->price * 0.01;
+    $pointsEarned = $item->price * 0.01;
 
-        $user->points()->create(['balance' => $pointsEarned]);
+    // ポイントを付与して保存
+    $user->points()->create(['balance' => $pointsEarned]);
 
-        SoldItem::create([
-            'item_id' => $item->id,
-            'buyer_id' => $user->id,
-            'seller_id' => $item->user_id,
-            'sold_at' => now(),
-        ]);
-    }
-    
+    SoldItem::create([
+        'item_id' => $item->id,
+        'buyer_id' => $user->id,
+        'seller_id' => $item->user_id,
+        'sold_at' => now(),
+    ]);
+}
 
     // 支払い方法に応じて支払い方法タイプを取得
     private function getPaymentMethodTypes($paymentMethod)
