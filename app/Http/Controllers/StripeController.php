@@ -32,6 +32,8 @@ class StripeController extends Controller
             $selectedPoints = $request->input('points_to_use', 0);
             $pointValue = $selectedPoints * 1;
 
+            $request->session()->put('selected_points', $pointValue);
+
             $user->points()->decrement('balance', $pointValue);
 
             $itemPrice = $item->price - $pointValue;
@@ -78,10 +80,28 @@ class StripeController extends Controller
     }
 
     // 決済キャンセル時の処理
-    public function cancel($itemId)
+    public function cancel(Request $request, $itemId)
     {
         $item = Item::findOrFail($itemId);
-        return view('payment.checkout', compact('item'));
+        $user = auth()->user();
+
+        DB::beginTransaction();
+
+        try {
+            $selectedPoints = $request->session()->pull('selected_points', 0);
+
+            if ($selectedPoints > 0) {
+                $user->points()->increment('balance', $selectedPoints);
+            }
+
+            DB::commit();
+
+            return view('payment.checkout', compact('item'));
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->route('user.item.show', ['item' => $itemId])
+                ->with('error', 'キャンセル処理中にエラーが発生しました。');
+        }
     }
 
     // 商品情報を更新し、SoldItemを作成
@@ -89,20 +109,14 @@ class StripeController extends Controller
     {
         $item->update(['is_sold' => true]);
 
-        // 購入金額の1%をポイントとして計算
         $pointsEarned = $item->price * 0.01;
 
-        // ユーザーの既存のポイントレコードを取得または新規作成
         $points = $user->points()->firstOrCreate(
             ['user_id' => $user->id],
             ['balance' => 0]
         );
 
-        // 既存のポイントバランスを更新
-        $points->increment(
-            'balance',
-            $pointsEarned
-        );
+        $points->increment('balance', $pointsEarned);
 
         SoldItem::create([
             'item_id' => $item->id,
