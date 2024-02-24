@@ -9,11 +9,20 @@ use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
-    //コメント表示
+    // コメント表示
     public function show($itemId)
     {
         $item = Item::findOrFail($itemId);
         $comments = $item->comments()->orderByDesc('created_at')->paginate(5);
+
+        if (Auth::check() && $item->user_id === Auth::id()) {
+            foreach ($comments as $comment) {
+                if (!$comment->read_at && $comment->sender_id !== $item->user_id) {
+                    $comment->read_at = now();
+                    $comment->save();
+                }
+            }
+        }
 
         return view('item.comment', compact('item', 'comments'));
     }

@@ -58,6 +58,9 @@
                                     </p>
                                     <p class="text-xs text-gray-600">
                                         {{ $comment->created_at->diffForHumans() }}
+                                        @if ($comment->read_at && $comment->sender_id == Auth::id())
+                                            <span class="text-gray-700 ml-2">既読</span>
+                                        @endif
                                     </p>
                                     @if (Auth::check() && ($comment->sender_id == Auth::id() || $item->user_id == Auth::id()))
                                         <form
