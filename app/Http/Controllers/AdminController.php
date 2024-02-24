@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Item;
 use App\Models\Admin;
 use App\Models\SoldItem;
@@ -29,7 +28,7 @@ class AdminController extends Controller
         return view('admin.create');
     }
 
-    // 管理者作成フォームの送信処理
+    // 管理者作成処理
     public function store(AdminStoreRequest $request)
     {
         $data = $request->validated();
@@ -43,7 +42,7 @@ class AdminController extends Controller
         return redirect()->route('admin.dashboard')->with('message', '管理者が作成されました。');
     }
 
-    // 出品者への送金額確認画面を表示
+    // 出品者への送金額確認画面表示
     public function showSellerPayments()
     {
         $soldItems = SoldItem::with('item')->paginate(10);
@@ -51,7 +50,7 @@ class AdminController extends Controller
         return view('admin.seller-payments', compact('soldItems'));
     }
 
-    // お知らせメール作成ページを表示するメソッド
+    // お知らせメール作成ページの表示
     public function showNotificationForm()
     {
         return view('admin.notification');

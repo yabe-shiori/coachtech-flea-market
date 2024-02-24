@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class LineLoginController extends Controller
 {
+    //LINEログイン
     public function lineLogin()
     {
         $state = Str::random(32);
@@ -28,6 +29,7 @@ class LineLoginController extends Controller
         return redirect($uri);
     }
 
+    //アクセストークンを取得
     public function getAccessToken($req)
     {
 
@@ -57,6 +59,7 @@ class LineLoginController extends Controller
         return $accessToken;
     }
 
+    //プロフィール情報を取得
     public function getProfile($at)
     {
 
@@ -74,6 +77,7 @@ class LineLoginController extends Controller
         return $json;
     }
 
+    //LINEログインのコールバック処理
     public function callback(Request $request)
     {
         $accessToken = $this->getAccessToken($request);

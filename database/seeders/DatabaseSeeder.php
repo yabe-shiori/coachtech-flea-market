@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             SoldItemsTableSeeder::class,
             FavoritesTableSeeder::class,
             CommentsTableSeeder::class,
+            AdminsTableSeeder::class,
         ]);
         // \App\Models\User::factory(10)->create();
 

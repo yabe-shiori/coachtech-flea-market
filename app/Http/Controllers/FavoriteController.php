@@ -23,7 +23,7 @@ class FavoriteController extends Controller
     }
 
     // お気に入り登録
-    public function store(Request $request)
+    public function favorite(Request $request)
     {
         $user_id = Auth::id();
 

@@ -25,7 +25,7 @@ class ItemController extends Controller
         return view('item.show', compact('item'));
     }
 
-    // 出品ページ
+    // 出品ページ表示
     public function create()
     {
         if (!Auth::check()) {
@@ -48,25 +48,22 @@ class ItemController extends Controller
 
             $user = Auth::user();
             $item = $user->items()->create([
-                    'name' => $data['name'],
-                    'price' => $data['price'],
-                    'condition' => $data['condition'],
-                    'description' => $data['description']
-                ]);
+                'name' => $data['name'],
+                'price' => $data['price'],
+                'condition' => $data['condition'],
+                'description' => $data['description']
+            ]);
 
-            // カテゴリーの保存
             $selectedCategories = (array) $request->input('category_id');
             $parentCategories = Category::whereIn('id', $selectedCategories)->pluck('parent_id')->toArray();
             $allCategories = array_merge($selectedCategories, $parentCategories);
             $item->category()->sync($allCategories);
 
-            // ブランドの保存
             if ($request->filled('brand_id')) {
                 $item->brand()->associate($request->input('brand_id'));
                 $item->save();
             }
 
-            // 画像の保存
             foreach ($request->file('image') as $image) {
                 $item->images()->create([
                     'image_path' => $image->store('item_images', 'public')

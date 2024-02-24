@@ -49,7 +49,6 @@ class ProfileController extends Controller
         ]);
     }
 
-
     // プロフィールの更新
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {

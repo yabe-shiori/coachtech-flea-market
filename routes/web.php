@@ -37,7 +37,7 @@ Route::get('/auth/google/callback', [GoogleLoginController::class, 'handleGoogle
 
 
 
-Route::post('/user/payment/change/{item}', [PaymentController::class, 'changePaymentMethod'])->name('payment.change');
+// Route::post('/user/payment/change/{item}', [PaymentController::class, 'changePaymentMethod'])->name('payment.change');
 
 //商品一覧ページ
 Route::get('/', [ItemController::class, 'index'])->name('item.index');
@@ -57,10 +57,10 @@ Route::get('/mylist', [FavoriteController::class, 'index'])->name('mylist');
 //商品検索
 Route::get('/search', [ItemController::class, 'search'])->name('item.search');
 
-//商品に対するお問い合わせ画面
+//商品に対するコメント一覧画面
 Route::get('/item/{item}/contact', [CommentController::class, 'show'])->name('comment.show');
 
-//商品に対するお問い合わせ
+//コメント投稿
 Route::post('/item/{item}/contact', [CommentController::class, 'store'])->name('comment.store');
 
 //支払いページ表示
@@ -90,7 +90,7 @@ Route::middleware(['auth:users'])->group(function () {
     Route::post('/sell', [ItemController::class, 'store'])->name('item.store');
 
     //お気に入り登録
-    Route::post('/favorite', [FavoriteController::class, 'store'])->name('favorite');
+    Route::post('/favorite', [FavoriteController::class, 'favorite'])->name('favorite');
 
     //お気に入り削除
     Route::delete('/favorite', [FavoriteController::class, 'removeFavorite'])->name('removeFavorite');
@@ -107,7 +107,7 @@ Route::middleware(['auth:users'])->group(function () {
     //フォローしているユーザーの商品一覧画面
     Route::get('/following-items/{user}', [ProfileController::class, 'show'])->name('following.items');
 
-    //商品に対するお問い合わせ削除
+    //コメント削除
     Route::delete('/item/{item}/contact/{comment}', [CommentController::class, 'destroy'])->name('comment.destroy');
 
     // Stripeでの支払い処理

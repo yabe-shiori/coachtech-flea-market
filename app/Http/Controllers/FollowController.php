@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Follow;
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class FollowController extends Controller
@@ -37,7 +35,7 @@ class FollowController extends Controller
         }
 
         $followerId = Auth::id();
-        
+
         $follow = Follow::where('follower_id', $followerId)
             ->where('followed_id', $followedUserId)
             ->first();
@@ -60,8 +58,7 @@ class FollowController extends Controller
     // フォロー一覧
     public function following()
     {
-        if(!Auth::check())
-        {
+        if (!Auth::check()) {
             return redirect()->back()->with('error', 'ログインしてください。');
         }
 

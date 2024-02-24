@@ -104,7 +104,6 @@ class StripeController extends Controller
         }
     }
 
-    // 商品情報を更新し、SoldItemを作成
     private function updateItemAndCreateSoldItem($item, $user)
     {
         $item->update(['is_sold' => true]);
@@ -126,13 +125,11 @@ class StripeController extends Controller
         ]);
     }
 
-    // 支払い方法に応じて支払い方法タイプを取得
     private function getPaymentMethodTypes($paymentMethod)
     {
         return $paymentMethod === 'konbini' ? ['konbini'] : ['card'];
     }
 
-    // 支払い方法に応じて支払い方法オプションを取得
     private function getPaymentMethodOptions($paymentMethod)
     {
         if ($paymentMethod === 'konbini') {
@@ -145,7 +142,7 @@ class StripeController extends Controller
         return [];
     }
 
-    // 商品情報からStripeのline_itemsを取得
+
     private function getLineItems($item, $itemPrice)
     {
         return [[
