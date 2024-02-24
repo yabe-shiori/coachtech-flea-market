@@ -11,7 +11,6 @@ use App\Http\Controllers\FollowController;
 use App\Http\Controllers\GoogleLoginController;
 use App\Http\Controllers\LineLoginController;
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes

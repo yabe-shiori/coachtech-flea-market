@@ -7,9 +7,6 @@ use App\Models\Comment;
 
 class CommentsTableSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
         Comment::create([

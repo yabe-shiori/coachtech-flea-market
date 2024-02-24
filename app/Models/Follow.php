@@ -26,4 +26,3 @@ class Follow extends Model
         return $this->belongsTo(User::class, 'followed_id');
     }
 }
-

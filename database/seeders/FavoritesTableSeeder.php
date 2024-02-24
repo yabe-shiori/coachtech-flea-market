@@ -7,9 +7,6 @@ use App\Models\Favorite;
 
 class FavoritesTableSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
         Favorite::create([

@@ -5,7 +5,7 @@
             <form action="{{ route('user.profile.updateShippingAddress') }}" method="POST" class="max-w-lg mx-auto">
                 @method('PATCH')
                 @csrf
-                <!-- 郵便番号 -->
+
                 <div class="mb-6">
                     <label for="postal_code" class="block text-base font-medium text-gray-700">郵便番号</label>
                     <input type="text" name="postal_code" id="postal_code"
@@ -14,7 +14,7 @@
                         value="{{ old('postal_code', optional($user->profile)->postal_code) }}">
                     <x-validation-errors field="postal_code" />
                 </div>
-                <!-- 住所 -->
+
                 <div class="mb-6">
                     <label for="address" class="block text-base font-medium text-gray-700">住所</label>
                     <textarea name="address" id="address" rows="3"
@@ -22,7 +22,7 @@
                         placeholder="東京都渋谷区..." required>{{ old('address', optional($user->profile)->address) }}</textarea>
                     <x-validation-errors field="address" />
                 </div>
-                <!-- 建物名 -->
+
                 <div class="mb-10">
                     <label for="building_name" class="block text-base font-medium text-gray-700">建物名（任意）</label>
                     <input type="text" name="building_name" id="building_name"

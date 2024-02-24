@@ -11,7 +11,6 @@
                     <p class="text-lg font-semibold text-gray-800 mb-4">¥{{ number_format($item->price) }}（値段）</p>
                     <div class="flex items-center mb-2">
                         @if (Auth::check() && Auth::user()->isFavorite($item->id))
-                            <!-- お気に入り削除フォーム -->
                             <form action="{{ route('user.removeFavorite', ['item_id' => $item->id]) }}" method="POST"
                                 class="flex items-center mr-6">
                                 @csrf
@@ -22,7 +21,6 @@
                                 </button>
                             </form>
                         @else
-                            <!-- お気に入り追加フォーム -->
                             <form action="{{ route('user.favorite', ['item_id' => $item->id]) }}" method="POST"
                                 class="flex items-center mr-6">
                                 @csrf
@@ -32,18 +30,14 @@
                                 </button>
                             </form>
                         @endif
-
                         <div class="flex items-center mr-2">
                             <a href="{{ route('user.comment.show', ['item' => $item->id]) }}"
                                 class="flex flex-col items-center justify-center text-center">
                                 <i class="far fa-comment fa-lg"></i>
-                                <!-- コメント数 -->
                                 <span class="text-xs text-gray-500 mt-3">{{ $item->comments->count() }}</span>
                             </a>
                         </div>
                     </div>
-
-                    <!-- コメント表示部分 -->
                     <div class="mt-10">
                         @foreach ($comments as $comment)
                             <div class="mb-4">
@@ -65,7 +59,6 @@
                                     <p class="text-xs text-gray-600">
                                         {{ $comment->created_at->diffForHumans() }}
                                     </p>
-                                    <!-- コメント削除ボタン -->
                                     @if (Auth::check() && ($comment->sender_id == Auth::id() || $item->user_id == Auth::id()))
                                         <form
                                             action="{{ route('user.comment.destroy', ['item' => $item->id, 'comment' => $comment->id]) }}"
@@ -83,11 +76,9 @@
                             </div>
                         @endforeach
                     </div>
-                    <!-- ページネーション -->
                     <div class="mt-4">
                         {{ $comments->links() }}
                     </div>
-                    <!-- コメントの入力欄 -->
                     <div class="mb-4">
                         <form action="{{ route('user.comment.store', ['item' => $item->id]) }}" method="POST">
                             @csrf

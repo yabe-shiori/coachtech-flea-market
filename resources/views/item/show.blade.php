@@ -20,7 +20,6 @@
                     <p class="text-lg font-semibold text-gray-800 my-4"> ¥{{ number_format($item->price) }}（値段）</p>
 
                     <div class="flex items-center mb-2">
-                        <!-- お気に入り -->
                         @if (Auth::check() && Auth::user()->isFavorite($item->id))
                             <form action="{{ route('user.removeFavorite', ['item_id' => $item->id]) }}" method="POST"
                                 class="flex items-center mr-6">
@@ -42,7 +41,6 @@
                             </form>
                         @endif
 
-                        <!-- コメント数 -->
                         <div class="flex items-center mr-2">
                             <a href="{{ route('user.comment.show', ['item' => $item->id]) }}"
                                 class="flex flex-col items-center justify-center text-center">

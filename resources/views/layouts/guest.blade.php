@@ -20,8 +20,8 @@
     <header class="text-white body-font">
         <div class="container-fluid flex flex-wrap p-5 flex-col md:flex-row items-center bg-black">
             <a class="flex title-font font-medium items-center text-white mb-4 md:mb-0">
-                <svg width="63" height="36" viewBox="0 0 63 36" fill="none"
-                    xmlns="http://www.w3.org/2000/svg" class="mr-2">
+                <svg width="63" height="36" viewBox="0 0 63 36" fill="none" xmlns="http://www.w3.org/2000/svg"
+                    class="mr-2">
                     <path
                         d="M56.6901 0H22.2601C12.3301 0 2.55007 8.06 0.420066 18C-1.71993 27.94 4.60007 36 14.5201 36H25.4101C26.8801 36 28.3301 34.81 28.6501 33.33L30.1701 26.27C30.4901 24.8 29.5501 23.6 28.0801 23.6H15.9701C13.2101 23.6 11.2601 21.47 11.7701 18.71C12.3001 15.85 15.0901 13.51 17.9301 13.51H36.9701C38.4401 13.51 39.3801 14.7 39.0601 16.18L35.3701 33.34C35.0501 34.81 35.9901 36.01 37.4601 36.01H46.2901C47.7601 36.01 49.2101 34.82 49.5301 33.34L53.2201 16.18C53.5401 14.71 54.9901 13.51 56.4601 13.51C57.9301 13.51 59.3801 12.32 59.7001 10.84L62.0301 0H56.7001L56.6901 0Z"
                         fill="white" />
@@ -56,31 +56,11 @@
                         fill="white" />
                 </svg>
 
-
                 {{-- <span class="ml-3 text-xl">COACHETCH</span> --}}
             </a>
-            {{-- <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
-                <a class="mr-5 hover:text-gray-900">First Link</a>
-                <a class="mr-5 hover:text-gray-900">Second Link</a>
-                <a class="mr-5 hover:text-gray-900">Third Link</a>
-                <a class="mr-5 hover:text-gray-900">Fourth Link</a>
-            </nav> --}}
-            {{-- <button
-                class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">Button
-                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                    stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
-                    <path d="M5 12h14M12 5l7 7-7 7"></path>
-                </svg>
-            </button> --}}
         </div>
     </header>
     <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
-        <div>
-            {{-- <a href="/">
-                    <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-                </a> --}}
-        </div>
-
         <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
             {{ $slot }}
         </div>

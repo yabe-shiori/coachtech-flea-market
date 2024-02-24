@@ -76,7 +76,7 @@ class User extends Authenticatable
         return $this->favorites()->where('item_id', $itemId)->exists();
     }
 
-   public function purchasedItems()
+    public function purchasedItems()
     {
         return $this->hasMany(SoldItem::class, 'buyer_id');
     }

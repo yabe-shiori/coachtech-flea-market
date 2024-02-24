@@ -15,7 +15,7 @@
                 <input type="text" name="query" class="form-input w-4/5 rounded-lg" placeholder="何をお探しですか？">
             </form>
         </div>
-        
+
         <!-- Navigation Links -->
         <div class="hidden md:flex items-center space-x-4 sm:space-x-8 flex-wrap">
             @auth

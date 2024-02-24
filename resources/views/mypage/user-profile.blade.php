@@ -19,7 +19,7 @@
                                 @csrf
                                 <button type="submit"
                                     class="bg-white border border-gray-700 text-gray-700 font-bold py-1 px-8 rounded flex items-center justify-center">
-                                   <i class="fa-solid fa-check mr-2"></i>
+                                    <i class="fa-solid fa-check mr-2"></i>
                                     <span>フォロー中</span>
                                 </button>
                             </form>
