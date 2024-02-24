@@ -1,4 +1,5 @@
 <x-app-layout>
+    <x-message :message="session('message')" />
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -11,8 +12,13 @@
                         <a href="{{ route('admin.create') }}" class="block py-2 text-blue-500 hover:underline mb-2">
                             <i class="fas fa-user-plus mr-2"></i> Create Admin
                         </a>
-                        <a href="{{ route('admin.seller_payments') }}" class="block py-2 text-blue-500 hover:underline">
+                        <a href="{{ route('admin.showSellerPayments') }}"
+                            class="block py-2 text-blue-500 hover:underline mb-2">
                             <i class="fas fa-money-check-alt mr-2"></i> Seller Payments
+                        </a>
+                        <a href="{{ route('admin.showNotificationForm') }}"
+                            class="block py-2 text-blue-500 hover:underline">
+                            <i class="fas fa-envelope mr-2"></i> Send Notification Email
                         </a>
                     </div>
                 </div>

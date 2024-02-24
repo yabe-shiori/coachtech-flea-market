@@ -67,7 +67,7 @@ Route::post('/item/{item}/contact', [CommentController::class, 'store'])->name('
 Route::get('/purchase/{item}', [PaymentController::class, 'create'])->name('payment.create');
 
 
-Route::middleware('auth:users')->group(function () {
+Route::middleware(['auth:users'])->group(function () {
     //マイページ
     Route::get('/mypage', [ProfileController::class, 'index'])->name('mypage.index');
 

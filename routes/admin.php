@@ -78,7 +78,13 @@ Route::middleware('auth:admin')->group(function () {
     Route::post('/admin/create', [AdminController::class, 'store'])->name('store');
 
     // 出品者への送金額確認画面を表示
-    Route::get('/seller-payments', [AdminController::class, 'showSellerPayments'])->name('seller_payments');
+    Route::get('/seller-payments', [AdminController::class, 'showSellerPayments'])->name('showSellerPayments');
+
+    //お知らせメール作成ページを表示
+    Route::get('/admin/send-notification', [AdminController::class, 'showNotificationForm'])->name('showNotificationForm');
+
+    //お知らせメール送信
+    Route::post('/admin/send-notification', [AdminController::class, 'sendNotification'])->name('sendNotification');
 
     Route::get('verify-email', EmailVerificationPromptController::class)
         ->name('verification.notice');
