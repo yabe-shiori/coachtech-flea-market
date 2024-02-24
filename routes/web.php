@@ -9,6 +9,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\StripeController;
 use App\Http\Controllers\FollowController;
 use App\Http\Controllers\GoogleLoginController;
+use App\Http\Controllers\LineLoginController;
 
 
 /*
@@ -22,6 +23,11 @@ use App\Http\Controllers\GoogleLoginController;
 |
 */
 
+//LINEログイン
+Route::get('/linelogin', [LineLoginController::class, 'lineLogin'])->name('linelogin');
+Route::get('/callback', [LineLoginController::class, 'callback'])->name('callback');
+
+
 //google認証
 Route::get('/auth/google', [GoogleLoginController::class, 'redirectToGoogle'])
     ->name('login.google');
@@ -29,7 +35,7 @@ Route::get('/auth/google', [GoogleLoginController::class, 'redirectToGoogle'])
 Route::get('/auth/google/callback', [GoogleLoginController::class, 'handleGoogleCallback'])
     ->name('login.google.callback');
 
-    
+
 
 Route::post('/user/payment/change/{item}', [PaymentController::class, 'changePaymentMethod'])->name('payment.change');
 

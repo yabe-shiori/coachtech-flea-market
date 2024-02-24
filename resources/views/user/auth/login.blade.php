@@ -25,15 +25,18 @@
         </div>
 
         <div class="mt-14 w-full">
-            <x-primary-button class="w-full bg-red-400 font-bold flex items-center justify-center">
+            <x-primary-button class="w-full bg-red-400 font-bold flex items-center justify-center mb-2">
                 ログインする
             </x-primary-button>
         </div>
 
         <div class="flex items-center justify-end mt-4">
-            <a href="{{ route('user.login.google') }}" class="ml-3 inline-flex items-center">
+            <a href="{{ route('user.login.google') }}" class="inline-flex items-center ml-3">
                 <img src="https://developers.google.com/identity/images/btn_google_signin_dark_normal_web.png"
-                    style="margin-left: 3em;">
+                    alt="Googleログイン">
+            </a>
+            <a href="{{ route('user.linelogin') }}" class="inline-flex items-center ml-3">
+                <img src="{{ asset('images/btn_login_base.png') }}" alt="LINEログイン">
             </a>
         </div>
 
