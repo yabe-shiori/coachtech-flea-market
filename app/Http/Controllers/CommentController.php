@@ -31,7 +31,12 @@ class CommentController extends Controller
     public function store(CommentStoreRequest $request, $itemId)
     {
         if (!Auth::check()) {
-            return back()->with('message', 'コメントを投稿するにはログインしてください');
+            return back()->with('error', 'ログインしてください');
+        }
+
+        $item = Item::findOrFail($itemId);
+        if ($item->is_sold) {
+            return back()->with('error', 'こちらの商品は売り切れなのでコメントできません。');
         }
 
         $senderId = Auth::id();

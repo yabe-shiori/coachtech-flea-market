@@ -1,10 +1,19 @@
 <x-app-layout>
+    <x-error-message :message="session('error')" />
+
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="grid grid-cols-2 gap-8">
-                <div class="max-w-sm">
+                <div class="max-w-sm relative">
                     <img src="{{ asset('storage/' . $item->images->first()->image_path) }}" alt="{{ $item->name }}"
                         class="w-full">
+                    @if ($item->isSold())
+                    <div class="absolute top-0 left-0">
+                        <span class="inline-flex items-center justify-center bg-red-500 text-white font-bold px-4 py-2 rounded-full shadow">
+                            <i class="fas fa-ban mr-2"></i> SOLD OUT
+                        </span>
+                    </div>
+                    @endif
                 </div>
                 <div class="w-3/4">
                     <h2 class="text-2xl font-bold text-black mb-4">{{ $item->name }}</h2>
