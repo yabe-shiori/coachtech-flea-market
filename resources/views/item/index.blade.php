@@ -8,8 +8,9 @@
     </x-slot>
     <div class="flex justify-center">
         @if (!isset($alreadyReceivedToday) || !$alreadyReceivedToday)
-            <button id="draw-fortune-btn" class="bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white font-bold py-2 px-4 rounded-full shadow-md mt-4">
-                おみくじを引く
+            <button id="draw-fortune-btn"
+                class="bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white font-bold py-2 px-4 rounded-full shadow-md mt-4 transition duration-300 transform hover:scale-105">
+                <i class="fas fa-hand-holding-heart mr-2"></i> おみくじを引く
             </button>
         @endif
     </div>
@@ -22,9 +23,12 @@
                             <a href="{{ route('user.item.show', $item) }}">
                                 <img src="{{ asset('storage/' . $image->image_path) }}" alt="{{ $item->name }}">
                                 @if ($item->isSold())
-                                    <div class="absolute top-0 left-0 bg-red-500 text-base text-white font-bold px-5 py-1">SOLD</div>
+                                    <div
+                                        class="absolute top-0 left-0 bg-red-500 text-base text-white font-bold px-5 py-1">
+                                        SOLD</div>
                                 @endif
-                                <span class="absolute bottom-0 left-0 px-2 py-1 bg-black bg-opacity-40 text-white rounded-tr-xl rounded-br-xl">¥{{ number_format($item->price) }}</span>
+                                <span
+                                    class="absolute bottom-0 left-0 px-2 py-1 bg-black bg-opacity-40 text-white rounded-tr-xl rounded-br-xl">¥{{ number_format($item->price) }}</span>
                             </a>
                         </div>
                     @endforeach
@@ -38,7 +42,8 @@
             <p id="fortune-result" class="text-xl font-semibold mb-2 text-center"></p>
             <p id="fortune-category" class="text-3xl font-bold mb-4 text-center" style="color: red;"></p>
             <p id="points-awarded" class="text-lg mb-4 text-center"></p>
-            <button id="close-popup-btn" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-full block mx-auto">閉じる</button>
+            <button id="close-popup-btn"
+                class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-full block mx-auto">閉じる</button>
         </div>
     </div>
 
@@ -56,28 +61,32 @@
 
         document.getElementById('draw-fortune-btn').addEventListener('click', function() {
             fetch('/draw-login-bonus', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                },
-                body: JSON.stringify({})
-            })
-            .then(response => response.json())
-            .then(data => {
-                if(data.success) {
-
-                    document.getElementById('fortune-result').innerHTML = `<span style="color: black;">おみくじ結果</span>`;
-                    document.getElementById('fortune-category').textContent = `${data.result}`;
-                    document.getElementById('points-awarded').textContent = `付与されたポイント: ${data.points_awarded}ポイント`;
-                    document.getElementById('fortune-popup').classList.remove('hidden');
-                } else {
-                    alert('本日は既におみくじを引いています。');
-                }
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute(
+                            'content')
+                    },
+                    body: JSON.stringify({})
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        setTimeout(function() {
+                            document.getElementById('fortune-result').innerHTML =
+                                `<span style="color: black;">おみくじ結果</span>`;
+                            document.getElementById('fortune-category').textContent = `${data.result}`;
+                            document.getElementById('points-awarded').textContent =
+                                `付与されたポイント: ${data.points_awarded}ポイント`;
+                            document.getElementById('fortune-popup').classList.remove('hidden');
+                        }, 2000);
+                    } else {
+                        alert('本日は既におみくじを引いています。');
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
         });
 
         document.getElementById('close-popup-btn').addEventListener('click', function() {
