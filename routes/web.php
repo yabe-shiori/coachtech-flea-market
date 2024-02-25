@@ -10,6 +10,7 @@ use App\Http\Controllers\StripeController;
 use App\Http\Controllers\FollowController;
 use App\Http\Controllers\GoogleLoginController;
 use App\Http\Controllers\LineLoginController;
+use App\Http\Controllers\LoginBonusController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +22,11 @@ use App\Http\Controllers\LineLoginController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+// ログインボーナスを引くためのルート
+Route::post('/draw-login-bonus', [LoginBonusController::class, 'drawLoginBonus'])->name('drawLoginBonus');
+// ユーザーのアイテム一覧ページを表示するルート
+Route::get('/', [LoginBonusController::class, 'showItemList'])->name('dashboard');
 
 //LINEログイン
 Route::get('/linelogin', [LineLoginController::class, 'lineLogin'])->name('linelogin');

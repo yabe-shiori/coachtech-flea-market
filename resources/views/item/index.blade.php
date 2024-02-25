@@ -6,7 +6,12 @@
             <a href="javascript:void(0)" id="myListLink" onclick="loadMyList()">マイリスト</a>
         </h2>
     </x-slot>
+   @if (!isset($alreadyReceivedToday) || !$alreadyReceivedToday)
 
+    <button id="draw-fortune-btn" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        おみくじを引く
+    </button>
+    @endif
     <div id="item-list" class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="grid grid-cols-5 gap-4">
@@ -37,5 +42,28 @@
                 })
                 .catch(error => console.error('Error:', error));
         }
+
+        document.getElementById('draw-fortune-btn').addEventListener('click', function() {
+            fetch('/draw-login-bonus', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                },
+                body: JSON.stringify({})
+            })
+            .then(response => response.json())
+            .then(data => {
+                if(data.success) {
+                    alert(`おみくじ結果: ${data.result} 付与されたポイント: ${data.points_awarded}`);
+
+                } else {
+                    alert('本日は既におみくじを引いています。');
+                }
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        });
     </script>
 </x-app-layout>
