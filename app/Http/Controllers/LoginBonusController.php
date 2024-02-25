@@ -20,7 +20,7 @@ class LoginBonusController extends Controller
         if ($alreadyReceived) {
             return response()->json([
                 'success' => false,
-                'message' => 'You have already drawn your fortune today.'
+                'message' => '本日のログインボーナスは既に受け取っています。'
             ]);
         }
 
@@ -51,14 +51,11 @@ class LoginBonusController extends Controller
 
         if ($randomNumber <= 10) {
             return '大吉';
-        }
-        elseif ($randomNumber <= 40) {
+        } elseif ($randomNumber <= 40) {
             return '中吉';
-        }
-        elseif ($randomNumber <= 90) {
+        } elseif ($randomNumber <= 90) {
             return '小吉';
-        }
-        else {
+        } else {
             return '凶';
         }
     }
@@ -73,15 +70,5 @@ class LoginBonusController extends Controller
         ];
 
         return $pointsMap[$result] ?? 0;
-    }
-
-    public function showItemList()
-    {
-        $user = Auth::user();
-        $alreadyReceivedToday = LoginBonusHistory::where('user_id', $user->id)
-            ->whereDate('date_awarded', now()->toDateString())
-            ->exists();
-
-        return view('item.index', compact('alreadyReceivedToday'));
     }
 }

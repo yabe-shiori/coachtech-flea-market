@@ -9,6 +9,7 @@ use App\Models\Brand;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\ItemStoreRequest;
 use Illuminate\Support\Facades\Auth;
+use App\Models\LoginBonusHistory;
 
 class ItemController extends Controller
 {
@@ -16,7 +17,16 @@ class ItemController extends Controller
     public function index()
     {
         $itemImages = Item::with('images')->get();
-        return view('item.index', compact('itemImages'));
+
+        $alreadyReceivedToday = false;
+        if (Auth::check()) {
+            $user = Auth::user();
+            $alreadyReceivedToday = LoginBonusHistory::where('user_id', $user->id)
+                ->whereDate('date_awarded', today())
+                ->exists();
+        }
+
+        return view('item.index', compact('itemImages', 'alreadyReceivedToday'));
     }
 
     // 商品詳細ページ

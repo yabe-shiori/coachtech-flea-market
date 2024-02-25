@@ -7,13 +7,15 @@
         </h2>
     </x-slot>
     <div class="flex justify-center">
-        @if (!isset($alreadyReceivedToday) || !$alreadyReceivedToday)
+    @auth
+        @if (!$alreadyReceivedToday)
             <button id="draw-fortune-btn"
                 class="bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white font-bold py-2 px-4 rounded-full shadow-md mt-4 transition duration-300 transform hover:scale-105">
                 <i class="fas fa-hand-holding-heart mr-2"></i> おみくじを引く
             </button>
         @endif
-    </div>
+    @endauth
+</div>
     <div id="item-list" class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="grid grid-cols-5 gap-4">
@@ -23,9 +25,12 @@
                             <a href="{{ route('user.item.show', $item) }}">
                                 <img src="{{ asset('storage/' . $image->image_path) }}" alt="{{ $item->name }}">
                                 @if ($item->isSold())
-                                    <div
-                                        class="absolute top-0 left-0 bg-red-500 text-base text-white font-bold px-5 py-1">
-                                        SOLD</div>
+                                    <div class="absolute top-0 left-0">
+                                        <span
+                                            class="inline-flex items-center justify-center bg-red-500 text-white font-bold px-3 py-1 rounded-full shadow">
+                                            <i class="fas fa-ban mr-1"></i> SOLD OUT
+                                        </span>
+                                    </div>
                                 @endif
                                 <span
                                     class="absolute bottom-0 left-0 px-2 py-1 bg-black bg-opacity-40 text-white rounded-tr-xl rounded-br-xl">¥{{ number_format($item->price) }}</span>
@@ -79,7 +84,7 @@
                             document.getElementById('points-awarded').textContent =
                                 `付与されたポイント: ${data.points_awarded}ポイント`;
                             document.getElementById('fortune-popup').classList.remove('hidden');
-                        }, 2000);
+                        }, 1000);
                     } else {
                         alert('本日は既におみくじを引いています。');
                     }

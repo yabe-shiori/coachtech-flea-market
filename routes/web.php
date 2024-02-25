@@ -23,10 +23,7 @@ use App\Http\Controllers\LoginBonusController;
 |
 */
 
-// ログインボーナスを引くためのルート
-Route::post('/draw-login-bonus', [LoginBonusController::class, 'drawLoginBonus'])->name('drawLoginBonus');
-// ユーザーのアイテム一覧ページを表示するルート
-Route::get('/', [LoginBonusController::class, 'showItemList'])->name('dashboard');
+
 
 //LINEログイン
 Route::get('/linelogin', [LineLoginController::class, 'lineLogin'])->name('linelogin');
@@ -41,11 +38,11 @@ Route::get('/auth/google/callback', [GoogleLoginController::class, 'handleGoogle
     ->name('login.google.callback');
 
 
-
-// Route::post('/user/payment/change/{item}', [PaymentController::class, 'changePaymentMethod'])->name('payment.change');
-
 //商品一覧ページ
 Route::get('/', [ItemController::class, 'index'])->name('item.index');
+
+// ログインボーナスを引くためのルート
+Route::post('/draw-login-bonus', [LoginBonusController::class, 'drawLoginBonus'])->name('drawLoginBonus');
 
 //商品詳細ページ
 Route::get('/item/{item}', [ItemController::class, 'show'])->name('item.show');
