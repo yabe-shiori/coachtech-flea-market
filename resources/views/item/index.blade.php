@@ -6,12 +6,13 @@
             <a href="javascript:void(0)" id="myListLink" onclick="loadMyList()">マイリスト</a>
         </h2>
     </x-slot>
-   @if (!isset($alreadyReceivedToday) || !$alreadyReceivedToday)
-
-    <button id="draw-fortune-btn" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-        おみくじを引く
-    </button>
-    @endif
+    <div class="flex justify-center">
+        @if (!isset($alreadyReceivedToday) || !$alreadyReceivedToday)
+            <button id="draw-fortune-btn" class="bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white font-bold py-2 px-4 rounded-full shadow-md mt-4">
+                おみくじを引く
+            </button>
+        @endif
+    </div>
     <div id="item-list" class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="grid grid-cols-5 gap-4">
