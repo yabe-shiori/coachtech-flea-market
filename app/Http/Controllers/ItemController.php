@@ -96,13 +96,13 @@ class ItemController extends Controller
 
         $items = Item::where(function ($query) use ($searchQuery) {
             $query->searchByName($searchQuery)
-                ->orWhere(function ($query) use ($searchQuery) {
-                    $query->searchByCategory($searchQuery);
-                })
+            ->orWhere(function ($query) use ($searchQuery) {
+                $query->searchByCategory($searchQuery);
+            })
                 ->orWhere(function ($query) use ($searchQuery) {
                     $query->searchByBrand($searchQuery);
                 });
-        })->get();
+        })->orderBy('price')->get();
 
         return view('item.search', compact('items'));
     }

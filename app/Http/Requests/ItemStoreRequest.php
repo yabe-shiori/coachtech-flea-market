@@ -27,7 +27,7 @@ class ItemStoreRequest extends FormRequest
             'image.*' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
             'name' => ['required', 'string', 'max:255'],
             'category_id' => ['required', 'exists:categories,id'],
-            'brand_id' => ['exists:brands,id'],
+            'brand_id' => ['nullable', 'exists:brands,id'],
             'price' => ['required', 'numeric', 'min:0', 'max:9999999.99'],
             'condition' => ['required', Rule::in([
                 '新品、未使用',
