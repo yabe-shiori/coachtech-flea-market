@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginBonusController extends Controller
 {
-    public function drawLoginBonus(Request $request)
+    public function draw(Request $request)
     {
         $user = Auth::user();
 

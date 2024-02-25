@@ -69,10 +69,10 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth:admin')->group(function () {
 
     //管理画面の商品一覧ページ
-    Route::get('/admin/items', [AdminController::class, 'index'])->name('item.index');
+    Route::get('/items', [AdminController::class, 'index'])->name('item.index');
 
     //管理者作成ページ表示
-    Route::get('/admin/create', [AdminController::class, 'create'])->name('create');
+    Route::get('/create', [AdminController::class, 'create'])->name('create');
 
     //管理者作成
     Route::post('/admin/create', [AdminController::class, 'store'])->name('store');
@@ -81,7 +81,7 @@ Route::middleware('auth:admin')->group(function () {
     Route::get('/seller-payments', [AdminController::class, 'showSellerPayments'])->name('showSellerPayments');
 
     //お知らせメール作成ページを表示
-    Route::get('/admin/send-notification', [AdminController::class, 'showNotificationForm'])->name('showNotificationForm');
+    Route::get('/send-notification', [AdminController::class, 'showNotificationForm'])->name('showNotificationForm');
 
     //お知らせメール送信
     Route::post('/admin/send-notification', [AdminController::class, 'sendNotification'])->name('sendNotification');

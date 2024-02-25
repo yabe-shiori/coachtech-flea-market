@@ -41,8 +41,8 @@ Route::get('/auth/google/callback', [GoogleLoginController::class, 'handleGoogle
 //商品一覧ページ
 Route::get('/', [ItemController::class, 'index'])->name('item.index');
 
-// ログインボーナスを引くためのルート
-Route::post('/draw-login-bonus', [LoginBonusController::class, 'drawLoginBonus'])->name('drawLoginBonus');
+// ログインボーナス
+Route::post('/login-bonus', [LoginBonusController::class, 'draw'])->name('draw');
 
 //商品詳細ページ
 Route::get('/item/{item}', [ItemController::class, 'show'])->name('item.show');

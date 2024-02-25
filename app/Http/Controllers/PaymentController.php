@@ -15,7 +15,7 @@ class PaymentController extends Controller
         $user = Auth::user();
 
         if (!$user) {
-            return redirect()->route('login')->with('error', 'ログインしてください。');
+            return redirect()->back()->with('error', 'ログインしてください。');
         }
 
         $item = Item::findOrFail($itemId);

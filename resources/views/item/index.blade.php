@@ -65,7 +65,7 @@
         }
 
         document.getElementById('draw-fortune-btn').addEventListener('click', function() {
-            fetch('/draw-login-bonus', {
+            fetch('/login-bonus', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
