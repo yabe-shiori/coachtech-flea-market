@@ -32,6 +32,16 @@
             </div>
         </div>
     </div>
+
+    <div id="fortune-popup" class="fixed inset-x-0 top-0 flex items-center justify-center hidden">
+        <div class="bg-white p-8 rounded-lg shadow-lg border-4 border-purple-600">
+            <p id="fortune-result" class="text-xl font-semibold mb-2 text-center"></p>
+            <p id="fortune-category" class="text-3xl font-bold mb-4 text-center" style="color: red;"></p>
+            <p id="points-awarded" class="text-lg mb-4 text-center"></p>
+            <button id="close-popup-btn" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-full block mx-auto">閉じる</button>
+        </div>
+    </div>
+
     <script>
         function loadMyList() {
             fetch('{{ route('user.mylist') }}')
@@ -56,8 +66,11 @@
             .then(response => response.json())
             .then(data => {
                 if(data.success) {
-                    alert(`おみくじ結果: ${data.result} 付与されたポイント: ${data.points_awarded}`);
 
+                    document.getElementById('fortune-result').innerHTML = `<span style="color: black;">おみくじ結果</span>`;
+                    document.getElementById('fortune-category').textContent = `${data.result}`;
+                    document.getElementById('points-awarded').textContent = `付与されたポイント: ${data.points_awarded}ポイント`;
+                    document.getElementById('fortune-popup').classList.remove('hidden');
                 } else {
                     alert('本日は既におみくじを引いています。');
                 }
@@ -65,6 +78,10 @@
             .catch((error) => {
                 console.error('Error:', error);
             });
+        });
+
+        document.getElementById('close-popup-btn').addEventListener('click', function() {
+            document.getElementById('fortune-popup').classList.add('hidden');
         });
     </script>
 </x-app-layout>
