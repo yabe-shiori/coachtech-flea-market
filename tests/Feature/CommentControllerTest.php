@@ -94,23 +94,23 @@ class CommentControllerTest extends TestCase
             'id' => $comment->id,
         ]);
     }
-    
-public function testCommentDestroyUnauthorized()
-{
 
-    $user = User::factory()->create();
-    $item = Item::factory()->create();
-    $comment = Comment::factory()->create(['item_id' => $item->id]);
-    $anotherUser = User::factory()->create();
+    public function testCommentDestroyUnauthorized()
+    {
 
-    $this->actingAs($anotherUser);
-    $response = $this->delete(route('user.comment.destroy', ['item' => $item->id, 'comment' => $comment->id]));
+        $user = User::factory()->create();
+        $item = Item::factory()->create();
+        $comment = Comment::factory()->create(['item_id' => $item->id]);
+        $anotherUser = User::factory()->create();
 
-    $response->assertRedirect();
-    $this->assertDatabaseHas('comments', [
-        'id' => $comment->id,
-    ]);
-}
+        $this->actingAs($anotherUser);
+        $response = $this->delete(route('user.comment.destroy', ['item' => $item->id, 'comment' => $comment->id]));
+
+        $response->assertRedirect();
+        $this->assertDatabaseHas('comments', [
+            'id' => $comment->id,
+        ]);
+    }
 
     public function testCommentDestroyAuthorized()
     {

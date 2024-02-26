@@ -20,11 +20,11 @@ class GoogleLoginControllerTest extends TestCase
     {
         $googleUserMock = Mockery::mock('Laravel\Socialite\Two\User');
         $googleUserMock->shouldReceive('getEmail')
-        ->andReturn('test@example.com');
+            ->andReturn('test@example.com');
 
         $socialiteMock = Mockery::mock('Laravel\Socialite\Contracts\Factory');
         $socialiteMock->shouldReceive('driver->user')
-        ->andReturn($googleUserMock);
+            ->andReturn($googleUserMock);
 
 
         $this->app->instance('Laravel\Socialite\Contracts\Factory', $socialiteMock);
@@ -34,5 +34,4 @@ class GoogleLoginControllerTest extends TestCase
         $response->assertStatus(302);
         $response->assertRedirect(route('user.login'));
     }
-
 }
