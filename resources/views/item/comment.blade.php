@@ -1,57 +1,57 @@
 <x-app-layout>
     <x-error-message :message="session('error')" />
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="grid grid-cols-2 gap-8">
-                <div class="max-w-sm relative">
+    <div class="py-6 md:py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+                <div class="max-w-sm mx-auto md:relative">
                     <img src="{{ asset('storage/' . $item->images->first()->image_path) }}" alt="{{ $item->name }}"
                         class="w-full">
                     @if ($item->isSold())
                     <div class="absolute top-0 left-0">
-                        <span class="inline-flex items-center justify-center bg-red-500 text-white font-bold px-4 py-2 rounded-full shadow">
-                            <i class="fas fa-ban mr-2"></i> SOLD OUT
+                        <span class="inline-flex items-center justify-center bg-red-500 text-white font-bold px-3 py-1 rounded-full shadow">
+                            <i class="fas fa-ban mr-1"></i> SOLD OUT
                         </span>
                     </div>
                     @endif
                 </div>
-                <div class="w-3/4">
-                    <h2 class="text-2xl font-bold text-black mb-4">{{ $item->name }}</h2>
-                    <p class="text-lg font-semibold text-gray-800 mb-4">¥{{ number_format($item->price) }}（値段）</p>
-                    <div class="flex items-center mb-2">
+                <div class="mt-6 md:mt-0 md:w-3/4 mx-auto">
+                    <h2 class="text-xl md:text-2xl font-bold text-black mb-2 md:mb-4">{{ $item->name }}</h2>
+                    <p class="text-base md:text-lg font-semibold text-gray-800 mb-4">¥{{ number_format($item->price) }}</p>
+                    <div class="flex flex-wrap items-center mb-4">
                         @if (Auth::check() && Auth::user()->isFavorite($item->id))
                             <form action="{{ route('user.removeFavorite', ['item_id' => $item->id]) }}" method="POST"
-                                class="flex items-center mr-6">
+                                class="flex items-center mr-3">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="flex flex-col items-center justify-center text-center">
-                                    <i class="fas fa-star fa-lg text-yellow-500"></i>
-                                    <span class="text-xs text-gray-500 mt-3">{{ $item->favorites()->count() }}</span>
+                                <button type="submit" class="flex items-center justify-center text-center">
+                                    <i class="fas fa-star text-yellow-500"></i>
+                                    <span class="text-xs text-gray-500 ml-1">{{ $item->favorites()->count() }}</span>
                                 </button>
                             </form>
                         @else
                             <form action="{{ route('user.favorite', ['item_id' => $item->id]) }}" method="POST"
-                                class="flex items-center mr-6">
+                                class="flex items-center mr-3">
                                 @csrf
-                                <button type="submit" class="flex flex-col items-center justify-center text-center">
-                                    <i class="far fa-star fa-lg text-gray-500"></i>
-                                    <span class="text-xs text-gray-500 mt-3">{{ $item->favorites()->count() }}</span>
+                                <button type="submit" class="flex items-center justify-center text-center">
+                                    <i class="far fa-star text-gray-500"></i>
+                                    <span class="text-xs text-gray-500 ml-1">{{ $item->favorites()->count() }}</span>
                                 </button>
                             </form>
                         @endif
-                        <div class="flex items-center mr-2">
+                        <div class="flex items-center">
                             <a href="{{ route('user.comment.show', ['item' => $item->id]) }}"
-                                class="flex flex-col items-center justify-center text-center">
+                                class="flex items-center justify-center text-center">
                                 <i class="far fa-comment fa-lg"></i>
-                                <span class="text-xs text-gray-500 mt-3">{{ $item->comments->count() }}</span>
+                                <span class="text-xs text-gray-500 ml-1">{{ $item->comments->count() }}</span>
                             </a>
                         </div>
                     </div>
-                    <div class="mt-10">
+                    <div class="mb-6">
                         @foreach ($comments as $comment)
                             <div class="mb-4">
                                 <div
-                                    class="flex items-center mb-2 {{ $comment->sender_id == $item->user_id ? 'flex-row-reverse' : '' }}">
+                                    class="flex items-center mb-2 {{ $comment->sender_id == $item->user_id ? 'justify-end' : 'justify-start' }}">
                                     <img src="{{ asset('storage/avatar/' . $comment->sender->avatar) }}"
                                         alt="User Avatar"
                                         class="w-8 h-8 rounded-full {{ $comment->sender_id == $item->user_id ? 'ml-2' : 'mr-2' }}">
@@ -88,7 +88,7 @@
                             </div>
                         @endforeach
                     </div>
-                    <div class="mt-4">
+                    <div class="mb-6">
                         {{ $comments->links() }}
                     </div>
                     <div class="mb-4">
