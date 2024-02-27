@@ -20,7 +20,12 @@
                                             </div>
                                             <div class="ml-4">
                                                 <p class="text-lg font-semibold">
-                                                    {{ $followedUser->profile->display_name }}</p>
+                                                @if ($followedUser->profile && $followedUser->profile->display_name)
+                                                    {{ $followedUser->profile->display_name }}
+                                                @else
+                                                    {{ $followedUser->name }}
+                                                @endif
+                                            </p>
                                             </div>
                                         </div>
                                     </a>

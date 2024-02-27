@@ -88,7 +88,13 @@
                                 class="flex items-center">
                                 <img src="{{ asset('storage/avatar/' . $item->user->avatar) }}" alt="User Avatar"
                                     class="w-10 h-10 rounded-full mr-2">
-                                <p class="text-sm font-semibold">{{ $item->user->name }}</p>
+                                <p class="text-sm font-semibold">
+                                    @if ($item->user->profile && $item->user->profile->display_name)
+                                        {{ $item->user->profile->display_name }}
+                                    @else
+                                        {{ $item->user->name }}
+                                    @endif
+                                </p>
                             </a>
                         </div>
                     </div>

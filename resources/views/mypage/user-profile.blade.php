@@ -9,7 +9,13 @@
                     <div class="flex items-center mb-4">
                         <img src="{{ asset('storage/avatar/' . $user->avatar) }}" alt="User Avatar"
                             class="w-10 h-10 rounded-full mr-4">
-                        <h2 class="text-2xl font-bold text-gray-800">{{ $user->profile->display_name }}</h2>
+                        <h2 class="text-2xl font-bold text-gray-800">
+                            @if ($user->profile && $user->profile->display_name)
+                                {{ $user->profile->display_name }}
+                            @else
+                                {{ $user->name ?? '名無しさん' }}
+                            @endif
+                        </h2>
                     </div>
 
                     <div class="mb-4">
@@ -35,7 +41,11 @@
                         @endif
                     </div>
 
-                    <p class="text-gray-600 whitespace-pre-line mt-8">{{ $user->profile->introduction }}</p>
+                    <p class="text-gray-600 whitespace-pre-line mt-8">
+                        @if ($user->profile && $user->profile->introduction)
+                            {{ $user->profile->introduction }}
+                        @endif
+                    </p>
                 </div>
             </div>
         </div>
