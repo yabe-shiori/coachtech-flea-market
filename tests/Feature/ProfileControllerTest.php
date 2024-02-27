@@ -113,17 +113,16 @@ class ProfileControllerTest extends TestCase
     {
         $user = User::factory()->create();
         $item = Item::factory()->create(['user_id' => $user->id]);
-        $profile = Profile::factory()->create(['user_id' => $user->id]); // 既存のプロフィールレコードを作成する
+        $profile = Profile::factory()->create(['user_id' => $user->id]);
 
-        // テスト用のダミーデータ
         $data = [
-            'postal_code' => '12345678',
+            'postal_code' => '123-4567',
             'address' => '123 Main Street',
             'building_name' => 'Building A',
         ];
 
         $response = $this->actingAs($user)->patch(route('user.profile.updateShippingAddress'), $data);
-        $response->assertRedirect(route('user.payment.create', $item->id))
+        $response->assertRedirect(route('user.mypage.index'))
             ->assertSessionHas('message', '住所を変更しました');
 
         $this->assertDatabaseHas('profiles', [
