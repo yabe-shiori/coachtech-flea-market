@@ -68,6 +68,16 @@
     <div :class="{ 'block': open, 'hidden': !open }" class="hidden md:hidden">
         <div class="pt-2 pb-3 space-y-1">
             @auth
+
+                <x-responsive-nav-link :href="route('user.item.index')" :active="request()->routeIs('user.mypage.index')">
+                    ホーム
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('user.mypage.index')" :active="request()->routeIs('user.mypage.index')">
+                    マイページ
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('user.item.create')" :active="request()->routeIs('user.item.create')">
+                    出品
+                </x-responsive-nav-link>
                 <form method="POST" action="{{ route('user.logout') }}">
                     @csrf
                     <x-responsive-nav-link :href="route('user.logout')"
@@ -76,13 +86,10 @@
                         {{ __('Log Out') }}
                     </x-responsive-nav-link>
                 </form>
-                <x-responsive-nav-link :href="route('user.mypage.index')" :active="request()->routeIs('user.mypage.index')">
-                    マイページ
-                </x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('user.item.create')" :active="request()->routeIs('user.item.create')">
-                    出品
-                </x-responsive-nav-link>
             @else
+                <x-responsive-nav-link :href="route('user.item.index')" :active="request()->routeIs('user.mypage.index')">
+                    ホーム
+                </x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('user.login')">
                     ログイン
                 </x-responsive-nav-link>
