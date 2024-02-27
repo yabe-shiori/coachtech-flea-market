@@ -7,33 +7,31 @@
         </h2>
     </x-slot>
     <div class="flex justify-center">
-    @auth
-        @if (!$alreadyReceivedToday)
-            <button id="draw-fortune-btn"
-                class="bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white font-bold py-2 px-4 rounded-full shadow-md mt-4 transition duration-300 transform hover:scale-105">
-                <i class="fas fa-hand-holding-heart mr-2"></i> おみくじを引く
-            </button>
-        @endif
-    @endauth
-</div>
+        @auth
+            @if (!$alreadyReceivedToday)
+                <button id="draw-fortune-btn"
+                    class="bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white font-bold py-2 px-4 rounded-full shadow-md mt-4 transition duration-300 transform hover:scale-105">
+                    <i class="fas fa-hand-holding-heart mr-2"></i> おみくじを引く
+                </button>
+            @endif
+        @endauth
+    </div>
     <div id="item-list" class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="grid grid-cols-5 gap-4">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-5 gap-4">
                 @foreach ($itemImages as $item)
                     @foreach ($item->images as $image)
                         <div class="relative">
                             <a href="{{ route('user.item.show', $item) }}">
-                                <img src="{{ asset('storage/' . $image->image_path) }}" alt="{{ $item->name }}">
+                                <img src="{{ asset('storage/' . $image->image_path) }}" alt="{{ $item->name }}" class="w-full">
                                 @if ($item->isSold())
                                     <div class="absolute top-0 left-0">
-                                        <span
-                                            class="inline-flex items-center justify-center bg-red-500 text-white font-bold px-3 py-1 rounded-full shadow">
+                                        <span class="inline-flex items-center justify-center bg-red-500 text-white font-bold px-2 py-1 rounded-full shadow">
                                             <i class="fas fa-ban mr-1"></i> SOLD OUT
                                         </span>
                                     </div>
                                 @endif
-                                <span
-                                    class="absolute bottom-0 left-0 px-2 py-1 bg-black bg-opacity-40 text-white rounded-tr-xl rounded-br-xl">¥{{ number_format($item->price) }}</span>
+                                <span class="absolute bottom-0 left-0 px-2 py-1 bg-black bg-opacity-40 text-white rounded-tr-xl rounded-br-xl">¥{{ number_format($item->price) }}</span>
                             </a>
                         </div>
                     @endforeach

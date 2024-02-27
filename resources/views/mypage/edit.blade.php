@@ -98,5 +98,28 @@
                 reader.readAsDataURL(input.files[0]);
             }
         }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const postalCodeInput = document.getElementById('postal_code');
+
+            postalCodeInput.addEventListener('input', function() {
+                // 入力された値から半角数字とハイフンのみを抽出
+                const formattedPostalCode = toHalfWidth(this.value).replace(/[^\d-]/g, '');
+                // ハイフンを除去
+                const postalCodeWithoutHyphen = formattedPostalCode.replace(/-/g, '');
+                // ハイフンを付けてフォーマット
+                const formattedWithHyphen = postalCodeWithoutHyphen.replace(/(\d{3})(\d{4})/, '$1-$2');
+                // 入力フィールドに値をセット
+                this.value = formattedWithHyphen;
+            });
+
+            postalCodeInput.value = toHalfWidth(postalCodeInput.value);
+        });
+
+        function toHalfWidth(str) {
+            return str.replace(/[！-～]/g, function(tmpStr) {
+                return String.fromCharCode(tmpStr.charCodeAt(0) - 0xFEE0);
+            });
+        }
     </script>
 </x-app-layout>

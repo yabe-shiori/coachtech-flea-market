@@ -106,9 +106,8 @@ class ProfileController extends Controller
 
         $user->profile()->update($validatedData);
 
-        $itemId = $user->items()->first()->id;
 
-        return redirect()->route('user.payment.create', $itemId)->with('message', '住所を変更しました');
+        return redirect()->route('user.mypage.index')->with('message', '住所を変更しました');
     }
 
     // 出品者のプロフィール表示
