@@ -9,6 +9,7 @@ use App\Http\Requests\AdminStoreRequest;
 use App\Models\User;
 use App\Mail\NotificationEmail;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Http\Request;
 use App\Http\Requests\NotificationMailFormRequest;
 
 
@@ -56,11 +57,20 @@ class AdminController extends Controller
         return view('admin.notification');
     }
 
-
-    // お知らせメール送信
-    public function sendNotification(NotificationMailFormRequest $request)
+    // お知らせメール確認/admin
+    public function confirmNotificationForm(NotificationMailFormRequest $request)
     {
         $validatedData = $request->validated();
+        return view('admin.notification-confirm', $validatedData);
+    }
+
+    // お知らせメール送信
+    public function sendNotification(Request $request)
+    {
+        $validatedData = $request->validate([
+            'subject' => 'required',
+            'content' => 'required',
+        ]);
 
         $subject = $validatedData['subject'];
         $content = $validatedData['content'];

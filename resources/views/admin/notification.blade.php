@@ -4,7 +4,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-gray-100">
                     <h3 class="text-2xl text-neutral-600 font-bold mb-6">お知らせメール作成</h3>
-                    <form action="{{ route('admin.sendNotification') }}" method="POST">
+                    <form action="{{ route('admin.confirmNotificationForm') }}" method="GET">
                         @csrf
                         <div class="mb-6">
                             <label for="subject" class="block text-base font-medium text-gray-700">件名</label>
@@ -20,7 +20,7 @@
                         </div>
                         <div>
                             <button type="submit"
-                                class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent w-full text-white rounded-md font-semibold text-base uppercase tracking-wide hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 disabled:opacity-25 transition">送信する</button>
+                                class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent w-full text-white rounded-md font-semibold text-base uppercase tracking-wide hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 disabled:opacity-25 transition">確認する</button>
                         </div>
                     </form>
                 </div>

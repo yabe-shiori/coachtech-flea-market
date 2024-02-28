@@ -81,6 +81,9 @@ Route::middleware('auth:admin')->group(function () {
     //お知らせメール作成ページを表示
     Route::get('/send-notification', [AdminController::class, 'showNotificationForm'])->name('showNotificationForm');
 
+    // お知らせメール内容確認ページの表示
+    Route::get('/admin/mail/confirmation', [AdminController::class, 'confirmNotificationForm'])->name('confirmNotificationForm');
+
     //お知らせメール送信
     Route::post('/admin/send-notification', [AdminController::class, 'sendNotification'])->name('sendNotification');
 
