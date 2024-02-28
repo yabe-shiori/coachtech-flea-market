@@ -3,8 +3,8 @@
     <x-error-message :message="session('error')" />
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 flex items-center justify-center">
-            <div class="grid grid-cols-2 gap-8">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div class="max-w-sm relative">
                     <img src="{{ asset('storage/' . $item->images->first()->image_path) }}" alt="{{ $item->name }}"
                         class="w-full">
@@ -18,14 +18,14 @@
                     @endif
                 </div>
 
-                <div>
+                <div class="pl-6">
                     <h2 class="text-2xl font-bold text-black">{{ $item->name }}</h2>
 
                     @if ($item->brand)
                         <p class="text-sm text-gray-500 mb-2">{{ $item->brand->name }}</p>
                     @endif
 
-                    <p class="text-lg font-semibold text-gray-800 my-4"> ¥{{ number_format($item->price) }}（値段）</p>
+                    <p class="text-xl font-semibold text-gray-800 my-4"> ¥{{ number_format($item->price) }}（値段）</p>
 
                     <div class="flex items-center mb-2">
                         @if (Auth::check() && Auth::user()->isFavorite($item->id))
@@ -59,12 +59,12 @@
                     </div>
 
                     <a href="{{ route('user.payment.create', ['item' => $item]) }}"
-                        class="inline-block bg-red-500 text-white text-base text-center w-2/3 px-4 py-2 rounded-lg font-semibold mb-4 hover:bg-red-600">購入する</a>
+                        class="inline-block bg-red-500 text-white text-base text-center w-2/3 md:w-2/3 px-4 py-2 rounded-lg font-semibold mb-4 hover:bg-red-600">購入する</a>
 
-                    <h3 class="text-xl font-bold mb-2 border-b-2 mb-4 p-2">商品説明</h3>
-                    <p>{{ $item->description }}</p>
+                    <h3 class="text-xl font-bold border-b-2 border-neutral-400 text-neutral-500 mb-4 p-2">商品説明</h3>
+                    <p class="text-base">{{ $item->description }}</p>
 
-                    <h3 class="text-xl font-bold my-4 border-b-2 p-2">商品の情報</h3>
+                    <h3 class="text-xl font-bold border-b-2 border-neutral-400 text-neutral-500 my-4 p-2">商品の情報</h3>
                     <div class="flex items-center mb-4">
                         <p class="mr-4 font-bold">カテゴリー</p>
                         @foreach ($item->category as $category)
@@ -82,13 +82,22 @@
                     </div>
 
                     <div class="mb-4">
-                        <p class="text-xl text-gray-700 font-bold mb-2 border-b-2 p-2">出品者</p>
+                        <p class="text-xl font-bold border-b-2 border-neutral-400 text-neutral-500 mb-4 p-2">出品者</p>
                         <div class="flex items-center mt-2">
                             <a href="{{ route('user.profile.show', ['user' => $item->user]) }}"
-                                class="flex items-center">
-                                <img src="{{ asset('storage/avatar/' . $item->user->avatar) }}" alt="User Avatar"
-                                    class="w-10 h-10 rounded-full mr-2">
-                                <p class="text-sm font-semibold">{{ $item->user->name }}</p>
+                                class="flex items-center text-gray-600 hover:text-red-500 transition-colors duration-300">
+                                <div class="flex items-center">
+                                    <div class="w-12 h-12 overflow-hidden rounded-full">
+                                        <img src="{{ asset('storage/avatar/' . $item->user->avatar) }}"
+                                            alt="User Avatar" class="object-cover w-full h-full">
+                                    </div>
+                                    <div class="ml-4">
+                                        <p class="text-sm font-semibold hover:underline">
+                                            {{ optional($item->user->profile)->display_name ?? $item->user->name }}
+                                        </p>
+                                        <p class="text-xs text-gray-500">View profile</p>
+                                    </div>
+                                </div>
                             </a>
                         </div>
                     </div>
