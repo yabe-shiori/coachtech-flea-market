@@ -2,14 +2,14 @@
     <x-message :message="session('message')" />
     <x-error-message :message="session('error')" />
 
-    <div class="py-12 flex justify-center">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+    <div class="py-6 lg:py-12 flex justify-center">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 w-full lg:w-4/5">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="flex flex-col items-center p-6">
-                    <div class="flex items-center mb-4">
+                <div class="flex flex-col lg:flex-row items-center p-6">
+                    <div class="flex items-center mb-6 lg:mb-0">
                         <img src="{{ asset('storage/avatar/' . $user->avatar) }}" alt="User Avatar"
                             class="w-10 h-10 rounded-full mr-4">
-                        <h2 class="text-2xl font-bold text-gray-800">
+                        <h2 class="text-2xl text-neutral-600 font-bold">
                             @if ($user->profile && $user->profile->display_name)
                                 {{ $user->profile->display_name }}
                             @else
@@ -18,7 +18,7 @@
                         </h2>
                     </div>
 
-                    <div class="mb-4">
+                    <div class="mb-4 lg:ml-auto lg:mb-0">
                         @if (Auth::check() && Auth::user()->isFollowing($user))
                             <form action="{{ route('user.unfollow', ['userId' => $user->id]) }}" method="POST">
                                 @method('DELETE')
@@ -40,27 +40,27 @@
                             </form>
                         @endif
                     </div>
-
-                    <p class="text-gray-600 whitespace-pre-line mt-8">
-                        @if ($user->profile && $user->profile->introduction)
-                            {{ $user->profile->introduction }}
-                        @endif
-                    </p>
                 </div>
+
+                <p class="text-gray-600 whitespace-pre-line p-6">
+                    @if ($user->profile && $user->profile->introduction)
+                        {{ $user->profile->introduction }}
+                    @endif
+                </p>
             </div>
         </div>
     </div>
 
     <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-        <div id="item-list" class="py-12">
+        <div id="item-list">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 @if ($userItems->isEmpty())
                     <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 mb-4">まだ出品した商品はありません
                     </div>
                 @else
-                    <div class="grid grid-cols-5 gap-4">
+                    <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
                         @foreach ($userItems as $item)
-                            <div class="relative">
+                            <div class="relative mx-3">
                                 @if ($item->images->isNotEmpty())
                                     <a href="{{ route('user.item.show', $item) }}">
                                         <img src="{{ asset('storage/' . $item->images->first()->image_path) }}"
