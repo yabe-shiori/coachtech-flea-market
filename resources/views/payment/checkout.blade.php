@@ -2,23 +2,23 @@
     <x-message :message="session('message')" />
     <div class="py-12">
         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-            <div class="grid grid-cols-2 gap-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="p-6 sm:px-20 bg-white border-b border-gray-200">
-                    <div class="flex items-center mb-8">
-                        <div class="w-1/4 max-w-xs mr-4">
+                    <div class="flex flex-col sm:flex-row items-center mb-8">
+                        <div class="w-full sm:w-1/4 max-w-xs mb-4 sm:mb-0 sm:mr-4">
                             <img src="{{ asset('storage/' . $item->images->first()->image_path) }}"
                                 alt="{{ $item->name }}" class="max-w-full">
                         </div>
-                        <div class="w-3/4">
+                        <div class="w-full sm:w-3/4">
                             <h2 class="text-2xl font-bold">{{ $item->name }}</h2>
                             <p class="mt-2 text-2xl text-gray-600">¥{{ number_format($item->price) }}</p>
                         </div>
                     </div>
-                    <div class="flex items-center mb-8">
-                        <div class="w-1/2">
+                    <div class="flex flex-col sm:flex-row items-center mb-8">
+                        <div class="w-full sm:w-1/2">
                             <h3 class="text-xl font-bold">支払い方法</h3>
                         </div>
-                        <div class="w-1/2 text-right">
+                        <div class="w-full sm:w-1/2 text-right">
                             <div id="payment-method-section" style="display: none;">
                                 <label class="inline-flex items-center">
                                     <input type="radio" class="form-radio" name="payment_method" value="konbini"
@@ -35,11 +35,11 @@
                         </div>
                     </div>
 
-                    <div class="flex items-center mb-8">
-                        <div class="w-1/2">
+                    <div class="flex flex-col sm:flex-row items-center mb-8">
+                        <div class="w-full sm:w-1/2">
                             <h3 class="text-xl font-bold">配送先</h3>
                         </div>
-                        <div class="w-1/2 text-right">
+                        <div class="w-full sm:w-1/2 text-right">
                             <a href="{{ route('user.profile.showShippingAddressForm', ['item' => $item->id]) }}"
                                 class="text-blue-500">変更する</a>
                         </div>
