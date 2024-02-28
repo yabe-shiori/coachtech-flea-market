@@ -18,7 +18,7 @@
                 </div>
                 <div class="text-center md:text-right">
                     <a href="{{ route('user.mypage.edit') }}"
-                        class="inline-block py-2 px-4 border-2 border-red-500 font-bold text-xl text-red-500 hover:bg-white hover:text-red-500 rounded-md md:ml-6 mb-8">プロフィールを編集</a>
+                        class="inline-block py-2 px-4 border-2 border-red-500 font-bold text-xl text-red-500 hover:bg-white hover:text-red-500 rounded-md">プロフィールを編集</a>
 
                     <a href="{{ route('user.following') }}"
                         class="inline-block mt-4 md:mt-0 md:ml-6 text-gray-500 hover:text-red-500 transition-colors duration-300 hover:bg-gray-100 rounded-lg py-2 px-4">
@@ -27,7 +27,7 @@
                     </a>
                 </div>
             </div>
-            <div class="md:flex md:items-center mb-4">
+            <div class="md:flex md:items-center mt-6 mb-2">
                 <a href="{{ route('user.mypage.index') }}" id="selling-link"
                     class="inline-block mr-10 text-gray-500 text-xl font-bold" style="color: #e57373;">出品した商品</a>
                 <a href="javascript:void(0)" id="purchased-link" class="inline-block text-xl font-bold"
