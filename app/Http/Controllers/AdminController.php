@@ -65,12 +65,9 @@ class AdminController extends Controller
     }
 
     // お知らせメール送信
-    public function sendNotification(Request $request)
+    public function sendNotification(NotificationMailFormRequest $request)
     {
-        $validatedData = $request->validate([
-            'subject' => 'required',
-            'content' => 'required',
-        ]);
+        $validatedData = $request->validated();
 
         $subject = $validatedData['subject'];
         $content = $validatedData['content'];

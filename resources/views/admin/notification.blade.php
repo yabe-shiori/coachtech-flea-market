@@ -13,7 +13,7 @@
                             <x-validation-errors field="subject" />
                         </div>
                         <div class="mb-10">
-                            <label for="content" class="block text-base font-medium text-gray-700">メッセージ</label>
+                            <label for="content" class="block text-base font-medium text-gray-700">本文</label>
                             <textarea name="content" id="content" rows="5" class="form-textarea mt-1 block w-full rounded-md shadow-sm"
                                 required></textarea>
                             <x-validation-errors field="content" />
