@@ -7,21 +7,25 @@
             <div class="flex flex-col md:flex-row md:justify-between items-center">
                 <div class="md:flex md:items-center mb-8">
                     <img src="{{ asset('storage/avatar/' . Auth::user()->avatar) }}" alt="User Avatar"
-                        class="w-32 h-32 rounded-full mr-4">
+                        class="w-32 h-32 rounded-full md:mr-4">
                     <div>
-                        <h2 class="text-2xl font-bold">{{ Auth::user()->name ? Auth::user()->name : '未設定' }}</h2>
+                        @if (optional(Auth::user()->profile)->display_name)
+                            <h2 class="text-2xl font-bold">{{ Auth::user()->profile->display_name }}</h2>
+                        @elseif (Auth::user()->name)
+                            <h2 class="text-2xl font-bold">{{ Auth::user()->name }}</h2>
+                        @endif
                     </div>
                 </div>
                 <div class="text-center md:text-right">
                     <a href="{{ route('user.mypage.edit') }}"
-                        class="inline-block py-2 px-4 border-2 border-red-500 font-bold text-xl text-red-500 hover:bg-white hover:text-red-500 rounded-md">プロフィールを編集</a>
+                        class="inline-block py-2 px-4 border-2 border-red-500 font-bold text-xl text-red-500 hover:bg-white hover:text-red-500 rounded-md md:ml-6 mb-8">プロフィールを編集</a>
 
-                    <a href="{{ route('user.following') }}" class="inline-block ml-6">
-                        <i class="fas fa-user-friends text-gray-500 mr-1"></i>
+                    <a href="{{ route('user.following') }}"
+                        class="inline-block mt-4 md:mt-0 md:ml-6 text-gray-500 hover:text-red-500 transition-colors duration-300 hover:bg-gray-100 rounded-lg py-2 px-4">
+                        <i class="fas fa-user-friends text-gray-500 md:mr-1"></i>
                         <span class="text-gray-500">フォロー中のユーザー</span>
                     </a>
                 </div>
-
             </div>
             <div class="md:flex md:items-center mb-4">
                 <a href="{{ route('user.mypage.index') }}" id="selling-link"
@@ -39,7 +43,7 @@
                     <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 mb-4">まだ出品した商品はありません
                     </div>
                 @else
-                    <div class="grid grid-cols-5 gap-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
                         @foreach ($userItems as $item)
                             <div class="relative">
                                 @if ($item->images->isNotEmpty())
