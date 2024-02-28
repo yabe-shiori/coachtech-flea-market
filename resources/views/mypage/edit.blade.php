@@ -2,11 +2,11 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <h2 class="text-2xl text-center font-bold text-gray-900">
+            <h2 class="text-2xl text-center font-bold text-neutral-600">
                 プロフィール設定
             </h2>
 
-            <form method="post" action="{{ route('user.mypage.update') }}" class="mt-6 space-y-6 max-w-lg mx-auto"
+            <form method="post" action="{{ route('user.mypage.update') }}" class="mt-6 space-y-6 max-w-xl mx-auto"
                 enctype="multipart/form-data">
                 @csrf
                 @method('patch')
@@ -27,15 +27,15 @@
                     </div>
                 </div>
 
-                <div class="mb-4">
+                <div class="mb-4 mx-2">
                     <label for="name" class="block text-sm font-medium text-gray-700">ユーザー名</label>
                     <input type="text" id="name" name="name" value="{{ old('name', $user->name) }}"
                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                     <x-validation-errors field="name" />
                 </div>
 
-                <div class="mb-4">
-                    <label for="display_name" class="block text-sm font-medium text-gray-700">ニックネーム</label>
+                <div class="mb-4 mx-2">
+                    <label for="display_name" class="block text-sm font-medium text-gray-700">ニックネーム (表示名)</label>
                     <input type="text" id="display_name" name="display_name"
                         value="{{ old('display_name', optional($user->profile)->display_name) }}"
                         placeholder="coachtechフリマ内のユーザー名"
@@ -43,14 +43,14 @@
                     <x-validation-errors field="display_name" />
                 </div>
 
-                <div class="mb-4">
+                <div class="mb-4 mx-2">
                     <label for="introduction" class="block text-sm font-medium text-gray-700">自己紹介</label>
                     <textarea id="introduction" name="introduction" rows="5" placeholder="例) ご覧いただきありがとうございます。どうぞよろしくお願いします！"
                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">{{ old('introduction', optional($user->profile)->introduction) }}</textarea>
                     <x-validation-errors field="introduction" />
                 </div>
 
-                <div class="mb-4">
+                <div class="mb-4 mx-2">
                     <label for="postal_code" class="block text-sm font-medium text-gray-700">郵便番号</label>
                     <input type="text" id="postal_code" name="postal_code"
                         value="{{ old('postal_code', optional($user->profile)->postal_code) }}"
@@ -58,7 +58,7 @@
                     <x-validation-errors field="postal_code" />
                 </div>
 
-                <div class="mb-4">
+                <div class="mb-4 mx-2">
                     <label for="address" class="block text-sm font-medium text-gray-700">住所</label>
                     <input type="text" id="address" name="address"
                         value="{{ old('address', optional($user->profile)->address) }}"
@@ -66,7 +66,7 @@
                     <x-validation-errors field="address" />
                 </div>
 
-                <div class="mb-4">
+                <div class="mb-4 mx-2">
                     <label for="building_name" class="block text-sm font-medium text-gray-700">建物名</label>
                     <input type="text" id="building_name" name="building_name"
                         value="{{ old('building_name', optional($user->profile)->building_name) }}"
@@ -76,7 +76,7 @@
 
                 <div class="flex items-center justify-center gap-4">
                     <x-primary-button
-                        class="w-full font-bold flex items-center justify-center mt-8">{{ __('更新する') }}</x-primary-button>
+                        class="w-full font-bold flex items-center justify-center mt-8 mx-2">{{ __('更新する') }}</x-primary-button>
 
                     @if (session('status') === 'profile-updated')
                         <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)"
@@ -103,13 +103,9 @@
             const postalCodeInput = document.getElementById('postal_code');
 
             postalCodeInput.addEventListener('input', function() {
-                // 入力された値から半角数字とハイフンのみを抽出
                 const formattedPostalCode = toHalfWidth(this.value).replace(/[^\d-]/g, '');
-                // ハイフンを除去
                 const postalCodeWithoutHyphen = formattedPostalCode.replace(/-/g, '');
-                // ハイフンを付けてフォーマット
                 const formattedWithHyphen = postalCodeWithoutHyphen.replace(/(\d{3})(\d{4})/, '$1-$2');
-                // 入力フィールドに値をセット
                 this.value = formattedWithHyphen;
             });
 

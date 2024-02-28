@@ -43,9 +43,9 @@
                     <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 mb-4">まだ出品した商品はありません
                     </div>
                 @else
-                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+                    <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
                         @foreach ($userItems as $item)
-                            <div class="relative">
+                            <div class="relative mx-2">
                                 @if ($item->images->isNotEmpty())
                                     <a href="{{ route('user.item.show', $item) }}">
                                         <img src="{{ asset('storage/' . $item->images->first()->image_path) }}"
