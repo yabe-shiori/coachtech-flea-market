@@ -123,4 +123,12 @@ class AdminControllerTest extends TestCase
         $response->assertRedirect(route('admin.dashboard'));
         $response->assertSessionHas('message', 'お知らせメールを送信しました。');
     }
+
+    public function confirmNotificationForm()
+    {
+        $subject = 'テスト件名';
+        $content = 'テスト本文';
+
+        return view('admin.notification-confirm', compact('subject', 'content'));
+    }
 }

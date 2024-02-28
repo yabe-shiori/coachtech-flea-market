@@ -57,7 +57,7 @@ class AdminController extends Controller
         return view('admin.notification');
     }
 
-    // お知らせメール確認/admin
+    // お知らせメール確認ページの表示
     public function confirmNotificationForm(NotificationMailFormRequest $request)
     {
         $validatedData = $request->validated();
