@@ -30,7 +30,6 @@
             </button>
         </div>
     </div>
-
     <!-- Responsive Navigation Menu -->
     <div :class="{ 'block': open, 'hidden': !open }" class="hidden md:hidden">
         <div class="pt-2 pb-3 space-y-1">

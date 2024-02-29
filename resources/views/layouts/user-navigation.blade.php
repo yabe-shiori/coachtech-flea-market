@@ -5,8 +5,13 @@
         <div class="flex items-center">
             <a href="{{ route('user.item.index') }}" class="hidden lg:flex">
                 <x-application-logo class="block h-9 w-auto fill-current text-white" />
-                {{-- <h1 class="text-white text-3xl font-bold ml-4 mr-6">COACHTECH</h1> --}}
             </a>
+            <svg width="53" height="26" viewBox="0 0 63 36" fill="none" xmlns="http://www.w3.org/2000/svg"
+                class="lg:hidden">
+                <path
+                    d="M56.6898 0H22.2598C12.3298 0 2.54982 8.06 0.419822 18C-1.72018 27.94 4.59982 36 14.5198 36H25.4098C26.8798 36 28.3298 34.81 28.6498 33.33L30.1698 26.27C30.4898 24.8 29.5498 23.6 28.0798 23.6H15.9698C13.2098 23.6 11.2598 21.47 11.7698 18.71C12.2998 15.85 15.0898 13.51 17.9298 13.51H36.9698C38.4398 13.51 39.3798 14.7 39.0598 16.18L35.3698 33.34C35.0498 34.81 35.9898 36.01 37.4598 36.01H46.2898C47.7598 36.01 49.2098 34.82 49.5298 33.34L53.2198 16.18C53.5398 14.71 54.9898 13.51 56.4598 13.51C57.9298 13.51 59.3798 12.32 59.6998 10.84L62.0298 0H56.6998L56.6898 0Z"
+                    fill="white" />
+            </svg>
         </div>
 
         <!-- Search Box -->
