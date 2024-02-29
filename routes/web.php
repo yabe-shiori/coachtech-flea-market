@@ -12,23 +12,14 @@ use App\Http\Controllers\GoogleLoginController;
 use App\Http\Controllers\LineLoginController;
 use App\Http\Controllers\LoginBonusController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
 
 
+//商品一覧ページ
+Route::get('/', [ItemController::class, 'index'])->name('item.index');
 
 //LINEログイン
 Route::get('/linelogin', [LineLoginController::class, 'lineLogin'])->name('linelogin');
 Route::get('/callback', [LineLoginController::class, 'callback'])->name('callback');
-
 
 //google認証
 Route::get('/auth/google', [GoogleLoginController::class, 'redirectToGoogle'])
@@ -36,10 +27,6 @@ Route::get('/auth/google', [GoogleLoginController::class, 'redirectToGoogle'])
 
 Route::get('/auth/google/callback', [GoogleLoginController::class, 'handleGoogleCallback'])
     ->name('login.google.callback');
-
-
-//商品一覧ページ
-Route::get('/', [ItemController::class, 'index'])->name('item.index');
 
 // ログインボーナス
 Route::post('/login-bonus', [LoginBonusController::class, 'draw'])->name('draw');
@@ -120,9 +107,6 @@ Route::middleware(['auth:users'])->group(function () {
 
     //決済キャンセル時の処理
     Route::get('/cancel/{itemId}', [StripeController::class, 'cancel'])->name('cancel');
-
-
-
 });
 
 require __DIR__ . '/auth.php';

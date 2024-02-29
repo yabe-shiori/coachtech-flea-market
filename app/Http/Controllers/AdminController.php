@@ -9,7 +9,6 @@ use App\Http\Requests\AdminStoreRequest;
 use App\Models\User;
 use App\Mail\NotificationEmail;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Http\Request;
 use App\Http\Requests\NotificationMailFormRequest;
 
 
