@@ -19,13 +19,13 @@
 <body class="font-sans text-gray-900 antialiased">
     <header class="text-white body-font">
         <div class="container-fluid flex flex-wrap p-4 flex-col md:flex-row items-start bg-black">
-        <a>
-            <x-application-logo class="block h-9 w-auto fill-current text-white" />
-        </a>
-    </div>
+            <a>
+                <x-application-logo class="block h-9 w-auto fill-current text-white" />
+            </a>
+        </div>
     </header>
-    <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0">
-        <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
+    <div class="min-h-screen  pt-6 sm:pt-0">
+        <div class="w-full mt-6 px-6 py-4 bg-white overflow-hidden">
             {{ $slot }}
         </div>
     </div>

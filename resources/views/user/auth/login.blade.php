@@ -3,7 +3,7 @@
     <x-auth-session-status class="mb-4" :status="session('status')" />
     <x-message :message="session('message')" />
 
-    <form method="POST" action="{{ route('user.login') }}">
+    <form method="POST" action="{{ route('user.login') }}" class="w-2/3 mx-auto lg:w-2/5">
         @csrf
 
         <h2 class="text-2xl text-center font-bold mt-8 mb-10">ログイン</h2>

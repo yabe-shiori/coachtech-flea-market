@@ -2,10 +2,10 @@
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    <form method="POST" action="{{ route('admin.login') }}">
+    <form method="POST" action="{{ route('admin.login') }}" class="w-2/3 mx-auto lg:w-2/5">
         @csrf
 
-        <h2 class="text-2xl text-center font-bold mt-8 mb-10">管理者用ログイン</h2>
+        <h2 class="text-2xl text-center font-bold mt-8 mb-12">管理者用ログイン</h2>
 
         <!-- Email Address -->
         <div>
@@ -16,7 +16,7 @@
         </div>
 
         <!-- Password -->
-        <div class="mt-4">
+        <div class="mt-10">
             <x-input-label for="password" :value="__('Password')" />
 
             <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required
