@@ -15,7 +15,7 @@
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
-        <div class="mt-4">
+        <div class="mt-10">
             <x-input-label for="password" :value="__('Password')" />
 
             <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required
@@ -30,7 +30,7 @@
             </x-primary-button>
         </div>
 
-        <div class="flex items-center justify-end mt-4">
+        <div class="flex items-center justify-end mt-8">
             <a href="{{ route('user.login.google') }}" class="inline-flex items-center ml-3">
                 <img src="https://developers.google.com/identity/images/btn_google_signin_dark_normal_web.png"
                     alt="Googleログイン">
@@ -40,8 +40,8 @@
             </a>
         </div>
 
-        <div class="text-center mt-4">
-            <a class="text-blue-500 hover:underline text-sm hover:text-blue-700" href="{{ route('user.register') }}">
+        <div class="text-center mt-8">
+            <a class="text-blue-500 hover:underline text-base hover:text-blue-700" href="{{ route('user.register') }}">
                 会員登録はこちら
             </a>
         </div>
