@@ -6,12 +6,22 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div class="max-w-sm relative">
-                    <img src="{{ asset('storage/' . $item->images->first()->image_path) }}" alt="{{ $item->name }}"
-                        class="w-full">
+                    <div class="overflow-hidden">
+                        <div id="imageSlider" class="flex">
+                            @foreach ($item->images as $image)
+                                <img src="{{ asset('storage/' . $image->image_path) }}" alt="{{ $item->name }}" class="w-full">
+                            @endforeach
+                        </div>
+                    </div>
+                    <button id="prevButton" class="absolute top-1/2 left-0 transform -translate-y-1/2 bg-gray-100 bg-opacity-50 px-2 py-1">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button id="nextButton" class="absolute top-1/2 right-0 transform -translate-y-1/2 bg-gray-100 bg-opacity-50 px-2 py-1">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
                     @if ($item->isSold())
                         <div class="absolute top-0 left-0">
-                            <span
-                                class="inline-flex items-center justify-center bg-red-500 text-white font-bold px-4 py-2 rounded-full shadow">
+                            <span class="inline-flex items-center justify-center bg-red-500 text-white font-bold px-4 py-2 rounded-full shadow">
                                 <i class="fas fa-ban mr-2"></i> SOLD OUT
                             </span>
                         </div>
@@ -105,4 +115,35 @@
             </div>
         </div>
     </div>
+    <script>
+        const imageSlider = document.getElementById('imageSlider');
+        const prevButton = document.getElementById('prevButton');
+        const nextButton = document.getElementById('nextButton');
+
+        let slideIndex = 0;
+
+        showSlides(slideIndex);
+
+        prevButton.addEventListener('click', () => {
+            showSlides(slideIndex -= 1);
+        });
+
+        nextButton.addEventListener('click', () => {
+            showSlides(slideIndex += 1);
+        });
+
+        function showSlides(n) {
+            const slides = document.querySelectorAll('#imageSlider img');
+            if (n >= slides.length) {
+                slideIndex = 0;
+            }
+            if (n < 0) {
+                slideIndex = slides.length - 1;
+            }
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = 'none';
+            }
+            slides[slideIndex].style.display = 'block';
+        }
+    </script>
 </x-app-layout>

@@ -39,7 +39,7 @@ class ItemController extends Controller
     public function create()
     {
         if (!Auth::check()) {
-            return redirect()->route('user.item.index')->with('message', 'ログインしてください。');
+            return redirect()->route('user.item.index')->with('error', 'ログインしてください。');
         }
 
         $categories = Category::all();
