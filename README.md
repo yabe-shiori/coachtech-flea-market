@@ -135,7 +135,7 @@ MailPitを利用しています。
 
 ## AWS構成図
 
-![AWS構成図]()
+![AWS構成図](https://github.com/yabe-shiori/coachtech-flea-market/assets/142664073/ba1c07ed-fe68-4cc7-96d0-d37b2bd2188d)
 
 <br />
 
