@@ -20,6 +20,20 @@ class ItemImagesTableSeeder extends Seeder
             ],
 
             [
+                'item_id' => 1,
+                'image_path' => 'item_images/dummy2.png',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+
+            [
+                'item_id' => 1,
+                'image_path' => 'item_images/dummy3.png',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+
+            [
                 'item_id' => 2,
                 'image_path' => 'item_images/dummy2.png',
                 'created_at' => Carbon::now(),

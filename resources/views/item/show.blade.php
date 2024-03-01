@@ -4,31 +4,37 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="max-w-sm relative">
-                    <div class="overflow-hidden">
-                        <div id="imageSlider" class="flex">
+            <div class="flex flex-col md:flex-row gap-8 justify-center items-start">
+                <div class="xl:w-1/2 md-w-full relative">
+                    <div class="overflow-hidden flex justify-center items-center md:h-full h-full">
+                        <div id="imageSlider" class="flex flex-wrap justify-center">
                             @foreach ($item->images as $image)
-                                <img src="{{ asset('storage/' . $image->image_path) }}" alt="{{ $item->name }}" class="w-full">
+                                <div class="mx-4">
+                                    <img src="{{ asset('storage/' . $image->image_path) }}" alt="{{ $item->name }}"
+                                        class="w-full">
+                                </div>
                             @endforeach
                         </div>
                     </div>
-                    <button id="prevButton" class="absolute top-1/2 left-0 transform -translate-y-1/2 bg-gray-100 bg-opacity-50 px-2 py-1">
+                    <button id="prevButton"
+                        class="absolute top-1/2 transform -translate-y-1/2 left-0 -ml-8 md:-ml-4 lg:-ml-8 bg-gray-100 bg-opacity-50 px-2 py-1">
                         <i class="fas fa-chevron-left"></i>
                     </button>
-                    <button id="nextButton" class="absolute top-1/2 right-0 transform -translate-y-1/2 bg-gray-100 bg-opacity-50 px-2 py-1">
+                    <button id="nextButton"
+                        class="absolute top-1/2 transform -translate-y-1/2 right-0 -mr-8 md:-mr-4 lg:-mr-8 bg-gray-100 bg-opacity-50 px-2 py-1">
                         <i class="fas fa-chevron-right"></i>
                     </button>
                     @if ($item->isSold())
                         <div class="absolute top-0 left-0">
-                            <span class="inline-flex items-center justify-center bg-red-500 text-white font-bold px-4 py-2 rounded-full shadow">
+                            <span
+                                class="inline-flex items-center justify-center bg-red-500 text-white font-bold px-4 py-2 rounded-full shadow">
                                 <i class="fas fa-ban mr-2"></i> SOLD OUT
                             </span>
                         </div>
                     @endif
                 </div>
 
-                <div class="pl-6">
+                <div class="pl-6 xl:w-1/2 md:w-full">
                     <h2 class="text-2xl font-bold text-black">{{ $item->name }}</h2>
 
                     @if ($item->brand)
@@ -72,23 +78,23 @@
                         class="inline-block bg-red-500 text-white text-base text-center w-2/3 md:w-2/3 px-4 py-2 rounded-lg font-semibold mb-4 hover:bg-red-600">購入する</a>
 
                     <h3 class="text-xl font-bold border-b-2 border-neutral-400 text-neutral-500 mb-4 p-2">商品説明</h3>
-                    <p class="text-base">{{ $item->description }}</p>
+                    <p class="text-lg">{{ $item->description }}</p>
 
                     <h3 class="text-xl font-bold border-b-2 border-neutral-400 text-neutral-500 my-4 p-2">商品の情報</h3>
                     <div class="flex items-center mb-4">
-                        <p class="mr-4 font-bold">カテゴリー</p>
+                        <p class="mr-4 font-bold text-base">カテゴリー</p>
                         @foreach ($item->category as $category)
                             <span
-                                class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
+                                class="inline-block bg-gray-200 rounded-full px-3 py-1 text-base font-semibold text-gray-700 mr-2">
                                 {{ $category->name }}
                             </span>
                         @endforeach
                     </div>
 
                     <div class="flex items-center mb-10">
-                        <p class="mr-4 font-bold">商品の状態</p>
+                        <p class="mr-4 font-bold text-base">商品の状態</p>
                         <span
-                            class="inline-block px-3 py-1 text-sm font-semibold text-gray-700 mr-2">{{ $item->condition }}</span>
+                            class="inline-block px-3 py-1 text-base font-semibold text-gray-700 mr-2">{{ $item->condition }}</span>
                     </div>
 
                     <div class="mb-4">
