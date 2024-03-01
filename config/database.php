@@ -45,7 +45,7 @@ return [
                 'driver' => 'mysql',
                 'host' => 'mysql',
                 'port' => '3306',
-                'database' => 'circle_testing',
+                'database' => 'testing',
                 'username' => 'sail',
                 'password' => 'password',
                 'charset' => 'utf8mb4',
