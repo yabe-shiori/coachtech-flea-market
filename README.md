@@ -85,10 +85,21 @@ laravelSailを使用してDocker環境をセットアップします。
 ## 注意事項: 
 
 **利用者について**  
+ユーザーを３名追加しています。  
   
-- メールアドレス-> user@example.com
+ユーザー１(テスト太郎)
+- メールアドレス-> test@example.com
 - パスワード-> password
-を入力して、ログインしてください。
+
+ユーザー２(テスト次郎)
+- メールアドレス-> testjiro@example.com
+- パスワード-> password
+
+ユーザー３(テスト三郎)
+- メールアドレス-> testsaburo@example.com
+- パスワード -> password
+  
+を入力して、ログインしてください。  
 
  
 **管理者について** 
