@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-message :message="session('message')" />
     <x-error-message :message="session('error')" />
-    
+
     <x-slot name="subheader">
         <h2 class="font-semibold text-xl leading-tight">
             <a href="{{ route('user.item.index') }}" id="recommendedLink" class="mr-4" style="color:#e57373;">おすすめ</a>
@@ -22,24 +22,23 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-5 gap-4">
                 @foreach ($itemImages as $item)
-                    @foreach ($item->images as $image)
-                        <div class="relative">
-                            <a href="{{ route('user.item.show', $item) }}">
-                                <img src="{{ asset('storage/' . $image->image_path) }}" alt="{{ $item->name }}"
-                                    class="w-full">
-                                @if ($item->isSold())
-                                    <div class="absolute top-0 left-0">
-                                        <span
-                                            class="inline-flex items-center justify-center bg-red-500 text-white font-bold px-2 py-1 rounded-full shadow">
-                                            <i class="fas fa-ban mr-1"></i> SOLD OUT
-                                        </span>
-                                    </div>
-                                @endif
-                                <span
-                                    class="absolute bottom-0 left-0 px-2 py-1 bg-black bg-opacity-40 text-white rounded-tr-xl rounded-br-xl">¥{{ number_format($item->price) }}</span>
-                            </a>
-                        </div>
-                    @endforeach
+                    @php $firstImage = $item->images->first(); @endphp
+                    <div class="relative">
+                        <a href="{{ route('user.item.show', $item) }}">
+                            <img src="{{ asset('storage/' . $firstImage->image_path) }}" alt="{{ $item->name }}"
+                                class="w-full">
+                            @if ($item->isSold())
+                                <div class="absolute top-0 left-0">
+                                    <span
+                                        class="inline-flex items-center justify-center bg-red-500 text-white font-bold px-2 py-1 rounded-full shadow">
+                                        <i class="fas fa-ban mr-1"></i> SOLD OUT
+                                    </span>
+                                </div>
+                            @endif
+                            <span
+                                class="absolute bottom-0 left-0 px-2 py-1 bg-black bg-opacity-40 text-white rounded-tr-xl rounded-br-xl">¥{{ number_format($item->price) }}</span>
+                        </a>
+                    </div>
                 @endforeach
             </div>
         </div>
