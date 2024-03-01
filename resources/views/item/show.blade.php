@@ -15,6 +15,14 @@
                                 </div>
                             @endforeach
                         </div>
+                        @if ($item->isSold())
+                            <div class="absolute top-0 left-0 mt-0 ml-4">
+                                <span
+                                    class="inline-flex items-center justify-center bg-red-500 text-white font-bold px-2 py-1 rounded-full shadow">
+                                    <i class="fas fa-ban mr-1"></i> SOLD OUT
+                                </span>
+                            </div>
+                        @endif
                     </div>
                     <button id="prevButton"
                         class="absolute top-1/2 transform -translate-y-1/2 left-0 -ml-0 md:-ml-4 lg:-ml-6 bg-gray-100 bg-opacity-50 px-2 py-1">
@@ -24,14 +32,6 @@
                         class="absolute top-1/2 transform -translate-y-1/2 right-0 -mr-0 md:-mr-4 lg:-mr-6 bg-gray-100 bg-opacity-50 px-2 py-1">
                         <i class="fas fa-chevron-right"></i>
                     </button>
-                    @if ($item->isSold())
-                        <div class="absolute top-0 left-0">
-                            <span
-                                class="inline-flex items-center justify-center bg-red-500 text-white font-bold px-4 py-2 rounded-full shadow">
-                                <i class="fas fa-ban mr-2"></i> SOLD OUT
-                            </span>
-                        </div>
-                    @endif
                 </div>
 
                 <div class="pl-6 xl:w-1/2 md:w-full">
