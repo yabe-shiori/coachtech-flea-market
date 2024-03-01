@@ -131,7 +131,7 @@ MailPitを利用しています。
 
 ## ER図
 
-![ER図]()
+<img width="913" alt="スクリーンショット 2024-02-29 151945" src="https://github.com/yabe-shiori/coachtech-flea-market/assets/142664073/0793a421-39e1-4c68-9cd6-6a60cc232a62">
 
 <br />
 
