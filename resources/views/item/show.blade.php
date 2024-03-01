@@ -5,8 +5,8 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row gap-8 justify-center items-start">
-                <div class="xl:w-1/2 md-w-full relative">
-                    <div class="overflow-hidden flex justify-center items-center md:h-full h-full">
+                <div class="xl:w-1/2 md-w-full relative flex justify-center items-center">
+                    <div class="overflow-hidden">
                         <div id="imageSlider" class="flex flex-wrap justify-center">
                             @foreach ($item->images as $image)
                                 <div class="mx-4">
@@ -17,11 +17,11 @@
                         </div>
                     </div>
                     <button id="prevButton"
-                        class="absolute top-1/2 transform -translate-y-1/2 left-0 -ml-8 md:-ml-4 lg:-ml-8 bg-gray-100 bg-opacity-50 px-2 py-1">
+                        class="absolute top-1/2 transform -translate-y-1/2 left-0 -ml-0 md:-ml-4 lg:-ml-6 bg-gray-100 bg-opacity-50 px-2 py-1">
                         <i class="fas fa-chevron-left"></i>
                     </button>
                     <button id="nextButton"
-                        class="absolute top-1/2 transform -translate-y-1/2 right-0 -mr-8 md:-mr-4 lg:-mr-8 bg-gray-100 bg-opacity-50 px-2 py-1">
+                        class="absolute top-1/2 transform -translate-y-1/2 right-0 -mr-0 md:-mr-4 lg:-mr-6 bg-gray-100 bg-opacity-50 px-2 py-1">
                         <i class="fas fa-chevron-right"></i>
                     </button>
                     @if ($item->isSold())
