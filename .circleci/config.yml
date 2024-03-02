@@ -6,5 +6,10 @@ jobs:
     steps:
       - checkout
       - run:
-          name: run phpunit
-          command: sail artisan test
+          name: Install Laravel Sail
+          command: |
+            composer require laravel/sail --dev
+            php artisan sail:install
+      - run:
+          name: Run PHPUnit tests
+          command: ./vendor/bin/sail artisan test
