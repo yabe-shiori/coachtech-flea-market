@@ -101,7 +101,7 @@
                         <p class="text-xl font-bold border-b-2 border-neutral-400 text-neutral-500 mb-4 p-2">出品者</p>
                         <div class="flex items-center mt-2">
                             <a href="{{ route('user.profile.show', ['user' => $item->user]) }}"
-                                class="flex items-center text-gray-600 hover:text-red-500 transition-colors duration-300">
+                                class="flex items-center text-gray-600 hover:text-blue-600 transition-colors duration-300">
                                 <div class="flex items-center">
                                     <div class="w-12 h-12 overflow-hidden rounded-full">
                                         <img src="{{ asset('storage/avatar/' . $item->user->avatar) }}"

@@ -16,6 +16,10 @@ class FollowController extends Controller
 
         $followerId = Auth::id();
 
+        if ($followerId == $followedUserId) {
+            return redirect()->back()->with('error', 'フォローできません。');
+        }
+
         if (!$this->isFollowing($followerId, $followedUserId)) {
             Follow::create([
                 'follower_id' => $followerId,
