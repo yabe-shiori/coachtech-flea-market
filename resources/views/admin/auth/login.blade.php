@@ -27,7 +27,7 @@
 
         <div class="mt-14 w-full">
             <x-primary-button
-                class="w-full bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-500 active:bg-indigo-500 font-bold flex items-center justify-center">
+                class="w-full font-bold flex items-center justify-center">
                 ログインする
             </x-primary-button>
         </div>

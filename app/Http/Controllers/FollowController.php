@@ -30,7 +30,6 @@ class FollowController extends Controller
         return redirect()->back()->with('message', 'フォローしました。');
     }
 
-
     // フォロー解除
     public function unfollow($followedUserId)
     {

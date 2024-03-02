@@ -42,7 +42,7 @@
                     </div>
                 </div>
 
-                <p class="text-gray-600 whitespace-pre-line p-6">
+                <p class="text-gray-600 whitespace-pre-line p-6 text-base">
                     @if ($user->profile && $user->profile->introduction)
                         {{ $user->profile->introduction }}
                     @endif

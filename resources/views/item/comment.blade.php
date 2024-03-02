@@ -1,4 +1,5 @@
 <x-app-layout>
+    <x-message :message="session('message')" />
     <x-error-message :message="session('error')" />
 
     <div class="py-6 md:py-12">
@@ -8,16 +9,18 @@
                     <img src="{{ asset('storage/' . $item->images->first()->image_path) }}" alt="{{ $item->name }}"
                         class="w-full">
                     @if ($item->isSold())
-                    <div class="absolute top-0 left-0">
-                        <span class="inline-flex items-center justify-center bg-red-500 text-white font-bold px-3 py-1 rounded-full shadow">
-                            <i class="fas fa-ban mr-1"></i> SOLD OUT
-                        </span>
-                    </div>
+                        <div class="absolute top-0 left-0">
+                            <span
+                                class="inline-flex items-center justify-center bg-red-500 text-white font-bold px-3 py-1 rounded-full shadow">
+                                <i class="fas fa-ban mr-1"></i> SOLD OUT
+                            </span>
+                        </div>
                     @endif
                 </div>
                 <div class="mt-6 md:mt-0 md:w-3/4 mx-auto">
                     <h2 class="text-xl md:text-2xl font-bold text-black mb-2 md:mb-4">{{ $item->name }}</h2>
-                    <p class="text-base md:text-lg font-semibold text-gray-800 mb-4">¥{{ number_format($item->price) }}</p>
+                    <p class="text-base md:text-lg font-semibold text-gray-800 mb-4">¥{{ number_format($item->price) }}
+                    </p>
                     <div class="flex flex-wrap items-center mb-4">
                         @if (Auth::check() && Auth::user()->isFavorite($item->id))
                             <form action="{{ route('user.removeFavorite', ['item_id' => $item->id]) }}" method="POST"
