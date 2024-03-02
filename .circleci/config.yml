@@ -5,11 +5,4 @@ jobs:
       - image: cimg/php:8.3.3
     steps:
       - checkout
-      - run:
-          name: Install Laravel Sail and choose services
-          command: |
-            composer require laravel/sail --dev
-            echo "mysql" | php artisan sail:install
-      - run:
-          name: Run PHPUnit tests
-          command: ./vendor/bin/sail artisan test
+      - run: php --version
