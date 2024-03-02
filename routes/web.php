@@ -14,7 +14,7 @@ use App\Http\Controllers\LoginBonusController;
 
 
 
-//商品一覧ページ
+//トップページ
 Route::get('/', [ItemController::class, 'index'])->name('item.index');
 
 //LINEログイン
@@ -27,9 +27,6 @@ Route::get('/auth/google', [GoogleLoginController::class, 'redirectToGoogle'])
 
 Route::get('/auth/google/callback', [GoogleLoginController::class, 'handleGoogleCallback'])
     ->name('login.google.callback');
-
-// ログインボーナス
-Route::post('/login-bonus', [LoginBonusController::class, 'draw'])->name('draw');
 
 //商品詳細ページ
 Route::get('/item/{item}', [ItemController::class, 'show'])->name('item.show');
@@ -46,7 +43,7 @@ Route::get('/mylist', [FavoriteController::class, 'index'])->name('mylist');
 //商品検索
 Route::get('/search', [ItemController::class, 'search'])->name('item.search');
 
-//商品に対するコメント一覧画面
+//コメント一覧画面
 Route::get('/item/{item}/contact', [CommentController::class, 'show'])->name('comment.show');
 
 //コメント投稿
@@ -57,6 +54,10 @@ Route::get('/purchase/{item}', [PaymentController::class, 'create'])->name('paym
 
 
 Route::middleware(['auth:users'])->group(function () {
+
+    // ログインボーナス
+    Route::post('/login-bonus', [LoginBonusController::class, 'draw'])->name('draw');
+
     //マイページ
     Route::get('/mypage', [ProfileController::class, 'index'])->name('mypage.index');
 
