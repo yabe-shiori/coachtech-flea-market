@@ -7,6 +7,8 @@ jobs:
       - checkout
       - run: php --version
       - run:
-          name: Run PHPUnit with Laravel Sail
-          command: ./vendor/bin/sail artisan test
-
+          name: Install Laravel dependencies
+          command: composer install
+      - run:
+          name: Run PHPUnit tests
+          command: vendor/bin/phpunit
