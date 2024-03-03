@@ -19,7 +19,7 @@ jobs:
       - run:
           name: Run migrations
           command: |
-            sail artisan migrate --env=testing --force
+            php artisan migrate --env=testing --force
       - run:
           name: Run Tests
           command: |
