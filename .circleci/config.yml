@@ -1,27 +1,17 @@
 version: 2.1
-orbs:
-  docker: circleci/docker@1.7.0
 jobs:
   build:
     docker:
-      - image: circleci/php:8.3-node-browsers
-        environment:
-          APP_DEBUG: true
-          APP_ENV: testing
-          DB_CONNECTION: mysql
-          DB_HOST: mysql
-          DB_PORT: 3306
-          DB_DATABASE: testing
-          DB_USERNAME: sail
-          DB_PASSWORD: password
+      - image: cimg/php:8.3.3
     steps:
       - checkout
+      - run: php --version
       - run:
-          name: Install Dependencies
-          command: |
-            composer install -n
-            cp .env.example .env
+          name: Install Laravel dependencies
+          command: composer install
       - run:
-          name: Run Tests
-          command: |
-            php artisan test
+          name: Install Laravel Sail
+          command: composer require laravel/sail --dev
+      - run:
+          name: Run PHPUnit tests with Laravel Sail
+          command: vendor/bin/sail artisan test
