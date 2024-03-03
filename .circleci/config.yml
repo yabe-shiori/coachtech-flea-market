@@ -2,16 +2,34 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: cimg/php:8.3.3
+      - image: circleci/php:7.4
     steps:
       - checkout
-      - run: php --version
       - run:
-          name: Install Laravel dependencies
-          command: composer install
+          name: Setup Laravel Sail
+          command: |
+            # Install dependencies
+            sudo apt-get update
+            sudo apt-get install -y libsqlite3-dev libsqlite3-0 mariadb-client
+            curl -s https://laravel.build/example-app | bash
       - run:
-          name: Install Laravel Sail
-          command: composer require laravel/sail --dev
+          name: Start Laravel Sail
+          command: |
+            cd example-app
+            ./vendor/bin/sail up -d
+            sleep 30 # Wait for containers to start
       - run:
-          name: Run PHPUnit tests with Laravel Sail
-          command: vendor/bin/sail artisan test
+          name: Install Composer dependencies
+          command: |
+            cd example-app
+            php composer.phar install --ignore-platform-reqs
+      - run:
+          name: Run Laravel tests
+          command: |
+            cd example-app
+            ./vendor/bin/sail artisan test
+      - run:
+          name: Tear down Laravel Sail
+          command: |
+            cd example-app
+            ./vendor/bin/sail down
