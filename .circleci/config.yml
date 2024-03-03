@@ -5,4 +5,7 @@ jobs:
       - image: cimg/php:8.3.3
     steps:
       - checkout
-      - run: php --version
+      - run:
+          name: Run Tests
+          command: |
+            ./vendor/bin/sail test
