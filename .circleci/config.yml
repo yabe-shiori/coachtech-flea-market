@@ -5,10 +5,8 @@ jobs:
       - image: cimg/php:8.3.3
     steps:
       - checkout
+      - run:
+          name: Copy .env.testing file
+          command: cp .env.testing .env
       - run: php --version
-      - run:
-          name: Install Laravel dependencies
-          command: composer install
-      - run:
-          name: Run PHPUnit tests
-          command: vendor/bin/phpunit
+      - run: vendor/bin/phpunit
