@@ -10,5 +10,8 @@ jobs:
           name: Install Laravel dependencies
           command: composer install
       - run:
-          name: Run PHPUnit tests
-          command: vendor/bin/phpunit
+          name: Install Laravel Sail
+          command: composer require laravel/sail --dev
+      - run:
+          name: Run PHPUnit tests with Laravel Sail
+          command: vendor/bin/sail artisan test
