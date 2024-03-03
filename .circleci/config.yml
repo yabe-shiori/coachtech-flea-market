@@ -5,6 +5,22 @@ jobs:
       - image: cimg/php:8.3.3
     steps:
       - checkout
+
+      # .env.testing ファイルをコピーして .env ファイルに設定する
+      - run:
+          name: Set up environment variables
+          command: |
+            cp .env.testing .env
+
+      # Laravel Sail のセットアップ
+      - run:
+          name: Install Dependencies and Setup Laravel Sail
+          command: |
+            sail composer install --prefer-dist --no-ansi --no-interaction --no-progress --no-scripts
+            sail artisan key:generate
+            sail artisan sail:install --with=mysql,redis,meilisearch
+
+      # テスト実行
       - run:
           name: Run Tests
           command: |
