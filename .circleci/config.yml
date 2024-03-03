@@ -1,12 +1,23 @@
 version: 2.1
-orbs:
-  docker: circleci/docker@1.7.0
+executors:
+  docker-executor:
+    docker:
+      - image: docker:20.10.7
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD
 jobs:
   build:
-    machine: true
+    executor: docker-executor
     steps:
       - checkout
-      - setup_remote_docker
+      - setup_remote_docker:
+          version: 20.10.7
+      - run:
+          name: Install Docker compose
+          command: |
+            apk add py-pip
+            pip install docker-compose
       - run:
           name: Start Docker Compose
           command: docker-compose up -d
