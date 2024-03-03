@@ -9,15 +9,15 @@ jobs:
       - run:
           name: Start Laravel Sail
           command: |
-            cd "\\wsl.localhost\Ubuntu\home\shiori\coachtech\coachtech-flea-market"
+            cd coachtech/coachtech-flea-market
             ./vendor/bin/sail up -d
       - run:
           name: Run PHPUnit with Laravel Sail
           command: |
-            cd "\\wsl.localhost\Ubuntu\home\shiori\coachtech\coachtech-flea-market"
+            cd coachtech/coachtech-flea-market
             ./vendor/bin/sail artisan test
       - run:
           name: Stop Laravel Sail
           command: |
-            cd "\\wsl.localhost\Ubuntu\home\shiori\coachtech\coachtech-flea-market"
+            cd coachtech/coachtech-flea-market
             ./vendor/bin/sail down
