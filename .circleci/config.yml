@@ -6,14 +6,18 @@ jobs:
     steps:
       - checkout
       - run: php --version
-      # Laravel Sailの起動とテスト実行
       - run:
           name: Start Laravel Sail
-          command: ./vendor/bin/sail up -d
+          command: |
+            cd "\\wsl.localhost\Ubuntu\home\shiori\coachtech\coachtech-flea-market"
+            ./vendor/bin/sail up -d
       - run:
           name: Run PHPUnit with Laravel Sail
-          command: ./vendor/bin/sail artisan test
-      # Laravel Sailの停止
+          command: |
+            cd "\\wsl.localhost\Ubuntu\home\shiori\coachtech\coachtech-flea-market"
+            ./vendor/bin/sail artisan test
       - run:
           name: Stop Laravel Sail
-          command: ./vendor/bin/sail down
+          command: |
+            cd "\\wsl.localhost\Ubuntu\home\shiori\coachtech\coachtech-flea-market"
+            ./vendor/bin/sail down
