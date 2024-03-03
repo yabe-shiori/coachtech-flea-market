@@ -7,17 +7,6 @@ jobs:
       - checkout
       - run: php --version
       - run:
-          name: Start Laravel Sail
-          command: |
-            cd /mnt/wsl/.localhost/Ubuntu/home/shiori/coachtech/coachtech-flea-market
-            ./vendor/bin/sail up -d
-      - run:
           name: Run PHPUnit with Laravel Sail
-          command: |
-            cd /mnt/wsl/.localhost/Ubuntu/home/shiori/coachtech/coachtech-flea-market
-            ./vendor/bin/sail artisan test
-      - run:
-          name: Stop Laravel Sail
-          command: |
-            cd /mnt/wsl/.localhost/Ubuntu/home/shiori/coachtech/coachtech-flea-market
-            ./vendor/bin/sail down
+          command: ./vendor/bin/sail artisan test
+
