@@ -4,14 +4,10 @@ jobs:
     docker:
       - image: cimg/php:8.3.3
     steps:
-      - checkout
-      - run: php --version
       - run:
-          name: Install Laravel dependencies
-          command: composer install
-      - run:
-          name: Install Laravel Sail
-          command: composer require laravel/sail --dev
-      - run:
-          name: Run PHPUnit tests with Laravel Sail
-          command: vendor/bin/sail artisan test
+          command: |
+            mkdir -p ~/phpunit
+            phpunit --log-junit ~/phpunit/junit.xml tests
+          when: always
+      - store_test_results:
+          path: ~/phpunit
