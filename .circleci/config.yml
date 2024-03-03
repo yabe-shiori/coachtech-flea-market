@@ -17,6 +17,12 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Install Dependencies
+          command: |
+            composer install -n --ignore-platform-reqs
+            cp .env.example .env
+            php artisan key:generate
+      - run:
           name: Run Tests
           command: |
-            ./vendor/bin/sail artisan test
+            php artisan test
