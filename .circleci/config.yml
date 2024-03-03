@@ -27,5 +27,6 @@ jobs:
             - ./vendor
           key: v1-dependencies-{{ checksum "composer.json" }}
       - run:
-          name: Run PHPUnit
-          command: vendor/bin/phpunit
+          name: Run PHPUnit with Laravel Sail
+          command: |
+            ./vendor/bin/sail artisan test
