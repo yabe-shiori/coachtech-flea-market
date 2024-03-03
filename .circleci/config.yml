@@ -6,3 +6,14 @@ jobs:
     steps:
       - checkout
       - run: php --version
+      # Laravel Sailの起動とテスト実行
+      - run:
+          name: Start Laravel Sail
+          command: ./vendor/bin/sail up -d
+      - run:
+          name: Run PHPUnit with Laravel Sail
+          command: ./vendor/bin/sail artisan test
+      # Laravel Sailの停止
+      - run:
+          name: Stop Laravel Sail
+          command: ./vendor/bin/sail down
