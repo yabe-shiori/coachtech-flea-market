@@ -1,35 +1,32 @@
 version: 2.1
+orbs:
+  docker: circleci/docker@1.7.0
 jobs:
   build:
     docker:
-      - image: cimg/php:8.3.3
+      - image: circleci/php:7.4-node-browsers
+        environment:
+          APP_DEBUG: true
+          APP_ENV: testing
+          DB_CONNECTION: mysql
+          DB_HOST: mysql
+          DB_PORT: 3306
+          DB_DATABASE: testing
+          DB_USERNAME: sail
+          DB_PASSWORD: password
     steps:
       - checkout
-      - run: 
-          name: Setup Laravel Sail
-          command: |
-            # Install dependencies
-            sudo apt-get update
-            sudo apt-get install -y libsqlite3-dev libsqlite3-0 mariadb-client
-            curl -s https://laravel.build/example-app | bash
       - run:
-          name: Start Laravel Sail
+          name: Install Dependencies
           command: |
-            cd example-app
-            ./vendor/bin/sail up -d
-            sleep 30 # Wait for containers to start
+            composer install -n --ignore-platform-reqs
+            cp .env.example .env
+            php artisan key:generate
       - run:
-          name: Install Composer dependencies
+          name: Run migrations
           command: |
-            cd example-app
-            php composer.phar install --ignore-platform-reqs
+            php artisan migrate --env=testing --force
       - run:
-          name: Run Laravel tests
+          name: Run Tests
           command: |
-            cd example-app
-            ./vendor/bin/sail artisan test
-      - run:
-          name: Tear down Laravel Sail
-          command: |
-            cd example-app
-            ./vendor/bin/sail down
+            ./vendor/bin/phpunit
