@@ -35,12 +35,6 @@ Route::get('/item/{item}', [ItemController::class, 'show'])->name('item.show');
 //出品ページ表示
 Route::get('/sell', [ItemController::class, 'create'])->name('item.create');
 
-//商品編集ページ表示
-Route::get('/items/{item}/edit', [ItemController::class, 'edit'])->name('item.edit');
-
-//商品更新
-Route::patch('/items/{item}', [ItemController::class, 'update'])->name('item.update');
-
 //出品者のプロフィール画面
 Route::get('/profile/{user}', [ProfileController::class, 'show'])->name('profile.show');
 
@@ -85,6 +79,12 @@ Route::middleware(['auth:users'])->group(function () {
 
     //出品
     Route::post('/sell', [ItemController::class, 'store'])->name('item.store');
+
+    //商品編集ページ表示
+    Route::get('/item/{item}/edit', [ItemController::class, 'edit'])->name('item.edit');
+
+    //商品更新
+    Route::patch('/item/{item}', [ItemController::class, 'update'])->name('item.update');
 
     //お気に入り登録
     Route::post('/favorite', [FavoriteController::class, 'favorite'])->name('favorite');

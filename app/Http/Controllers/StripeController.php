@@ -8,6 +8,7 @@ use Stripe\Stripe;
 use App\Models\Item;
 use App\Models\SoldItem;
 use Stripe\Checkout\Session as StripeCheckoutSession;
+use App\Notifications\ItemSoldNotification;
 
 class StripeController extends Controller
 {
@@ -107,6 +108,9 @@ class StripeController extends Controller
     private function updateItemAndCreateSoldItem($item, $user)
     {
         $item->update(['is_sold' => true]);
+
+        $item->user->notify(new ItemSoldNotification($item));
+
 
         $pointsEarned = $item->price * 0.01;
 

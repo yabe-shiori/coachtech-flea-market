@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\LoginBonusHistory;
 use Illuminate\Support\Facades\Storage;
 
+
 class ItemController extends Controller
 {
     // 商品一覧ページ
@@ -172,4 +173,5 @@ class ItemController extends Controller
             return redirect()->back()->with('error', '商品の更新中にエラーが発生しました。もう一度お試しください。');
         }
     }
+
 }
