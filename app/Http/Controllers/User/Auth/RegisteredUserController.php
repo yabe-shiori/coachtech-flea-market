@@ -7,11 +7,12 @@ use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
 use App\Http\Requests\RegisterRequest;
+use Illuminate\Support\Str;
+use App\Models\Point;
 
 class RegisteredUserController extends Controller
 {
@@ -30,18 +31,35 @@ class RegisteredUserController extends Controller
      */
     public function store(RegisterRequest $request): RedirectResponse
     {
-        $attr = [
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ];
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->save();
 
-        $user = User::create($attr);
+        if ($request->invitation_code) {
+            $inviter = User::where('invitation_code', $request->invitation_code)->first();
+
+            if ($inviter) {
+
+                $userPoints = Point::firstOrNew(['user_id' => $user->id]);
+                $userPoints->balance += 500.00;
+                $userPoints->save();
+
+                $inviterPoints = Point::firstOrNew(['user_id' => $inviter->id]);
+                $inviterPoints->balance += 500;
+                $inviterPoints->save();
+
+                $inviter->incrementInvitedUsersCount();
+            }
+        }
+
+        $user->invitation_code = Str::random(8);
+        $user->save();
 
         event(new Registered($user));
 
         Auth::login($user);
-
         return redirect(RouteServiceProvider::HOME);
     }
 }

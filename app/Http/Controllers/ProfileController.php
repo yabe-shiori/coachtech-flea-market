@@ -120,4 +120,13 @@ class ProfileController extends Controller
             'userItems' => $userItems,
         ]);
     }
+
+    //招待キャンペーンページ表示
+    public function showInvitationCode()
+    {
+        $user = Auth::user();
+        $invitationCode = $user->invitation_code;
+
+        return view('mypage.invitation', ['user' => $user, 'invitationCode' => $invitationCode]);
+    }
 }

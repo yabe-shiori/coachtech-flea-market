@@ -25,6 +25,12 @@
                         <i class="fas fa-user-friends text-gray-500 md:mr-1"></i>
                         <span class="text-gray-500">フォロー中のユーザー</span>
                     </a>
+                    <a href="{{route('user.showInvitationCode')}}"
+                        class="inline-block mt-4 md:mt-0 md:ml-6 text-gray-500 hover:text-red-500 transition-colors duration-300 hover:bg-gray-100 rounded-lg py-2 px-4">
+                        <i class="fas fa-gift text-gray-500 md:mr-1"></i>
+                        <span class="text-gray-500">招待キャンペーン</span>
+                    </a>
+
                 </div>
             </div>
             <div class="md:flex md:items-center mt-6 mb-2">
@@ -33,6 +39,7 @@
                 <a href="javascript:void(0)" id="purchased-link" class="inline-block text-xl font-bold"
                     onclick="loadPurchasedItems()">購入した商品</a>
             </div>
+
         </div>
     </div>
 

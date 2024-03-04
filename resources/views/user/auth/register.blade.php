@@ -26,6 +26,12 @@
         </div>
 
         <div class="mt-10">
+            <x-input-label for="invitation_code" :value="__('招待コード')" />
+            <x-text-input id="invitation_code" class="block mt-1 w-full" type="text" name="invitation_code" :value="old('invitation_code')" placeholder="お持ちの方のみ（任意）" autofocus />
+            <x-input-error :messages="$errors->get('invitation_code')" class="mt-2" />
+        </div>
+
+        <div class="mt-10">
             <x-primary-button class="w-full bg-red-400 font-bold flex items-center justify-center mb-4">
                 登録する
             </x-primary-button>

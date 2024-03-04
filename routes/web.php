@@ -14,7 +14,7 @@ use App\Http\Controllers\LoginBonusController;
 
 
 
-
+Route::get('/mypage/invitation', [ProfileController::class, 'showInvitationCode'])->name('showInvitationCode');
 //トップページ
 Route::get('/', [ItemController::class, 'index'])->name('item.index');
 

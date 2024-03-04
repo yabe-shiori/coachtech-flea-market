@@ -25,6 +25,7 @@ class RegisterRequest extends FormRequest
             'email' => ['required', 'email', 'unique:users', 'string', 'max:191'],
             'password' => ['required', 'string', 'min:8', 'max:191'],
             'avatar' => ['image', 'max:2048'],
+            'invitation_code' => ['nullable', 'string', 'max:8'],
 
         ];
     }

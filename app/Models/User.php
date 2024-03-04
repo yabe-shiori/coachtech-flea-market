@@ -17,11 +17,15 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'invitation_code',
         'name',
         'email',
         'password',
+        'provider',
+        'line_id',
         'gtoken',
         'avatar',
+        'invited_users_count',
     ];
 
     /**
@@ -98,5 +102,12 @@ class User extends Authenticatable
     public function points()
     {
         return $this->hasOne(Point::class);
+    }
+
+    public function incrementInvitedUsersCount($amount = 1)
+    {
+        $this->increment('invited_users_count', $amount);
+
+        return $this;
     }
 }

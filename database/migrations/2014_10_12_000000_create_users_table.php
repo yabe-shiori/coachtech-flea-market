@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->string('invitation_code')->unique()->nullable();
             $table->string('name')->nullable();
             $table->string('email')->unique()->nullable();
             $table->timestamp('email_verified_at')->nullable();
@@ -21,6 +22,7 @@ return new class extends Migration
             $table->string('provider')->nullable();
             $table->string('line_id')->nullable();
             $table->text('gtoken')->nullable();
+            $table->unsignedInteger('invited_users_count')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });
