@@ -8,10 +8,13 @@ jobs:
 
     steps:
       - checkout
+
+      # Create Environment file and generate app key
       - run:
           name: "Create Environment file and generate app key"
           command: |
             mv .env.testing .env
+            php artisan key:generate
 
       # Download and cache dependencies
       - restore_cache:
@@ -30,27 +33,16 @@ jobs:
           paths:
             - ./vendor
 
-      # prepare the database
+      # Install sqlite and prepare the database
       - run:
-          name: "Generate App key"
-          command: php artisan key:generate
-
-      - run:
-          name: "Install sqlite"
-          command: sudo apt-get install libsqlite3-dev
-
-      - run:
-          name: "Create database and run migration"
+          name: "Install sqlite and create database"
           command: |
+            sudo apt-get update
+            sudo apt-get install -y libsqlite3-dev
             touch database/database.sqlite
             php artisan migrate --env=testing
 
-      # - run:
-      #     name: "Generate Passport encryption keys"
-      #     command: php artisan passport:install
-
-      # run tests with phpunit
+      # Run tests with phpunit
       - run:
           name: "Run Tests"
           command: php artisan test
-
