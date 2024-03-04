@@ -1,41 +1,56 @@
 version: 2.1
 jobs:
   build:
+    working_directory: ~/repo
     docker:
-      - image: cimg/php:8.3.3
-      - image: circleci/mysql:5.7
-        environment:
-          MYSQL_ROOT_PASSWORD: root_password
-          MYSQL_DATABASE: testing
-          MYSQL_USER: sail
-          MYSQL_PASSWORD: password
+      # Specify the version you desire here
+      - image: cimg/php:8.2.7
+
     steps:
       - checkout
-      - run: php --version
       - run:
-          name: "Install dependencies"
+          name: "Create Environment file and generate app key"
           command: |
-            composer install
+            mv .env.testing .env
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            # "composer.lock" can be used if it is committed to the repo
+            - v1-dependencies-{{ checksum "composer.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+
       - run:
-          name: "Prepare .env file for testing"
-          command: |
-            cp .env.testing .env
+          name: "Install Dependencies"
+          command: composer install -n --prefer-dist
+
+      - save_cache:
+          key: v1-dependencies-{{ checksum "composer.json" }}
+          paths:
+            - ./vendor
+
+      # prepare the database
       - run:
-          name: "Wait for DB"
-          command: |
-            for i in `seq 1 10`;
-            do
-              nc -z 127.0.0.1 3306 && echo Success && exit 0
-              echo -n .
-              sleep 1
-            done
-            echo Failed waiting for DB && exit 1
+          name: "Generate App key"
+          command: php artisan key:generate
+
+      - run:
+          name: "Install sqlite"
+          command: sudo apt-get install libsqlite3-dev
+
       - run:
           name: "Create database and run migration"
           command: |
-            php artisan migrate
+            touch database/database.sqlite
+            php artisan migrate --env=testing
+
       - run:
-          name: "テスト"
-          command: |
-            ./vendor/bin/phpunit
+          name: "Generate Passport encryption keys"
+          command: php artisan passport:install
+
+      # run tests with phpunit
+      - run:
+          name: "Run Tests"
+          command: php artisan test
 
