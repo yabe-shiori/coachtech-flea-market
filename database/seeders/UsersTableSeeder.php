@@ -14,6 +14,7 @@ class UsersTableSeeder extends Seeder
             'name' => 'テスト太郎',
             'email' => 'test@example.com',
             'password' => Hash::make('password'),
+            'invitation_code' => 'xIth3z3z',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -21,6 +22,7 @@ class UsersTableSeeder extends Seeder
             'name' => 'テスト次郎',
             'email' => 'testjiro@example.com',
             'password' => Hash::make('password'),
+            'invitation_code' => 'jf9Ofi32',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -28,6 +30,7 @@ class UsersTableSeeder extends Seeder
             'name' => 'テスト三郎',
             'email' => 'testsaburo@example.com',
             'password' => Hash::make('password'),
+            'invitation_code' => 'Lo458ikg',
             'created_at' => now(),
             'updated_at' => now(),
         ]);

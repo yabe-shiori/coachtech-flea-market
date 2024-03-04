@@ -14,7 +14,7 @@ use App\Http\Controllers\LoginBonusController;
 
 
 
-Route::get('/mypage/invitation', [ProfileController::class, 'showInvitationCode'])->name('showInvitationCode');
+
 //トップページ
 Route::get('/', [ItemController::class, 'index'])->name('item.index');
 
@@ -70,6 +70,9 @@ Route::middleware(['auth:users'])->group(function () {
 
     //プロフィール更新
     Route::patch('/mypage/profile', [ProfileController::class, 'update'])->name('mypage.update');
+
+    //招待キャンペーンページ表示
+    Route::get('/mypage/invitation', [ProfileController::class, 'showInvitationCode'])->name('showInvitationCode');
 
     //配送先変更ページ
     Route::get('/address/{item}', [ProfileController::class, 'showShippingAddressForm'])->name('profile.showShippingAddressForm');

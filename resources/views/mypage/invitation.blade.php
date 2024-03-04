@@ -35,8 +35,12 @@
             </div>
         </div>
     </div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+        <div class="text-center">
+            <button onclick="inviteOnLine()" class="bg-green-500 hover:bg-green-700 text-white font-bold py-4 px-6 rounded mt-4">LINEで招待する</button>
+        </div>
+    </div>
 </x-app-layout>
-
 <script>
     function copyToClipboard() {
         const invitationCode = document.getElementById('invitationCode').innerText;
@@ -46,4 +50,12 @@
             console.error('招待コードのコピーに失敗しました: ', err);
         });
     }
+    function inviteOnLine() {
+    const invitationCode = document.getElementById('invitationCode').innerText;
+    const message = `coachtechフリマに登録しませんか？\nこちらの招待コードを入力すれば500ポイントもらえます!😊\n🎁 招待コード【 ${invitationCode.toUpperCase()} 】`;
+
+    const lineShareURL = `https://social-plugins.line.me/lineit/share?url=&text=${encodeURIComponent(message).replace(/%0D%0A/g, '%0A')}`;
+
+    window.open(lineShareURL, '_blank');
+}
 </script>

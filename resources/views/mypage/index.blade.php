@@ -25,7 +25,7 @@
                         <i class="fas fa-user-friends text-gray-500 md:mr-1"></i>
                         <span class="text-gray-500">フォロー中のユーザー</span>
                     </a>
-                    <a href="{{route('user.showInvitationCode')}}"
+                    <a href="{{ route('user.showInvitationCode') }}"
                         class="inline-block mt-4 md:mt-0 md:ml-6 text-gray-500 hover:text-red-500 transition-colors duration-300 hover:bg-gray-100 rounded-lg py-2 px-4">
                         <i class="fas fa-gift text-gray-500 md:mr-1"></i>
                         <span class="text-gray-500">招待キャンペーン</span>
