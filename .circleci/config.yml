@@ -6,3 +6,12 @@ jobs:
     steps:
       - checkout
       - run: php --version
+      - run:
+          name: "Create database and run migration"
+          command: |
+            touch storage/testing.sqlite
+            php artisan migrate --env=testing
+      - run:
+          name: "テスト"
+          command: |
+            ./vendor/bin/phpunit
