@@ -41,21 +41,25 @@
         </div>
     </div>
 </x-app-layout>
+
 <script>
     function copyToClipboard() {
         const invitationCode = document.getElementById('invitationCode').innerText;
         navigator.clipboard.writeText(invitationCode).then(() => {
-            alert('招待コードをコピーしました');
+            alert('✔ コピーしました。');
         }).catch(err => {
             console.error('招待コードのコピーに失敗しました: ', err);
         });
     }
+
     function inviteOnLine() {
-    const invitationCode = document.getElementById('invitationCode').innerText;
-    const message = `coachtechフリマに登録しませんか？\nこちらの招待コードを入力すれば500ポイントもらえます!😊\n🎁 招待コード【 ${invitationCode.toUpperCase()} 】`;
+        const invitationCode = document.getElementById('invitationCode').innerText;
+        const message =
+            `coachtechフリマに登録しませんか？\nこちらの招待コードを入力すれば500ポイントもらえます!😊\n🎁 招待コード【 ${invitationCode.toUpperCase()} 】`;
 
-    const lineShareURL = `https://social-plugins.line.me/lineit/share?url=&text=${encodeURIComponent(message).replace(/%0D%0A/g, '%0A')}`;
+        const lineShareURL =
+            `https://social-plugins.line.me/lineit/share?url=&text=${encodeURIComponent(message).replace(/%0D%0A/g, '%0A')}`;
 
-    window.open(lineShareURL, '_blank');
-}
+        window.open(lineShareURL, '_blank');
+    }
 </script>
