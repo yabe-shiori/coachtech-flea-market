@@ -123,4 +123,43 @@ class ItemControllerTest extends TestCase
         $this->assertEquals($item2->id, $items[1]->id);
         $this->assertEquals($item3->id, $items[2]->id);
     }
+
+    public function testEditMethod(): void
+    {
+        $user = User::factory()->create();
+        $this->actingAs($user);
+
+        $item = Item::factory()->create(['user_id' => $user->id]);
+
+        $response = $this->get(route('user.item.edit', $item));
+
+        $response->assertStatus(200)
+            ->assertViewIs('item.edit')
+            ->assertViewHas('item', $item)
+            ->assertViewHas('categories')
+            ->assertViewHas('brands')
+            ->assertViewHas('conditions');
+    }
+
+    public function testUpdateMethod(): void
+    {
+
+        $user = User::factory()->create();
+        $this->actingAs($user);
+
+        $item = Item::factory()->create(['user_id' => $user->id]);
+        $data = [
+            'name' => 'Updated Name',
+            'price' => 1000,
+            'condition' => '新品、未使用',
+            'description' => 'Updated description',
+            'category_id' => [1],
+        ];
+
+        $response = $this->patch(route('user.item.update', $item), $data);
+
+        $response->assertSessionHasErrors(['image', 'category_id']);
+    }
 }
+
+

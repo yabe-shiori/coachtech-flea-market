@@ -47,7 +47,7 @@
                         @foreach ($userItems as $item)
                             <div class="relative mx-2">
                                 @if ($item->images->isNotEmpty())
-                                    <a href="{{ route('user.item.show', $item) }}">
+                                    <a href="{{ route('user.item.edit', $item) }}">
                                         <img src="{{ asset('storage/' . $item->images->first()->image_path) }}"
                                             alt="{{ $item->name }}">
                                         <span
