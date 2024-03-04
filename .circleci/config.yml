@@ -7,6 +7,10 @@ jobs:
       - checkout
       - run: php --version
       - run:
+          name: "Install dependencies"
+          command: |
+            composer install
+      - run:
           name: "Create database and run migration"
           command: |
             touch storage/testing.sqlite
