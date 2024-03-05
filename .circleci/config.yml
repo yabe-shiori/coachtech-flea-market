@@ -11,8 +11,9 @@ jobs:
       - run: sudo composer self-update --2
       - run: composer install -n --prefer-dist
       - run: |
-          curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
-          sudo apt-get install -y nodejs
+          curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+          export NVM_DIR="$HOME/.nvm"
+          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
       - run: nvm install 20.5.0
       - run: npm ci
       - run: npm run dev
