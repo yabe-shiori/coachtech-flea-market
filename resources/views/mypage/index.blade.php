@@ -57,6 +57,14 @@
                                     <a href="{{ route('user.item.edit', $item) }}">
                                         <img src="{{ asset('storage/' . $item->images->first()->image_path) }}"
                                             alt="{{ $item->name }}">
+                                        @if ($item->isSold())
+                                            <div class="absolute top-0 left-0">
+                                                <span
+                                                    class="inline-flex items-center justify-center bg-red-500 text-white font-bold px-2 py-1 rounded-full shadow">
+                                                    <i class="fas fa-ban mr-1"></i> SOLD OUT
+                                                </span>
+                                            </div>
+                                        @endif
                                         <span
                                             class="absolute bottom-0 left-0 px-2 py-1 bg-black bg-opacity-40 text-white rounded-tr-xl rounded-br-xl">¥{{ number_format($item->price) }}</span>
                                     </a>
