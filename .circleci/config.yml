@@ -13,7 +13,7 @@ jobs:
       - run: |
           curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
           sudo apt-get install -y nodejs
-      - run: npm install -g npm@latest
+      - run: nvm install 20.5.0
       - run: npm ci
       - run: npm run dev
       - run:
