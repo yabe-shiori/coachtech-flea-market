@@ -17,7 +17,7 @@ class ProfilesTableSeeder extends Seeder
                 'introduction' => 'プロフィールをご覧いただきありがとうございます。
                 トレンドを見つけるのが得意です。
                 気持ちの良い対応を心がけてまいりますので、よろしくお願いします！',
-                'postal_code' => '1234567',
+                'postal_code' => '123-4567',
                 'address' => '北海道札幌市中央区北1条西2丁目',
                 'building_name' => '札幌パークビル',
                 'created_at' => now(),
@@ -30,7 +30,7 @@ class ProfilesTableSeeder extends Seeder
                 'introduction' => '＊購入につていて
                 ・即購入大歓迎です。交渉中であっても先に購入された方を優先させていただきます。
                 ・商品購入の際、気になる点はご質問ください。必ず返信いたします。',
-                'postal_code' => '2345678',
+                'postal_code' => '234-5678',
                 'address' => '北海道帯広市西4条南9丁目',
                 'building_name' => '帯広ヒルズ',
                 'created_at' => now(),
@@ -43,7 +43,7 @@ class ProfilesTableSeeder extends Seeder
                 'introduction' => 'プロフィールをお読みいただきありがとうございます。
                 仕事の都合上、お返事ができなかったり、遅くなる場合がございます。ご了承ください。
                 気持ちの良いお取引をしたいと考えております。よろしくお願いたします。',
-                'postal_code' => '3456789',
+                'postal_code' => '345-6789',
                 'address' => '北海道岩内郡岩内町字本町',
                 'building_name' => '岩内ハイツ',
                 'created_at' => now(),
