@@ -3,12 +3,11 @@ jobs:
   build:
     working_directory: ~/repo
     docker:
-      # Specify the version you desire here
       - image: cimg/php:8.2.7
 
     steps:
       - checkout
       - run: composer install -n --prefer-dist
-      - run: npm ci
+      # npmコマンドを削除し、ビルドされたJavaScriptファイルを使ってテストを実行する
       - run: npm run build
       - run: vendor/bin/phpunit
