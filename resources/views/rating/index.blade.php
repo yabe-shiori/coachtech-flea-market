@@ -13,11 +13,13 @@
                                 <div class="py-4">
                                     <div class="flex items-center">
                                         <div class="flex-shrink-0">
-                                            <img class="h-10 w-10 rounded-full" src="{{ asset('storage/avatar/' . $rating->fromUser->avatar) }}" alt="">
+                                            <img class="h-12 w-12 rounded-full"
+                                                src="{{ asset('storage/avatar/' . $rating->fromUser->avatar) }}"
+                                                alt="">
                                         </div>
                                         <div class="ml-4">
-                                            <div class="text-sm font-medium text-gray-900">{{ $rating->fromUser->name }}</div>
-                                            <div class="text-sm text-gray-500">{{ $rating->created_at->format('Y/m/d H:i') }}</div> <!-- 時間を追加 -->
+                                            <div class="text-base font-medium text-gray-900">
+                                                {{ $rating->fromUser->name }}</div>
                                             <div class="mt-2">
                                                 @for ($i = 1; $i <= 5; $i++)
                                                     @if ($i <= $rating->rating)
@@ -27,7 +29,9 @@
                                                     @endif
                                                 @endfor
                                             </div>
-                                            <p class="text-sm text-gray-500 mt-2">{{ $rating->comment }}</p>
+                                            <p class="text-base text-gray-500 mt-2">{{ $rating->comment }}</p>
+                                            <div class="text-sm text-gray-500">
+                                                {{ $rating->created_at->format('Y/m/d H:i') }}</div>
                                         </div>
                                     </div>
                                 </div>

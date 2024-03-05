@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             CommentsTableSeeder::class,
             AdminsTableSeeder::class,
             FollowsTableSeeder::class,
+            RatingsTableSeeder::class,
         ]);
     }
 }

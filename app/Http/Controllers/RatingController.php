@@ -32,7 +32,7 @@ class RatingController extends Controller
             ->exists();
 
         if ($existingRating) {
-            return back()->with('error', 'すでにこのユーザーに対する評価が存在します');
+            return redirect()->route('user.mypage.index')->with('error', 'すでにこのユーザーに対する評価が存在します');
         }
 
         $rating = new Rating();
@@ -42,7 +42,7 @@ class RatingController extends Controller
         $rating->to_user_id = $item->user_id;
         $rating->save();
 
-        return back()->with('message', '評価を登録しました');
+        return redirect()->route('user.mypage.index')->with('message', '評価を登録しました');
     }
 
     //評価一覧画面
