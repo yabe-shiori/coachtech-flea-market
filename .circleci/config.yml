@@ -1,7 +1,11 @@
+version: 2.1
 jobs:
   build:
+    working_directory: ~/repo
     docker:
-      - image: circleci/php:8.2
+      # Specify the version you desire here
+      - image: cimg/php:8.2.7
+
     steps:
       - checkout
       - run: sudo composer self-update --1
