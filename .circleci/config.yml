@@ -3,17 +3,44 @@ jobs:
   build:
     working_directory: ~/repo
     docker:
-      # Specify the version you desire here
       - image: cimg/php:8.2.7
 
     steps:
       - checkout
 
       # Create Environment file and generate app key
+      - run:
+          name: "Create Environment file and generate app key"
+          command: |
+            mv .env.testing .env
+            php artisan key:generate
 
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "composer.json" }}
+            - v1-dependencies-
 
+      - run:
+          name: "Install Dependencies"
+          command: composer install -n --prefer-dist
 
-      # Run tests with phpunit
+      - save_cache:
+          key: v1-dependencies-{{ checksum "composer.json" }}
+          paths:
+            - ./vendor
+
+      # Start Laravel Sail environment
+      - run:
+          name: "Start Laravel Sail environment"
+          command: ./vendor/bin/sail up -d
+
+      # Wait for Sail containers to be ready
+      - run:
+          name: "Wait for Sail containers to be ready"
+          command: sleep 30
+
+      # Run tests with phpunit in Sail environment
       - run:
           name: "Run Tests"
           command: ./vendor/bin/sail artisan test
