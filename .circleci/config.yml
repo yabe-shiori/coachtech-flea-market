@@ -10,11 +10,7 @@ jobs:
       - checkout
 
       # Create Environment file and generate app key
-      - run:
-          name: "Create Environment file and generate app key"
-          command: |
-            mv .env.testing .env
-            php artisan key:generate
+
 
 
       # Run tests with phpunit
