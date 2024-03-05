@@ -8,8 +8,8 @@
                     <a href="{{ route('user.item.show', $item->item) }}">
                         <img src="{{ asset('storage/' . $item->item->images->first()->image_path) }}" alt="{{ $item->item->name }}">
                     </a>
-                    <div class="flex justify-between items-center mt-2">
-                        <span class="text-sm text-gray-700">¥{{ number_format($item->item->price) }}</span>
+                    <div class="flex justify-between items-center mt-6">
+                        <span class="text-base text-gray-700">¥{{ number_format($item->item->price) }}</span>
                         <a href="{{ route('user.rating.create', ['item_id' => $item->item->id]) }}" class="px-2 py-1 bg-blue-500 text-white rounded-full">評価を入力する</a>
                     </div>
                 </div>
