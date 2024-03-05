@@ -190,6 +190,66 @@ class ItemsTableSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],
+
+            [
+                'user_id' => 1,
+                'name' => 'サプライズボックス',
+                'category_ids' => [54, 60],
+                'brand_id' => 10,
+                'price' => 3000,
+                'condition' => '新品、未使用',
+                'description' => '何が入っているかわからないサプライズボックスです。おもちゃや雑貨などが入っているので、開けるのが楽しみです。',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+
+            [
+                'user_id' => 2,
+                'name' => 'レトロゲーム機セット',
+                'category_ids' => [41, 43],
+                'brand_id' => 3,
+                'price' => 12000,
+                'condition' => '目立った傷や汚れなし',
+                'description' => '懐かしいゲームを楽しめるレトロゲーム機セットです。ファミコンやスーパーファミコンなどがセットになっており、レトロゲームファンにはたまらないアイテムです。',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+
+            [
+                'user_id' => 3,
+                'name' => 'デザイナーズ家具セット',
+                'category_ids' => [24, 27],
+                'brand_id' => 3,
+                'price' => 50000,
+                'condition' => '未使用に近い',
+                'description' => '高級感あふれるデザイナーズ家具セットです。ダイニングテーブルやソファなどが揃っており、おしゃれな空間を演出します。',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+
+            [
+                'user_id' => 1,
+                'name' => '宇宙を感じるLEDプロジェクター',
+                'category_ids' => [19, 28],
+                'brand_id' => 3,
+                'price' => 8500,
+                'condition' => '全体的に状態が悪い',
+                'description' => '宇宙の星空を部屋に演出するLEDプロジェクターです。リラックス効果があり、就寝前のリラクゼーションやパーティーの雰囲気作りに最適です。',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+
+            [
+                'user_id' => 2,
+                'name' => '寝袋',
+                'category_ids' => [38, 46],
+                'brand_id' => 5,
+                'price' => 2000,
+                'condition' => 'やや傷や汚れあり',
+                'description' => 'アウトドアでのキャンプやフェスなどに便利な寝袋です。軽量でコンパクトに収納できるので、持ち運びに便利です。',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
         ];
 
         foreach ($items as $item) {

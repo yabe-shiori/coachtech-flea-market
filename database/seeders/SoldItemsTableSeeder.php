@@ -38,5 +38,16 @@ class SoldItemsTableSeeder extends Seeder
         ]);
 
         Item::where('id', 6)->update(['is_sold' => true]);
+
+        SoldItem::create([
+            'item_id' => 15,
+            'buyer_id' => 2,
+            'seller_id' => 3,
+            'sold_at' => now(),
+        ]);
+
+        Item::where('id', 15)->update(['is_sold' => true]);
     }
+
+
 }
