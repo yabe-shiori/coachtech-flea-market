@@ -3,12 +3,11 @@ jobs:
   build:
     working_directory: ~/repo
     docker:
-      # Specify the version you desire here
       - image: cimg/php:8.2.7
 
     steps:
       - checkout
-      - run: sudo composer self-update --1
+      - run: sudo composer self-update --2
       - run: composer install -n --prefer-dist
       - run: npm ci
       - run: npm run dev
