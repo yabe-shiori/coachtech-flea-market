@@ -6,6 +6,7 @@ use Laravel\Socialite\Facades\Socialite;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Exception;
+use Illuminate\Support\Str;
 
 class GoogleLoginController extends Controller
 {
@@ -28,6 +29,10 @@ class GoogleLoginController extends Controller
                     'name' => $googleUser->getName(),
                 ]
             );
+            
+            $user->invitation_code = Str::random(8);
+            $user->save();
+
             Auth::login($user);
             return redirect()->route('user.item.index');
         } catch (Exception $e) {

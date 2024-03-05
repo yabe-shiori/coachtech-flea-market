@@ -4,7 +4,6 @@
             <h2 class="text-2xl text-center font-bold text-neutral-600">
                 プロフィール設定
             </h2>
-
             <form method="post" action="{{ route('user.mypage.update') }}" class="mt-6 space-y-6 max-w-xl mx-auto"
                 enctype="multipart/form-data">
                 @csrf
