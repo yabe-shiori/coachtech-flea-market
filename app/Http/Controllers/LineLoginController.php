@@ -93,7 +93,10 @@ class LineLoginController extends Controller
             $user->provider = 'line';
             $user->line_id = $profile->userId;
             $user->name = $profile->displayName;
+
+            $user->invitation_code = Str::random(8);
             $user->save();
+
             Auth::login($user);
             return redirect()->route('user.item.index');
         }

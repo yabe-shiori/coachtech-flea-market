@@ -29,7 +29,7 @@ class GoogleLoginController extends Controller
                     'name' => $googleUser->getName(),
                 ]
             );
-            
+
             $user->invitation_code = Str::random(8);
             $user->save();
 
