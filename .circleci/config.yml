@@ -16,28 +16,6 @@ jobs:
             mv .env.testing .env
             php artisan key:generate
 
-      # Download and cache dependencies
-      - restore_cache:
-          keys:
-            # "composer.lock" can be used if it is committed to the repo
-            - v1-dependencies-{{ checksum "composer.json" }}
-            # fallback to using the latest cache if no exact match is found
-            - v1-dependencies-
-
-      - run:
-          name: "Install Dependencies"
-          command: composer install -n --prefer-dist
-
-      - save_cache:
-          key: v1-dependencies-{{ checksum "composer.json" }}
-          paths:
-            - ./vendor
-
-      - run:
-          name: "Install sqlite and create database"
-          command: |
-            ./vendor/bin/sail up -d
-            ./vendor/bin/sail artisan migrate
 
       # Run tests with phpunit
       - run:
