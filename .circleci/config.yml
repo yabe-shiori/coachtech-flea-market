@@ -1,7 +1,7 @@
 jobs:
   build:
     docker:
-      - image: circleci/php:8.2-node-browsers
+      - image: circleci/php:8.2
     steps:
       - checkout
       - run: sudo composer self-update --1
