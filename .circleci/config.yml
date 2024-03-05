@@ -1,11 +1,38 @@
 version: 2.1
 jobs:
   build:
-    working_directory: ~/repo
     docker:
-      - image: cimg/php:8.2.7
-
+      - image: circleci/php:7.4-node-browsers
+    working_directory: ~/laravel-sail
     steps:
       - checkout
-      - run: composer install -n --prefer-dist
-      - run: vendor/bin/phpunit
+
+      # Install dependencies
+      - run:
+          name: Install PHP dependencies
+          command: composer install --ignore-platform-reqs --no-interaction
+
+      # Start Docker containers
+      - run:
+          name: Start Docker containers
+          command: |
+            cp .env.testing .env
+            ./vendor/bin/sail up -d
+
+      # Run database migrations
+      - run:
+          name: Run database migrations
+          command: |
+            ./vendor/bin/sail artisan migrate --force
+
+      # Run tests
+      - run:
+          name: Run tests
+          command: |
+            ./vendor/bin/sail test
+
+      # Shut down Docker containers
+      - run:
+          name: Stop Docker containers
+          command: |
+            ./vendor/bin/sail down
