@@ -11,9 +11,12 @@ use App\Http\Controllers\FollowController;
 use App\Http\Controllers\GoogleLoginController;
 use App\Http\Controllers\LineLoginController;
 use App\Http\Controllers\LoginBonusController;
+use App\Http\Controllers\RatingController;
 
 
 
+Route::get('mypage/rating', [RatingController::class, 'create'])->name('rating.create');
+Route::post('/mypage/rating', [RatingController::class, 'store'])->name('rating.store');
 
 //トップページ
 Route::get('/', [ItemController::class, 'index'])->name('item.index');

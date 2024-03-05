@@ -30,7 +30,9 @@
                         <i class="fas fa-gift text-gray-500 md:mr-1"></i>
                         <span class="text-gray-500">招待キャンペーン</span>
                     </a>
-
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2">
+        <a href="{{ route('user.rating.create') }}" class="text-blue-500 font-bold">評価を入力する</a>
+    </div>
                 </div>
             </div>
             <div class="md:flex md:items-center mt-6 mb-2">
