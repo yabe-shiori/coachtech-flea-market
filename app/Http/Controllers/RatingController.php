@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Rating;
 use App\Models\Item;
 use App\Http\Requests\RatingRequest;
+use App\Models\User;
 
 class RatingController extends Controller
 {
@@ -16,7 +17,7 @@ class RatingController extends Controller
         $item = Item::findOrFail($item_id);
         $to_user_id = $item->seller_id;
 
-        return view('mypage.rating', compact('to_user_id', 'item_id'));
+        return view('rating.create', compact('to_user_id', 'item_id'));
     }
 
     //評価登録処理
@@ -42,5 +43,15 @@ class RatingController extends Controller
         $rating->save();
 
         return back()->with('message', '評価を登録しました');
+    }
+
+    //評価一覧画面
+    public function index($userId)
+    {
+        $user = User::findOrFail($userId);
+
+        $ratings = Rating::where('to_user_id', $userId)->latest()->paginate(10);
+
+        return view('rating.index', compact('user', 'ratings'));
     }
 }

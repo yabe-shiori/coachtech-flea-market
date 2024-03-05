@@ -16,6 +16,7 @@ use App\Http\Controllers\RatingController;
 
 
 
+
 //トップページ
 Route::get('/', [ItemController::class, 'index'])->name('item.index');
 
@@ -80,6 +81,9 @@ Route::middleware(['auth:users'])->group(function () {
 
     //評価登録処理
     Route::post('/mypage/rating', [RatingController::class, 'store'])->name('rating.store');
+
+    //評価一覧画面
+    Route::get('/rating/{userId}', [RatingController::class, 'index'])->name('rating.index');
 
     //配送先変更ページ
     Route::get('/address/{item}', [ProfileController::class, 'showShippingAddressForm'])->name('profile.showShippingAddressForm');

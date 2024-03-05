@@ -110,4 +110,18 @@ class User extends Authenticatable
 
         return $this;
     }
+
+    public function ratings()
+    {
+        return $this->hasMany(Rating::class, 'to_user_id');
+    }
+
+    public function averageRating()
+    {
+        if ($this->ratings->isEmpty()) {
+            return null;
+        }
+
+        return $this->ratings->avg('rating');
+    }
 }

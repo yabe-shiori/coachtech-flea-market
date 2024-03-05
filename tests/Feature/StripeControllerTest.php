@@ -32,7 +32,6 @@ class StripeControllerTest extends TestCase
         $response->assertJsonStructure(['id']);
     }
 
-
     public function testSuccess()
     {
         $user = User::factory()->create();

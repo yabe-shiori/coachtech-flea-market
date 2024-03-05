@@ -6,6 +6,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use App\Models\Item;
 use App\Models\User;
+use App\Models\Rating;
 
 class RatingControllerTest extends TestCase
 {
@@ -14,15 +15,14 @@ class RatingControllerTest extends TestCase
      * A basic feature test example.
      */
 
-    public function testItDisplaysRatingCreationForm()
+    public function testRatingCreationForm()
     {
+        $user = User::factory()->create();
+
         $item = Item::factory()->create();
 
-        $request = [
-            'item_id' => $item->id,
-        ];
-
-        $response = $this->get(route('user.rating.create', $request));
+        $response = $this->actingAs($user)
+            ->get(route('user.rating.create', ['item_id' => $item->id]));
 
         $response->assertStatus(200);
 
@@ -53,5 +53,19 @@ class RatingControllerTest extends TestCase
 
         $response->assertRedirect();
         $response->assertSessionHas('message', '評価を登録しました');
+    }
+
+    public function testRatingIndex()
+    {
+        $user = User::factory()->create();
+        $this->actingAs($user);
+
+        $ratings = Rating::where('to_user_id', $user->id)->latest()->paginate(10);
+
+        $response = $this->actingAs($user)->get(route('user.rating.index', ['userId' => $user->id]));
+
+        $response->assertStatus(200);
+        $response->assertViewIs('rating.index');
+        $response->assertViewHas('user', $user);
     }
 }

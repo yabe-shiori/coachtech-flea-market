@@ -6,7 +6,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 w-full lg:w-4/5">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="flex flex-col lg:flex-row items-center p-6">
-                    <div class="flex items-center mb-6 lg:mb-0">
+                    <div class="flex items-center mb-2 lg:mb-0">
                         <img src="{{ asset('storage/avatar/' . $user->avatar) }}" alt="User Avatar"
                             class="w-10 h-10 rounded-full mr-4">
                         <h2 class="text-2xl text-neutral-600 font-bold">
@@ -16,6 +16,24 @@
                                 {{ $user->name ?? '名無しさん' }}
                             @endif
                         </h2>
+                    </div>
+                    <div class="ml-2 md:mb-2 flex items-center">
+                        <!-- ☆の表示位置を調整 -->
+                        @if ($user->ratings->isNotEmpty())
+                            @php
+                                $averageRating = $user->averageRating();
+                                $roundedRating = round($averageRating);
+                            @endphp
+                            <a href="{{ route('user.rating.index', ['userId' => $user->id]) }}" class="flex items-center">
+                                @for ($i = 1; $i <= 5; $i++)
+                                    @if ($i <= $roundedRating)
+                                        <i class="fa fa-star text-yellow-500"></i>
+                                    @else
+                                        <i class="fa fa-star text-gray-400"></i>
+                                    @endif
+                                @endfor
+                            </a>
+                        @endif
                     </div>
 
                     <div class="mb-4 lg:ml-auto lg:mb-0">
