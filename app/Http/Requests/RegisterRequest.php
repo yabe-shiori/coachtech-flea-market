@@ -24,9 +24,7 @@ class RegisterRequest extends FormRequest
         return [
             'email' => ['required', 'email', 'unique:users', 'string', 'max:191'],
             'password' => ['required', 'string', 'min:8', 'max:191'],
-            'avatar' => ['image', 'max:2048'],
             'invitation_code' => ['nullable', 'string', 'max:8'],
-
         ];
     }
 
@@ -42,8 +40,6 @@ class RegisterRequest extends FormRequest
             'password.string' => 'パスワードを文字列で入力してください',
             'password.min' => 'パスワードは8文字以上で入力してください',
             'password.max' => 'パスワードは191文字以内で入力してください',
-            'avatar.image' => '画像ファイルを選択して下さい',
-            'avatar.max' => '画像ファイルは2MB以内で選択して下さい',
         ];
     }
 }

@@ -20,7 +20,6 @@
                                 onchange="previewImages(event)">
                         </div>
                         <div id="imagePreview" class="flex flex-wrap justify-start gap-4">
-                            <!-- ここに画像プレビューが表示されます -->
                         </div>
 
                         <h3 class="text-xl font-bold border-b border-neutral-700 text-neutral-500 my-4">商品の詳細</h3>

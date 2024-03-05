@@ -173,5 +173,4 @@ class ItemController extends Controller
             return redirect()->back()->with('error', '商品の更新中にエラーが発生しました。もう一度お試しください。');
         }
     }
-
 }

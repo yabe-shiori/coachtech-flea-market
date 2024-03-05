@@ -1,7 +1,7 @@
 <nav x-data="{ open: false }" class="bg-black border-b border-gray-100">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
-        <!-- Logo and Text -->
+
         <div class="flex items-center">
             <a href="{{ route('user.item.index') }}" class="hidden lg:flex">
                 <x-application-logo class="block h-9 w-auto fill-current text-white" />
