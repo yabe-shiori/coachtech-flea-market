@@ -15,8 +15,6 @@ use App\Http\Controllers\RatingController;
 
 
 
-Route::get('mypage/rating', [RatingController::class, 'create'])->name('rating.create');
-Route::post('/mypage/rating', [RatingController::class, 'store'])->name('rating.store');
 
 //トップページ
 Route::get('/', [ItemController::class, 'index'])->name('item.index');
@@ -76,6 +74,12 @@ Route::middleware(['auth:users'])->group(function () {
 
     //招待キャンペーンページ表示
     Route::get('/mypage/invitation', [ProfileController::class, 'showInvitationCode'])->name('showInvitationCode');
+
+    //評価入力画面表示
+    Route::get('/mypage/rating', [RatingController::class, 'create'])->name('rating.create');
+
+    //評価登録処理
+    Route::post('/mypage/rating', [RatingController::class, 'store'])->name('rating.store');
 
     //配送先変更ページ
     Route::get('/address/{item}', [ProfileController::class, 'showShippingAddressForm'])->name('profile.showShippingAddressForm');
