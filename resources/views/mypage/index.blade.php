@@ -54,9 +54,9 @@
                         @foreach ($userItems as $item)
                             <div class="relative mx-2">
                                 @if ($item->images->isNotEmpty())
-                                    <a href="{{ route('user.item.edit', $item) }}">
+                                    <a href="{{ route('user.item.edit', $item) }}" class="block">
                                         <img src="{{ asset('storage/' . $item->images->first()->image_path) }}"
-                                            alt="{{ $item->name }}">
+                                            alt="{{ $item->name }}" class="cursor-pointer hover:opacity-80">
                                         @if ($item->isSold())
                                             <div class="absolute top-0 left-0">
                                                 <span
