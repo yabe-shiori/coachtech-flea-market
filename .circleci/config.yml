@@ -8,8 +8,6 @@ jobs:
     steps:
       - checkout
       - run: composer install -n --prefer-dist
-      # npmをインストールする
       - run: sudo apt-get update && sudo apt-get install -y npm
       - run: npm ci
-      - run: npm run build
       - run: vendor/bin/phpunit
