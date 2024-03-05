@@ -1,48 +1,17 @@
 version: 2.1
 jobs:
   build:
-    working_directory: ~/repo
     docker:
-      # Specify the version you desire here
-      - image: cimg/php:8.2.7
+      - image: circleci/php:7.4-node-browsers
+    working_directory: ~/project
 
     steps:
       - checkout
 
-      # Create Environment file and generate app key
       - run:
-          name: "Create Environment file and generate app key"
-          command: |
-            mv .env.testing .env
-            php artisan key:generate
-
-      # Download and cache dependencies
-      - restore_cache:
-          keys:
-            # "composer.lock" can be used if it is committed to the repo
-            - v1-dependencies-{{ checksum "composer.json" }}
-            # fallback to using the latest cache if no exact match is found
-            - v1-dependencies-
+          name: Install Dependencies
+          command: composer install
 
       - run:
-          name: "Install Dependencies"
-          command: composer install -n --prefer-dist
-
-      - save_cache:
-          key: v1-dependencies-{{ checksum "composer.json" }}
-          paths:
-            - ./vendor
-
-      # Install sqlite and prepare the database
-      - run:
-          name: "Install sqlite and create database"
-          command: |
-            sudo apt-get update
-            sudo apt-get install -y libsqlite3-dev
-            touch database/database.sqlite
-            php artisan migrate --env=testing
-
-      # Run tests with phpunit
-      - run:
-          name: "Run Tests"
-          command: php artisan test
+          name: Run Tests
+          command: vendor/bin/phpunit
