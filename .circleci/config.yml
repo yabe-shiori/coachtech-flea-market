@@ -3,6 +3,7 @@ jobs:
   build:
     working_directory: ~/repo
     docker:
+      # Specify the version you desire here
       - image: cimg/php:8.2.7
 
     steps:
@@ -18,7 +19,9 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
+            # "composer.lock" can be used if it is committed to the repo
             - v1-dependencies-{{ checksum "composer.json" }}
+            # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
 
       - run:
@@ -30,17 +33,16 @@ jobs:
           paths:
             - ./vendor
 
-      # Start Laravel Sail environment
+      # Install sqlite and prepare the database
       - run:
-          name: "Start Laravel Sail environment"
-          command: ./vendor/bin/sail up -d
+          name: "Install sqlite and create database"
+          command: |
+            sudo apt-get update
+            sudo apt-get install -y libsqlite3-dev
+            touch database/database.sqlite
+            php artisan migrate --env=testing
 
-      # Wait for Sail containers to be ready
-      - run:
-          name: "Wait for Sail containers to be ready"
-          command: sleep 30
-
-      # Run tests with phpunit in Sail environment
+      # Run tests with phpunit
       - run:
           name: "Run Tests"
-          command: ./vendor/bin/sail artisan test
+          command: php artisan test
