@@ -16,9 +16,6 @@ use App\Http\Controllers\FileUploadController;
 
 
 
-//ファイルアップロード
-Route::post('/upload', [FileUploadController::class, 'upload']);
-
 //トップページ
 Route::get('/', [ItemController::class, 'index'])->name('item.index');
 
