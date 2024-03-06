@@ -142,7 +142,7 @@ MailPitを利用しています。
 
 ## ER図
 
-<img width="726" alt="スクリーンショット 2024-03-05 083235" src="https://github.com/yabe-shiori/coachtech-flea-market/assets/142664073/d700b3e6-8432-4a46-b4a3-829b215e7f4e">
+<img width="830" alt="coachtech-flea-market" src="https://github.com/yabe-shiori/coachtech-flea-market/assets/142664073/804ba04f-c1ca-4c2e-8c6a-93c644a24b6f">
 
 
 
