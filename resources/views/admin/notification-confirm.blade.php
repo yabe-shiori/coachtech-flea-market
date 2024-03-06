@@ -4,14 +4,17 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-gray-100">
                     <h3 class="text-2xl text-neutral-600 font-bold mb-6">お知らせメール内容確認</h3>
+
                     <div class="mb-8">
                         <label for="subject" class="block text-base font-medium text-gray-700">件名</label>
                         <p class="block text-base text-gray-700">{{ $subject }}</p>
                     </div>
+
                     <div class="mb-10">
                         <label for="content" class="block text-base font-medium text-gray-700">メッセージ</label>
                         <p class="block text-base text-gray-700">{{ $content }}</p>
                     </div>
+                    
                     <form action="{{ route('admin.sendNotification') }}" method="POST">
                         @csrf
                         <input type="hidden" name="subject" value="{{ $subject }}">

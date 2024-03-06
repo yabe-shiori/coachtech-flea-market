@@ -5,7 +5,6 @@
                 <h2 class="text-2xl font-bold text-neutral-600 text-center">管理者作成</h2>
                 <form method="POST" action="{{ route('admin.store') }}" class="space-y-6 p-4">
                     @csrf
-
                     <div>
                         <label for="name" class="block text-sm font-medium text-gray-700">名前</label>
                         <input id="name"
@@ -13,7 +12,6 @@
                             type="text" name="name" value="{{ old('name') }}" required autofocus />
                         <x-validation-errors field="name" />
                     </div>
-
                     <div>
                         <label for="email" class="block text-sm font-medium text-gray-700">メールアドレス</label>
                         <input id="email"
@@ -21,7 +19,7 @@
                             type="email" name="email" value="{{ old('email') }}" required />
                         <x-validation-errors field="email" />
                     </div>
-
+                    
                     <div>
                         <label for="password" class="block text-sm font-medium text-gray-700">パスワード</label>
                         <input id="password"

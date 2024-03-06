@@ -1,7 +1,6 @@
 <x-app-layout>
     <div class="container mx-auto">
         <h1 class="text-xl font-bold mb-6">出品者への送金額確認</h1>
-
         <div class="overflow-x-auto">
             <div class="shadow-md rounded overflow-hidden">
                 <div class="min-w-full overflow-x-auto">
@@ -33,7 +32,6 @@
                 </div>
             </div>
         </div>
-
         <div class="mt-4">
             {{ $soldItems->links() }}
         </div>

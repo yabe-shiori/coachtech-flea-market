@@ -25,16 +25,19 @@
                                 $roundedRating = round($averageRating);
                                 $ratingCount = $user->rating_count;
                             @endphp
-                            <div class="flex items-center">
-                                @for ($i = 1; $i <= 5; $i++)
-                                    @if ($i <= $roundedRating)
-                                        <i class="fa fa-star text-yellow-500"></i>
-                                    @else
-                                        <i class="fa fa-star text-gray-400"></i>
-                                    @endif
-                                @endfor
-                                <span class="ml-2 text-blue-600">{{ $ratingCount }}</span>
-                            </div>
+                            <a href="{{ route('user.rating.index', ['userId' => $user->id]) }}"
+                                class="flex items-center">
+                                <div class="flex items-center">
+                                    @for ($i = 1; $i <= 5; $i++)
+                                        @if ($i <= $roundedRating)
+                                            <i class="fa fa-star text-yellow-500"></i>
+                                        @else
+                                            <i class="fa fa-star text-gray-400"></i>
+                                        @endif
+                                    @endfor
+                                    <span class="ml-2 text-blue-600">{{ $ratingCount }}</span>
+                                </div>
+                            </a>
                         </div>
                     @endif
 
@@ -53,7 +56,7 @@
                             <form action="{{ route('user.follow', ['user' => $user->id]) }}" method="POST">
                                 @csrf
                                 <button type="submit"
-                                    class="bg-white border border-red-500 text-red-500 text-base font-bold py-1 px-8 rounded flex items-center justify-center">
+                                    class="bg-white border border-red-500 text-red-500 font-bold py-1 px-8 rounded flex items-center justify-center">
                                     <i class="fa fa-plus-circle mr-2" aria-hidden="true"></i>
                                     <span>フォロー</span>
                                 </button>
