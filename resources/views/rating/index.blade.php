@@ -4,7 +4,15 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 w-full lg:w-4/5">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6">
-                    <h2 class="text-2xl text-neutral-600 font-bold mb-4">{{ $user->name }}さんの評価一覧</h2>
+                    <h2 class="text-2xl text-neutral-600 font-bold mb-4">
+                        @if ($user->profile && $user->profile->display_name)
+                            {{ $user->profile->display_name }} さんの評価一覧
+                        @elseif ($user->name)
+                            {{ $user->name }} さんの評価一覧
+                        @else
+                            名無しさん さんの評価一覧
+                        @endif
+                    </h2>
                     @if ($ratings->isEmpty())
                         <div class="text-gray-600">評価はまだありません</div>
                     @else
