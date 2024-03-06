@@ -1,26 +1,19 @@
 version: 2.1
+orbs:
+  php: circleci/php@1.1.1
+workflows:
+  version: 2
+  test:
+    jobs:
+      - php/test:
+          version: "8.2"
+          dir: ~/project
+          steps:
+            - checkout
+            - run: curl -s https://getcomposer.org/installer | php
+            - run: php composer.phar install
+            - run: cp .env.example .env
+            - run: php artisan key:generate
+            - run: ./vendor/bin/phpunit
 
-jobs:
-  build:
-    docker:
-      - image: sail-10.0
 
-    working_directory: ~/repo
-
-    steps:
-      - checkout
-
-      # Laravel Sailのセットアップ
-      - run:
-          name: Install Sail dependencies
-          command: |
-            alias sail='bash vendor/bin/sail'
-            sail up -d
-            sail composer install
-
-      # データベースのセットアップとテストの実行
-      - run:
-          name: Setup Database and Run Tests
-          command: |
-            sail artisan migrate --seed
-            sail test
