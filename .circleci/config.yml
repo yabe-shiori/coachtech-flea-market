@@ -1,37 +1,14 @@
 version: 2.1
-executors:
-  docker-executor:
-    docker:
-      - image: docker:20.10.7
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD
 jobs:
   build:
-    executor: docker-executor
+    docker:
+      - image: circleci/php:7.3-node-browsers
     steps:
       - checkout
-      - setup_remote_docker:
-          version: 20.10.7
+      - run: sudo composer self-update --1
+      - run: composer install -n --prefer-dist
+      - run: npm ci
+      - run: npm run dev
       - run:
-          name: Install Docker compose
-          command: |
-            apk add py-pip
-            pip install docker-compose
-      - run:
-          name: Start Docker Compose
-          command: |
-            docker-compose -f docker-compose.yml up -d
-      - run:
-          name: Install Dependencies
-          command: |
-            docker-compose exec laravel.test composer install
-      - run:
-          name: Run Tests
-          command: |
-            docker-compose exec laravel.test ./vendor/bin/phpunit
-workflows:
-  version: 2
-  build:
-    jobs:
-      - build
+          name: php test
+          command: vendor/bin/phpunit
