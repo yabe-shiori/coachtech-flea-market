@@ -5,8 +5,8 @@
     <div class="py-6 lg:py-12 flex justify-center">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 w-full lg:w-4/5">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="flex flex-col lg:flex-row items-center p-6">
-                    <div class="flex items-center mb-2 lg:mb-0">
+                <div class="flex flex-col lg:flex-row items-center p-4">
+                    <div class="flex items-center mb-0 lg:mb-0">
                         <img src="{{ asset('storage/avatar/' . $user->avatar) }}" alt="User Avatar"
                             class="w-10 h-10 rounded-full mr-4">
                         <h2 class="text-2xl text-neutral-600 font-bold">
@@ -17,14 +17,15 @@
                             @endif
                         </h2>
                     </div>
-                    <div class="ml-2 md:mb-2 flex items-center">
-                        <!-- ☆の表示位置を調整 -->
-                        @if ($user->ratings->isNotEmpty())
+
+                    @if ($user->ratings->isNotEmpty())
+                        <div class="ml-4 flex items-center">
                             @php
                                 $averageRating = $user->averageRating();
                                 $roundedRating = round($averageRating);
+                                $ratingCount = $user->rating_count;
                             @endphp
-                            <a href="{{ route('user.rating.index', ['userId' => $user->id]) }}" class="flex items-center">
+                            <div class="flex items-center">
                                 @for ($i = 1; $i <= 5; $i++)
                                     @if ($i <= $roundedRating)
                                         <i class="fa fa-star text-yellow-500"></i>
@@ -32,11 +33,12 @@
                                         <i class="fa fa-star text-gray-400"></i>
                                     @endif
                                 @endfor
-                            </a>
-                        @endif
-                    </div>
+                                <span class="ml-2 text-blue-600">{{ $ratingCount }}</span>
+                            </div>
+                        </div>
+                    @endif
 
-                    <div class="mb-4 lg:ml-auto lg:mb-0">
+                    <div class="my-4 lg:ml-auto lg:mb-0">
                         @if (Auth::check() && Auth::user()->isFollowing($user))
                             <form action="{{ route('user.unfollow', ['userId' => $user->id]) }}" method="POST">
                                 @method('DELETE')
@@ -51,7 +53,7 @@
                             <form action="{{ route('user.follow', ['user' => $user->id]) }}" method="POST">
                                 @csrf
                                 <button type="submit"
-                                    class="bg-white border border-red-500 text-red-500 font-bold py-1 px-8 rounded flex items-center justify-center">
+                                    class="bg-white border border-red-500 text-red-500 text-base font-bold py-1 px-8 rounded flex items-center justify-center">
                                     <i class="fa fa-plus-circle mr-2" aria-hidden="true"></i>
                                     <span>フォロー</span>
                                 </button>
@@ -60,7 +62,7 @@
                     </div>
                 </div>
 
-                <p class="text-gray-600 whitespace-pre-line p-6 text-base">
+                <p class="text-gray-600 whitespace-pre-line p-3 text-base">
                     @if ($user->profile && $user->profile->introduction)
                         {{ $user->profile->introduction }}
                     @endif

@@ -24,7 +24,7 @@ class RegisterRequest extends FormRequest
         return [
             'email' => ['required', 'email', 'unique:users', 'string', 'max:191'],
             'password' => ['required', 'string', 'min:8', 'max:191'],
-            'invitation_code' => ['nullable', 'string', 'max:8'],
+            'invitation_code' => ['nullable', 'string', 'max:8', 'exists:users,invitation_code'],
         ];
     }
 
@@ -40,6 +40,9 @@ class RegisterRequest extends FormRequest
             'password.string' => 'パスワードを文字列で入力してください',
             'password.min' => 'パスワードは8文字以上で入力してください',
             'password.max' => 'パスワードは191文字以内で入力してください',
+            'invitation_code.string' => '招待コードを文字列で入力してください',
+            'invitation_code.max' => '招待コードは8文字以内で入力してください',
+            'invitation_code.exists' => 'その招待コードは存在しません',
         ];
     }
 }

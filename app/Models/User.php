@@ -124,4 +124,9 @@ class User extends Authenticatable
 
         return $this->ratings->avg('rating');
     }
+
+    public function getRatingCountAttribute()
+    {
+        return $this->ratings()->count();
+    }
 }
