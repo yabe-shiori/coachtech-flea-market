@@ -15,8 +15,6 @@ use App\Http\Controllers\RatingController;
 
 
 
-
-
 //トップページ
 Route::get('/', [ItemController::class, 'index'])->name('item.index');
 
@@ -25,11 +23,9 @@ Route::get('/linelogin', [LineLoginController::class, 'lineLogin'])->name('linel
 Route::get('/callback', [LineLoginController::class, 'callback'])->name('callback');
 
 //google認証
-Route::get('/auth/google', [GoogleLoginController::class, 'redirectToGoogle'])
-    ->name('login.google');
+Route::get('/auth/google', [GoogleLoginController::class, 'redirectToGoogle'])->name('login.google');
 
-Route::get('/auth/google/callback', [GoogleLoginController::class, 'handleGoogleCallback'])
-    ->name('login.google.callback');
+Route::get('/auth/google/callback', [GoogleLoginController::class, 'handleGoogleCallback'])->name('login.google.callback');
 
 //商品詳細ページ
 Route::get('/item/{item}', [ItemController::class, 'show'])->name('item.show');
@@ -45,6 +41,9 @@ Route::post('/favorite', [FavoriteController::class, 'favorite'])->name('favorit
 
 //マイリスト表示
 Route::get('/mylist', [FavoriteController::class, 'index'])->name('mylist');
+
+//評価一覧画面
+Route::get('/rating/{userId}', [RatingController::class, 'index'])->name('rating.index');
 
 //商品検索
 Route::get('/search', [ItemController::class, 'search'])->name('item.search');
@@ -84,9 +83,6 @@ Route::middleware(['auth:users'])->group(function () {
 
     //評価登録処理
     Route::post('/mypage/rating', [RatingController::class, 'store'])->name('rating.store');
-
-    //評価一覧画面
-    Route::get('/rating/{userId}', [RatingController::class, 'index'])->name('rating.index');
 
     //配送先変更ページ
     Route::get('/address/{itemId}', [ProfileController::class, 'showShippingAddressForm'])->name('showShippingAddressForm');

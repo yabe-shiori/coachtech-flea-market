@@ -21,10 +21,10 @@ Route::middleware('auth:admin')->group(function () {
 
     Route::get('/items', [AdminController::class, 'index'])->name('item.index');
     Route::get('/create', [AdminController::class, 'create'])->name('create');
-    Route::post('/admin/create', [AdminController::class, 'store'])->name('store');
+    Route::post('/create', [AdminController::class, 'store'])->name('store');
     Route::get('/seller-payments', [AdminController::class, 'showSellerPayments'])->name('showSellerPayments');
     Route::get('/send-notification', [AdminController::class, 'showNotificationForm'])->name('showNotificationForm');
-    Route::get('/admin/mail/confirmation', [AdminController::class, 'confirmNotificationForm'])->name('confirmNotificationForm');
-    Route::post('/admin/send-notification', [AdminController::class, 'sendNotification'])->name('sendNotification');
+    Route::get('/mail/confirmation', [AdminController::class, 'confirmNotificationForm'])->name('confirmNotificationForm');
+    Route::post('/send-notification', [AdminController::class, 'sendNotification'])->name('sendNotification');
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 });
