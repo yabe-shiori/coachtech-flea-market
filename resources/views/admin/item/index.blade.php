@@ -11,7 +11,8 @@
                             </div>
                             <h3 class="text-lg font-semibold">{{ $item->name }}</h3>
                             <p class="text-gray-500 mb-2">価格: ¥{{ number_format($item->price) }}</p>
-                            <p class="text-gray-500 mb-2">状態: {{ $item->condition }}</p>
+                            <p class="text-gray-500 mb-2">状態: <span class="{{ $item->is_sold ? 'text-red-500 font-bold' : '' }}">{{ $item->is_sold ? '売り切れ' : '販売中' }}</span></p>
+                            <p class="text-gray-500 mb-2">出品者: {{ $item->user->name }}</p>
                             <p class="text-gray-500">{{ $item->description }}</p>
                         </div>
                     @endforeach
@@ -20,4 +21,3 @@
         </div>
     </div>
 </x-app-layout>
-

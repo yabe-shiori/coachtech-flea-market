@@ -3,7 +3,7 @@
         <div class="max-w-xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <h2 class="text-2xl font-bold text-neutral-600 text-center">管理者作成</h2>
-                <form method="POST" action="{{ route('admin.store') }}" class="space-y-6">
+                <form method="POST" action="{{ route('admin.store') }}" class="space-y-6 p-4">
                     @csrf
 
                     <div>
@@ -40,7 +40,7 @@
 
                     <div class="flex justify-center sm:justify-end">
                         <button type="submit"
-                            class="inline-flex justify-center w-full py-2 mt-6 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                            class="inline-flex justify-center w-full py-2 mt-6 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                             作成する
                         </button>
                     </div>

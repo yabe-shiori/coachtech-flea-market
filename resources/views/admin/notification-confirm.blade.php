@@ -17,7 +17,7 @@
                         <input type="hidden" name="subject" value="{{ $subject }}">
                         <input type="hidden" name="content" value="{{ $content }}">
                         <button type="submit"
-                            class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                            class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                             送信する
                         </button>
                     </form>
