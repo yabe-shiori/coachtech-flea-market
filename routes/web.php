@@ -12,7 +12,7 @@ use App\Http\Controllers\GoogleLoginController;
 use App\Http\Controllers\LineLoginController;
 use App\Http\Controllers\LoginBonusController;
 use App\Http\Controllers\RatingController;
-use App\Http\Controllers\FileUploadController;
+
 
 
 
