@@ -12,8 +12,12 @@ use App\Http\Controllers\GoogleLoginController;
 use App\Http\Controllers\LineLoginController;
 use App\Http\Controllers\LoginBonusController;
 use App\Http\Controllers\RatingController;
+use App\Http\Controllers\FileUploadController;
 
 
+
+//ファイルアップロード
+Route::post('/upload', [FileUploadController::class, 'upload']);
 
 //トップページ
 Route::get('/', [ItemController::class, 'index'])->name('item.index');
