@@ -28,7 +28,7 @@ class FavoriteController extends Controller
         $user_id = Auth::id();
 
         if (!$user_id) {
-            return redirect()->route('user.login');
+            return redirect()->route('user.login')->with('error', 'ログインしてください');
         }
 
         $item_id = $request->item_id;

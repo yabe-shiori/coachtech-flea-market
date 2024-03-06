@@ -40,6 +40,9 @@ Route::get('/sell', [ItemController::class, 'create'])->name('item.create');
 //出品者のプロフィール画面
 Route::get('/profile/{user}', [ProfileController::class, 'show'])->name('profile.show');
 
+//お気に入り登録
+Route::post('/favorite', [FavoriteController::class, 'favorite'])->name('favorite');
+
 //マイリスト表示
 Route::get('/mylist', [FavoriteController::class, 'index'])->name('mylist');
 
@@ -99,9 +102,6 @@ Route::middleware(['auth:users'])->group(function () {
 
     //商品更新
     Route::patch('/item/{item}', [ItemController::class, 'update'])->name('item.update');
-
-    //お気に入り登録
-    Route::post('/favorite', [FavoriteController::class, 'favorite'])->name('favorite');
 
     //お気に入り削除
     Route::delete('/favorite', [FavoriteController::class, 'removeFavorite'])->name('removeFavorite');

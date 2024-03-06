@@ -2,6 +2,7 @@
 
     <x-auth-session-status class="mb-4" :status="session('status')" />
     <x-message :message="session('message')" />
+    <x-error-message :message="session('error')" />
 
     <form method="POST" action="{{ route('user.login') }}" class="w-2/3 mx-auto lg:w-2/5">
         @csrf
