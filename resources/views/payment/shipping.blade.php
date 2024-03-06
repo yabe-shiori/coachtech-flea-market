@@ -1,8 +1,9 @@
 <x-app-layout>
+    <x-error-message :message="session('error')" />
     <div class="py-8 sm:py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-2xl sm:text-3xl text-center text-neutral-600 font-bold mb-6 sm:mb-8">住所の変更</h2>
-            <form action="{{ route('user.profile.updateShippingAddress') }}" method="POST" class="max-w-xl mx-auto">
+            <form action="{{ route('user.updateShippingAddress', ['userId' => $user->id, 'itemId' => $itemId]) }}" method="POST" class="max-w-xl mx-auto">
                 @method('PATCH')
                 @csrf
 

@@ -89,25 +89,28 @@ class ProfileController extends Controller
     }
 
     // 配送先変更ページ表示
-    public function showShippingAddressForm()
+    public function showShippingAddressForm($itemId)
     {
         $user = Auth::user();
         $profile = $user->profile;
 
-        return view('payment.shipping', compact('user', 'profile'));
+        return view('payment.shipping', compact('user', 'profile', 'itemId'));
     }
 
     // 配送先住所の更新
-    public function updateShippingAddress(ShippingAddressUpdateRequest $request): RedirectResponse
+    public function updateShippingAddress(ShippingAddressUpdateRequest $request)
     {
         $user = Auth::user();
 
         $validatedData = $request->validated();
 
+        if (!$user->profile) {
+            return redirect()->back()->with('error', 'マイページで住所を登録してください');
+        }
+
         $user->profile()->update($validatedData);
 
-
-        return redirect()->route('user.mypage.index')->with('message', '住所を変更しました');
+        return redirect()->route('user.payment.create', ['item' => $request->itemId])->with('message', '住所を変更しました');
     }
 
     // 出品者のプロフィール表示

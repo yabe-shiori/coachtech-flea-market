@@ -8,6 +8,7 @@ use App\Models\Item;
 use Illuminate\Http\UploadedFile;
 use App\Models\Profile;
 use App\Models\SoldItem;
+use App\Models\ItemImage;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ProfileControllerTest extends TestCase
@@ -57,18 +58,20 @@ class ProfileControllerTest extends TestCase
         $user = User::factory()->create();
 
         $response = $this->actingAs($user)
-            ->get(route('user.profile.showShippingAddressForm', ['item' => 'dummy']));
+            ->get(route('user.showShippingAddressForm', ['itemId' => 'dummy']));
 
         $response->assertStatus(200);
         $response->assertViewIs('payment.shipping');
         $response->assertViewHas('user');
         $response->assertViewHas('profile');
     }
+
     public function testPurchasedItems()
     {
         $user = User::factory()->create();
 
         $soldItem = SoldItem::factory()->create(['buyer_id' => $user->id]);
+        $image = ItemImage::factory()->create(['item_id' => $soldItem->item_id]);
 
         $response = $this->actingAs($user)->get(route('user.mypage.purchasedItems'));
 
@@ -121,8 +124,8 @@ class ProfileControllerTest extends TestCase
             'building_name' => 'Building A',
         ];
 
-        $response = $this->actingAs($user)->patch(route('user.profile.updateShippingAddress'), $data);
-        $response->assertRedirect(route('user.mypage.index'))
+        $response = $this->actingAs($user)->patch(route('user.updateShippingAddress', ['itemId' => $item->id]), $data);
+        $response->assertRedirect(route('user.payment.create', ['item' => $item->id]))
             ->assertSessionHas('message', '住所を変更しました');
 
         $this->assertDatabaseHas('profiles', [
@@ -143,7 +146,7 @@ class ProfileControllerTest extends TestCase
             'building_name' => 'Building A',
         ];
 
-        $response = $this->actingAs($user)->patch(route('user.profile.updateShippingAddress'), $invalidData);
+        $response = $this->actingAs($user)->patch(route('user.updateShippingAddress', ['itemId' => 1]), $invalidData);
         $response->assertRedirect()
             ->assertSessionHasErrors(['postal_code']);
     }

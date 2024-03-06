@@ -86,10 +86,10 @@ Route::middleware(['auth:users'])->group(function () {
     Route::get('/rating/{userId}', [RatingController::class, 'index'])->name('rating.index');
 
     //配送先変更ページ
-    Route::get('/address/{item}', [ProfileController::class, 'showShippingAddressForm'])->name('profile.showShippingAddressForm');
+    Route::get('/address/{itemId}', [ProfileController::class, 'showShippingAddressForm'])->name('showShippingAddressForm');
 
     //配送先住所の変更
-    Route::patch('/profile/shipping-address', [ProfileController::class, 'updateShippingAddress'])->name('profile.updateShippingAddress');
+    Route::patch('/address/{itemId}', [ProfileController::class, 'updateShippingAddress'])->name('updateShippingAddress');
 
     //出品
     Route::post('/sell', [ItemController::class, 'store'])->name('item.store');
