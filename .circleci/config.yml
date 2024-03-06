@@ -1,19 +1,19 @@
 version: 2.1
-orbs:
-  php: circleci/php@1.1.1
-workflows:
-  version: 2
-  test:
-    jobs:
-      - php/test:
-          version: "8.2"
-          dir: ~/project
-          steps:
-            - checkout
-            - run: curl -s https://getcomposer.org/installer | php
-            - run: php composer.phar install
-            - run: cp .env.example .env
-            - run: php artisan key:generate
-            - run: ./vendor/bin/phpunit
-
-
+executors:
+  docker-executor:
+    docker:
+      - image: docker:20.10.7
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD
+jobs:
+  build-and-test:
+    docker:
+      - image: cimg/node:16.10
+    steps:
+      - checkout
+      - node/install-packages:
+          pkg-manager: npm
+      - run:
+          name: Run tests
+          command: npm test
